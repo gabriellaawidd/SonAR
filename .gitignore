@@ -1,0 +1,10 @@
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+
+# macOS
+.DS_Store
+
+# XcodeGen
+# project.yml is tracked, so do NOT ignore it.

@@ -1,0 +1,22 @@
+name: SonAR
+options:
+  bundleIdPrefix: com.sonar
+  createIntermediateGroups: true
+targets:
+  SonAR:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - App
+      - ARBridge
+      - Config
+      - Core
+      - Features
+      - GlobalComponents
+      - Resources
+      - Services
+    settings:
+      base:
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: 5.0
