@@ -21,6 +21,7 @@
 		DE7E00899DB427AB2DDE7773 /* dor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C9E3B84CA8E67F4964C0D /* dor.swift */; };
 		DE9984DD01DD329382EA6564 /* placeholder2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BBEC0CF9F95117EC3B233 /* placeholder2.swift */; };
 		E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */; };
+		EBC4BF1F302586D200AFC660 /* FeedbackRobot in Resources */ = {isa = PBXBuildFile; fileRef = EBC4BF1430256DCE00AFC660 /* FeedbackRobot */; };
 		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +29,7 @@
 		1C8BBEC0CF9F95117EC3B233 /* placeholder2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder2.swift; sourceTree = "<group>"; };
 		2E3C9E3B84CA8E67F4964C0D /* dor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dor.swift; sourceTree = "<group>"; };
 		33E1B4278C6EFC2FC3673382 /* SonARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonARApp.swift; sourceTree = "<group>"; };
-		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F79E4CD011B3479FB112288 /* clementkece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clementkece.swift; sourceTree = "<group>"; };
 		8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denzelganteng123.swift; sourceTree = "<group>"; };
 		86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,6 +44,16 @@
 		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EBC4BF20302586F400AFC660 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		013D42DEB724D5CDF62A99E2 /* App */ = {
@@ -237,6 +248,7 @@
 			buildPhases = (
 				2E5B876507155D17F1537EC7 /* Sources */,
 				47EB0B344E450555E92ECD25 /* Resources */,
+				EBC4BF20302586F400AFC660 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -245,6 +257,9 @@
 			name = SonAR;
 			packageProductDependencies = (
 				EBC4BF1630256DE900AFC660 /* FeedbackRobot */,
+				EBC4BF1830257C4000AFC660 /* FeedbackRobot */,
+				EBC4BF1A30257F1600AFC660 /* FeedbackRobot */,
+				EBC4BF1C3025834300AFC660 /* FeedbackRobot */,
 			);
 			productName = SonAR;
 			productReference = 7D32B964231D58CAD4A90951 /* SonAR.app */;
@@ -269,7 +284,6 @@
 			mainGroup = 66EC72583B392453533224D9;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				EBC4BF1530256DE900AFC660 /* XCLocalSwiftPackageReference "../FeedbackRobot" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 351031AE3AA1BFA2EB2BE21B /* Products */;
@@ -286,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC4BF1F302586D200AFC660 /* FeedbackRobot in Resources */,
 				08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -341,7 +356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -493,15 +508,20 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		EBC4BF1530256DE900AFC660 /* XCLocalSwiftPackageReference "../FeedbackRobot" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../FeedbackRobot;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		EBC4BF1630256DE900AFC660 /* FeedbackRobot */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedbackRobot;
+		};
+		EBC4BF1830257C4000AFC660 /* FeedbackRobot */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedbackRobot;
+		};
+		EBC4BF1A30257F1600AFC660 /* FeedbackRobot */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedbackRobot;
+		};
+		EBC4BF1C3025834300AFC660 /* FeedbackRobot */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FeedbackRobot;
 		};
