@@ -2,6 +2,11 @@ name: SonAR
 options:
   bundleIdPrefix: com.sonar
   createIntermediateGroups: true
+
+packages:
+  FeedbackRobot:
+    path: FeedbackRobot
+
 targets:
   SonAR:
     type: application
@@ -16,9 +21,10 @@ targets:
       - GlobalComponents
       - Resources
       - Services
+    dependencies:
+      - package: FeedbackRobot
     settings:
       base:
-        GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_NSCameraUsageDescription: "SonAR uses the camera to place the ultrasonic sensor in AR."
         SWIFT_VERSION: 5.0

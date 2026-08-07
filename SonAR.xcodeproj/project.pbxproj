@@ -28,6 +28,7 @@
 		D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */; };
 		DE7E00899DB427AB2DDE7773 /* dor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C9E3B84CA8E67F4964C0D /* dor.swift */; };
 		E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */; };
+		EBC4BF1F302586D200AFC660 /* FeedbackRobot in Resources */ = {isa = PBXBuildFile; fileRef = EBC4BF1430256DCE00AFC660 /* FeedbackRobot */; };
 		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
 		EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */; };
 		F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA829AB492DC300568492E1 /* ARSessionModel.swift */; };
@@ -62,6 +63,16 @@
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
 		FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRaycastManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EBC4BF20302586F400AFC660 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		013D42DEB724D5CDF62A99E2 /* App */ = {
@@ -265,6 +276,7 @@
 			buildPhases = (
 				2E5B876507155D17F1537EC7 /* Sources */,
 				47EB0B344E450555E92ECD25 /* Resources */,
+				EBC4BF20302586F400AFC660 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -310,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC4BF1F302586D200AFC660 /* FeedbackRobot in Resources */,
 				08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */,
 				234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */,
 			);
@@ -360,7 +373,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -381,7 +394,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
