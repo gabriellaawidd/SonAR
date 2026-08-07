@@ -2,11 +2,16 @@ name: SonAR
 options:
   bundleIdPrefix: com.sonar
   createIntermediateGroups: true
+
+packages:
+  FeedbackRobot:
+    path: FeedbackRobot
+
 targets:
   SonAR:
     type: application
     platform: iOS
-    deploymentTarget: "26.0"
+    deploymentTarget: "17.0"
     sources:
       - App
       - ARBridge
@@ -16,8 +21,9 @@ targets:
       - GlobalComponents
       - Resources
       - Services
+    dependencies:
+      - package: FeedbackRobot
     settings:
       base:
-        GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         SWIFT_VERSION: 5.0
