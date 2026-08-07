@@ -8,40 +8,59 @@
 
 /* Begin PBXBuildFile section */
 		08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */; };
-		0B03DA0F428CB3B4C2B48DFA /* zz.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081285F25334E8E812776FE /* zz.swift */; };
 		132817BA2D1F1A0322D34B8B /* ini.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5819D5565862BC3A5E8FC /* ini.swift */; };
 		20D8772C475455A771CD9B16 /* kiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A4AC0C59C537AD32BF1055 /* kiw.swift */; };
 		220AD0B8BBAAB650831C4676 /* placeholder3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B20D7B3518C36727831AE4 /* placeholder3.swift */; };
+		234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */; };
 		26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E1B4278C6EFC2FC3673382 /* SonARApp.swift */; };
-		2A5E0FB40057C7AC2E900ECC /* placeholder4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9579D1347C4CEEDAE9691978 /* placeholder4.swift */; };
+		3185C93D5931D18F37948774 /* ARSessionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */; };
+		76D077B5B9997BD84573A34C /* PlacementSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */; };
 		8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9088505855634499D2B8D68 /* ContentView.swift */; };
+		8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */; };
+		95CD6A78351077EC0236B7A8 /* ARPreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72056361DCF96401FFD35826 /* ARPreviewManager.swift */; };
+		95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */; };
 		9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA71B26DBBC878BC7FD155CE /* placeholder5.swift */; };
+		A1EE2288287C8B88A306AA18 /* ARPlacementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */; };
+		B22037A7999D37CBF8B8CABE /* PlacementAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */; };
 		B8D00F57F9F6E211C8BF8FB7 /* clementkece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79E4CD011B3479FB112288 /* clementkece.swift */; };
-		BAE71DB7280ED7079EF5C863 /* placeholder1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07443A9FBE1548AA8A20056 /* placeholder1.swift */; };
+		C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */; };
+		D35C594901620DB9577CBC81 /* ARRaycastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */; };
+		D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */; };
 		DE7E00899DB427AB2DDE7773 /* dor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C9E3B84CA8E67F4964C0D /* dor.swift */; };
-		DE9984DD01DD329382EA6564 /* placeholder2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BBEC0CF9F95117EC3B233 /* placeholder2.swift */; };
 		E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */; };
 		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
+		EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */; };
+		F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA829AB492DC300568492E1 /* ARSessionModel.swift */; };
+		FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A59F87A4279D097A6C56522 /* AppPhase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C8BBEC0CF9F95117EC3B233 /* placeholder2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder2.swift; sourceTree = "<group>"; };
+		086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionConfigurator.swift; sourceTree = "<group>"; };
+		18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPlacementARView.swift; sourceTree = "<group>"; };
 		2E3C9E3B84CA8E67F4964C0D /* dor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dor.swift; sourceTree = "<group>"; };
 		33E1B4278C6EFC2FC3673382 /* SonARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonARApp.swift; sourceTree = "<group>"; };
-		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPlacementManager.swift; sourceTree = "<group>"; };
+		3A59F87A4279D097A6C56522 /* AppPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPhase.swift; sourceTree = "<group>"; };
+		64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceRaycast.swift; sourceTree = "<group>"; };
+		72056361DCF96401FFD35826 /* ARPreviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPreviewManager.swift; sourceTree = "<group>"; };
+		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F79E4CD011B3479FB112288 /* clementkece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clementkece.swift; sourceTree = "<group>"; };
+		815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sensor_Ultrasonik_3D.usdz; sourceTree = "<group>"; };
 		8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denzelganteng123.swift; sourceTree = "<group>"; };
 		86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9579D1347C4CEEDAE9691978 /* placeholder4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder4.swift; sourceTree = "<group>"; };
+		885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneController.swift; sourceTree = "<group>"; };
 		A9088505855634499D2B8D68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA71B26DBBC878BC7FD155CE /* placeholder5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder5.swift; sourceTree = "<group>"; };
-		B07443A9FBE1548AA8A20056 /* placeholder1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder1.swift; sourceTree = "<group>"; };
-		D081285F25334E8E812776FE /* zz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zz.swift; sourceTree = "<group>"; };
+		B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementSolver.swift; sourceTree = "<group>"; };
+		BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorAsset.swift; sourceTree = "<group>"; };
+		CFA829AB492DC300568492E1 /* ARSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionModel.swift; sourceTree = "<group>"; };
 		D4B20D7B3518C36727831AE4 /* placeholder3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder3.swift; sourceTree = "<group>"; };
 		E7AC517540A419EB236775FF /* inniiii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inniiii.swift; sourceTree = "<group>"; };
-		EBC4BF1430256DCE00AFC660 /* FeedbackRobot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeedbackRobot; sourceTree = "<group>"; };
+		F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementAnimator.swift; sourceTree = "<group>"; };
 		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
+		FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRaycastManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -74,8 +93,17 @@
 			isa = PBXGroup;
 			children = (
 				86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */,
+				815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		234566C63C175A70BB99D70E /* SensorPlacement */ = {
+			isa = PBXGroup;
+			children = (
+				18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */,
+			);
+			path = SensorPlacement;
 			sourceTree = "<group>";
 		};
 		351031AE3AA1BFA2EB2BE21B /* Products */ = {
@@ -91,6 +119,7 @@
 			children = (
 				09A0A922D7E97317608A6500 /* FreeExplore */,
 				B668739E355CB00F1744798B /* GuidedWalkthrough */,
+				234566C63C175A70BB99D70E /* SensorPlacement */,
 				58D31B338296C9928F361512 /* SplashScreen */,
 			);
 			path = Features;
@@ -118,7 +147,6 @@
 		66EC72583B392453533224D9 = {
 			isa = PBXGroup;
 			children = (
-				EBC4BF1430256DCE00AFC660 /* FeedbackRobot */,
 				013D42DEB724D5CDF62A99E2 /* App */,
 				97D7A89155FC0B684AC09F38 /* ARBridge */,
 				85DA88C87DD2600B7F00F60A /* Config */,
@@ -127,7 +155,6 @@
 				8FFA12713F1DB39272B65CD9 /* GlobalComponents */,
 				17B6D9DFF23A5126B997F0B5 /* Resources */,
 				64AEB9C6391F5CEF18E1A5D9 /* Services */,
-				EBC4BF1230256CCE00AFC660 /* Frameworks */,
 				351031AE3AA1BFA2EB2BE21B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -144,7 +171,7 @@
 		75F29668E01405CAF8E2EA3E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				B07443A9FBE1548AA8A20056 /* placeholder1.swift */,
+				3A59F87A4279D097A6C56522 /* AppPhase.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -176,7 +203,11 @@
 		97D7A89155FC0B684AC09F38 /* ARBridge */ = {
 			isa = PBXGroup;
 			children = (
-				D081285F25334E8E812776FE /* zz.swift */,
+				FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */,
+				885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */,
+				0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */,
+				086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */,
+				64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */,
 			);
 			path = ARBridge;
 			sourceTree = "<group>";
@@ -200,7 +231,7 @@
 		C8AFAE81DB0E1BA6A276DD73 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1C8BBEC0CF9F95117EC3B233 /* placeholder2.swift */,
+				CFA829AB492DC300568492E1 /* ARSessionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -213,17 +244,14 @@
 			path = WaveLogic;
 			sourceTree = "<group>";
 		};
-		EBC4BF1230256CCE00AFC660 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		EF0AE416878A2C304ED2F530 /* SensorPlacement */ = {
 			isa = PBXGroup;
 			children = (
-				9579D1347C4CEEDAE9691978 /* placeholder4.swift */,
+				341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */,
+				72056361DCF96401FFD35826 /* ARPreviewManager.swift */,
+				F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */,
+				B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */,
+				BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */,
 			);
 			path = SensorPlacement;
 			sourceTree = "<group>";
@@ -244,7 +272,6 @@
 			);
 			name = SonAR;
 			packageProductDependencies = (
-				EBC4BF1630256DE900AFC660 /* FeedbackRobot */,
 			);
 			productName = SonAR;
 			productReference = 7D32B964231D58CAD4A90951 /* SonAR.app */;
@@ -268,9 +295,6 @@
 			);
 			mainGroup = 66EC72583B392453533224D9;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				EBC4BF1530256DE900AFC660 /* XCLocalSwiftPackageReference "../FeedbackRobot" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 351031AE3AA1BFA2EB2BE21B /* Products */;
 			projectDirPath = "";
@@ -287,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */,
+				234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,20 +322,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1EE2288287C8B88A306AA18 /* ARPlacementManager.swift in Sources */,
+				95CD6A78351077EC0236B7A8 /* ARPreviewManager.swift in Sources */,
+				D35C594901620DB9577CBC81 /* ARRaycastManager.swift in Sources */,
+				95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */,
+				3185C93D5931D18F37948774 /* ARSessionConfigurator.swift in Sources */,
+				F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */,
+				D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */,
+				FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */,
 				8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */,
+				B22037A7999D37CBF8B8CABE /* PlacementAnimator.swift in Sources */,
+				76D077B5B9997BD84573A34C /* PlacementSolver.swift in Sources */,
+				8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */,
+				C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */,
 				26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */,
+				EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */,
 				B8D00F57F9F6E211C8BF8FB7 /* clementkece.swift in Sources */,
 				E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */,
 				DE7E00899DB427AB2DDE7773 /* dor.swift in Sources */,
 				132817BA2D1F1A0322D34B8B /* ini.swift in Sources */,
 				EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */,
 				20D8772C475455A771CD9B16 /* kiw.swift in Sources */,
-				BAE71DB7280ED7079EF5C863 /* placeholder1.swift in Sources */,
-				DE9984DD01DD329382EA6564 /* placeholder2.swift in Sources */,
 				220AD0B8BBAAB650831C4676 /* placeholder3.swift in Sources */,
-				2A5E0FB40057C7AC2E900ECC /* placeholder4.swift in Sources */,
 				9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */,
-				0B03DA0F428CB3B4C2B48DFA /* zz.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +356,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = FU4TVB538X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -340,6 +377,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = FU4TVB538X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -492,20 +532,6 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		EBC4BF1530256DE900AFC660 /* XCLocalSwiftPackageReference "../FeedbackRobot" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../FeedbackRobot;
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		EBC4BF1630256DE900AFC660 /* FeedbackRobot */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FeedbackRobot;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A679A6C6BE388C25EAD01D1 /* Project object */;
 }

@@ -1,0 +1,49 @@
+import SwiftUI
+
+struct SensorPlacementARView: View {
+    @StateObject private var model = ARSessionModel()
+
+    var body: some View {
+        ZStack {
+            ARViewContainer(model: model)
+                .ignoresSafeArea()
+
+            VStack {
+                Spacer()
+
+                if model.phase == .carrying, model.isAssetReady {
+                    HintPill(text: "Ketuk untuk meletakkan sensor")
+                        .padding(.bottom, 32)
+                        .transition(.opacity)
+                }
+
+                if model.phase == .placed {
+                    Button("Letakkan ulang") {
+                        model.placeAgain()
+                    }
+                    .font(.headline)
+                    .foregroundStyle(.black)
+                    .padding(.horizontal, 28)
+                    .padding(.vertical, 14)
+                    .background(.white, in: Capsule())
+                    .padding(.bottom, 32)
+                    .transition(.opacity)
+                }
+            }
+        }
+        .animation(.easeInOut(duration: 0.25), value: model.phase)
+        .animation(.easeInOut(duration: 0.2), value: model.isAssetReady)
+    }
+}
+
+private struct HintPill: View {
+    let text: String
+
+    var body: some View {
+        Text(text)
+            .font(.footnote.weight(.medium))
+            .padding(.horizontal, 18)
+            .padding(.vertical, 10)
+            .background(.ultraThinMaterial, in: Capsule())
+    }
+}

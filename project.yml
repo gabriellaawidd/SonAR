@@ -20,4 +20,5 @@ targets:
       base:
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_NSCameraUsageDescription: "SonAR uses the camera to place the ultrasonic sensor in AR."
         SWIFT_VERSION: 5.0
