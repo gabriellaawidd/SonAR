@@ -13,18 +13,27 @@
 		132817BA2D1F1A0322D34B8B /* ini.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5819D5565862BC3A5E8FC /* ini.swift */; };
 		20D8772C475455A771CD9B16 /* kiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A4AC0C59C537AD32BF1055 /* kiw.swift */; };
 		220AD0B8BBAAB650831C4676 /* placeholder3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B20D7B3518C36727831AE4 /* placeholder3.swift */; };
+		234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */; };
 		26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E1B4278C6EFC2FC3673382 /* SonARApp.swift */; };
 		2A5E0FB40057C7AC2E900ECC /* placeholder4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9579D1347C4CEEDAE9691978 /* placeholder4.swift */; };
 		5CF0DD3E15D83785F9FBC81A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA3CE1941E32D7F129193F /* AppConfig.swift */; };
 		63AD195371707F345248B11D /* SurfaceReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2957E86628AB007285C5B7C9 /* SurfaceReading.swift */; };
 		8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9088505855634499D2B8D68 /* ContentView.swift */; };
+		8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */; };
+		95CD6A78351077EC0236B7A8 /* ARPreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72056361DCF96401FFD35826 /* ARPreviewManager.swift */; };
+		95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */; };
 		9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA71B26DBBC878BC7FD155CE /* placeholder5.swift */; };
+		A1EE2288287C8B88A306AA18 /* ARPlacementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */; };
+		B22037A7999D37CBF8B8CABE /* PlacementAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */; };
 		B8D00F57F9F6E211C8BF8FB7 /* clementkece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79E4CD011B3479FB112288 /* clementkece.swift */; };
 		D773B5E90ED6B430287F9E43 /* AngleCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */; };
 		DE7E00899DB427AB2DDE7773 /* dor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C9E3B84CA8E67F4964C0D /* dor.swift */; };
 		E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */; };
 		E615B86357FEDBB07BD653AE /* PlacementResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377147723EEDB8A01FA03C8 /* PlacementResult.swift */; };
 		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
+		EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */; };
+		F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA829AB492DC300568492E1 /* ARSessionModel.swift */; };
+		FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A59F87A4279D097A6C56522 /* AppPhase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +44,10 @@
 		4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleCategory.swift; sourceTree = "<group>"; };
 		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F79E4CD011B3479FB112288 /* clementkece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clementkece.swift; sourceTree = "<group>"; };
+		815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sensor_Ultrasonik_3D.usdz; sourceTree = "<group>"; };
 		8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denzelganteng123.swift; sourceTree = "<group>"; };
 		86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9579D1347C4CEEDAE9691978 /* placeholder4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder4.swift; sourceTree = "<group>"; };
+		885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneController.swift; sourceTree = "<group>"; };
 		A9088505855634499D2B8D68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA71B26DBBC878BC7FD155CE /* placeholder5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder5.swift; sourceTree = "<group>"; };
 		CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCategory.swift; sourceTree = "<group>"; };
@@ -47,6 +57,7 @@
 		E7AC517540A419EB236775FF /* inniiii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inniiii.swift; sourceTree = "<group>"; };
 		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
+		FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRaycastManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -79,8 +90,17 @@
 			isa = PBXGroup;
 			children = (
 				86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */,
+				815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		234566C63C175A70BB99D70E /* SensorPlacement */ = {
+			isa = PBXGroup;
+			children = (
+				18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */,
+			);
+			path = SensorPlacement;
 			sourceTree = "<group>";
 		};
 		351031AE3AA1BFA2EB2BE21B /* Products */ = {
@@ -96,6 +116,7 @@
 			children = (
 				09A0A922D7E97317608A6500 /* FreeExplore */,
 				B668739E355CB00F1744798B /* GuidedWalkthrough */,
+				234566C63C175A70BB99D70E /* SensorPlacement */,
 				58D31B338296C9928F361512 /* SplashScreen */,
 			);
 			path = Features;
@@ -181,7 +202,11 @@
 		97D7A89155FC0B684AC09F38 /* ARBridge */ = {
 			isa = PBXGroup;
 			children = (
-				D081285F25334E8E812776FE /* zz.swift */,
+				FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */,
+				885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */,
+				0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */,
+				086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */,
+				64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */,
 			);
 			path = ARBridge;
 			sourceTree = "<group>";
@@ -222,7 +247,11 @@
 		EF0AE416878A2C304ED2F530 /* SensorPlacement */ = {
 			isa = PBXGroup;
 			children = (
-				9579D1347C4CEEDAE9691978 /* placeholder4.swift */,
+				341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */,
+				72056361DCF96401FFD35826 /* ARPreviewManager.swift */,
+				F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */,
+				B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */,
+				BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */,
 			);
 			path = SensorPlacement;
 			sourceTree = "<group>";
@@ -282,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */,
+				234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,9 +336,7 @@
 				EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */,
 				20D8772C475455A771CD9B16 /* kiw.swift in Sources */,
 				220AD0B8BBAAB650831C4676 /* placeholder3.swift in Sources */,
-				2A5E0FB40057C7AC2E900ECC /* placeholder4.swift in Sources */,
 				9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */,
-				0B03DA0F428CB3B4C2B48DFA /* zz.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
