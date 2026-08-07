@@ -1,0 +1,13 @@
+{
+  "pathsToIds" : {
+    "\/FeedbackRobot\/Sources\/FeedbackRobot\/FeedbackRobot.rkassets\/Scene.usda" : "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+    "\/FeedbackRobot\/Sources\/FeedbackRobot\/FeedbackRobot.rkassets\/Untitled%20Scene.usda" : "89998E33-C262-4603-95D7-27B9375136D8",
+    "FeedbackRobot\/Sources\/FeedbackRobot\/FeedbackRobot.rkassets\/Scene.usda" : "03873CAA-A778-44F0-B8CC-5ED4451576C5"
+  },
+  "projectID" : 2393765130954092815,
+  "uuidToIntID" : {
+    "03873CAA-A778-44F0-B8CC-5ED4451576C5" : 2386171631669460031,
+    "6EC0BDCE-3DF4-4243-B8EB-366A273E836C" : -4823780407314472919,
+    "89998E33-C262-4603-95D7-27B9375136D8" : 7424037657340628378
+  }
+}

@@ -39,6 +39,7 @@
 		D081285F25334E8E812776FE /* zz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zz.swift; sourceTree = "<group>"; };
 		D4B20D7B3518C36727831AE4 /* placeholder3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder3.swift; sourceTree = "<group>"; };
 		E7AC517540A419EB236775FF /* inniiii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inniiii.swift; sourceTree = "<group>"; };
+		EBC4BF1430256DCE00AFC660 /* FeedbackRobot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeedbackRobot; sourceTree = "<group>"; };
 		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +118,7 @@
 		66EC72583B392453533224D9 = {
 			isa = PBXGroup;
 			children = (
+				EBC4BF1430256DCE00AFC660 /* FeedbackRobot */,
 				013D42DEB724D5CDF62A99E2 /* App */,
 				97D7A89155FC0B684AC09F38 /* ARBridge */,
 				85DA88C87DD2600B7F00F60A /* Config */,
@@ -125,6 +127,7 @@
 				8FFA12713F1DB39272B65CD9 /* GlobalComponents */,
 				17B6D9DFF23A5126B997F0B5 /* Resources */,
 				64AEB9C6391F5CEF18E1A5D9 /* Services */,
+				EBC4BF1230256CCE00AFC660 /* Frameworks */,
 				351031AE3AA1BFA2EB2BE21B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -210,6 +213,13 @@
 			path = WaveLogic;
 			sourceTree = "<group>";
 		};
+		EBC4BF1230256CCE00AFC660 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF0AE416878A2C304ED2F530 /* SensorPlacement */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +244,7 @@
 			);
 			name = SonAR;
 			packageProductDependencies = (
+				EBC4BF1630256DE900AFC660 /* FeedbackRobot */,
 			);
 			productName = SonAR;
 			productReference = 7D32B964231D58CAD4A90951 /* SonAR.app */;
@@ -247,8 +258,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 3E6D4B79F79920AC9349CA62 /* Build configuration list for PBXProject "SonAR" */;
 			developmentRegion = en;
@@ -259,6 +268,9 @@
 			);
 			mainGroup = 66EC72583B392453533224D9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EBC4BF1530256DE900AFC660 /* XCLocalSwiftPackageReference "../FeedbackRobot" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 351031AE3AA1BFA2EB2BE21B /* Products */;
 			projectDirPath = "";
@@ -480,6 +492,20 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		EBC4BF1530256DE900AFC660 /* XCLocalSwiftPackageReference "../FeedbackRobot" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../FeedbackRobot;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EBC4BF1630256DE900AFC660 /* FeedbackRobot */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedbackRobot;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A679A6C6BE388C25EAD01D1 /* Project object */;
 }
