@@ -1,6 +1,7 @@
 import ARKit
 import RealityKit
 import simd
+import CoreVideo
 
 final class ARRaycastManager {
     private weak var arView: ARView?
@@ -9,7 +10,7 @@ final class ARRaycastManager {
     private(set) var latestFrameTimestamp: TimeInterval = 0
 
     var onHitUpdate: ((RaycastHit) -> Void)?
-    var onLockCreated: ((PlacementLock) -> Void)?
+    var onLockCreated: ((PlacementLock, CVPixelBuffer?) -> Void)?
 
     func attach(to arView: ARView) {
         self.arView = arView
@@ -50,7 +51,8 @@ final class ARRaycastManager {
 
     func createLock(
         position: SIMD3<Float>,
-        orientation: simd_quatf
+        orientation: simd_quatf,
+        pixelBuffer: CVPixelBuffer?
     ) -> PlacementLock {
         let lock = PlacementLock(
             id: UUID(),
@@ -61,7 +63,7 @@ final class ARRaycastManager {
             timestamp: latestFrameTimestamp
         )
         locks.append(lock)
-        onLockCreated?(lock)
+        onLockCreated?(lock, pixelBuffer)
         return lock
     }
 
