@@ -85,8 +85,14 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             let position = previewManager.currentPosition,
             let orientation = previewManager.currentOrientation
         else { return }
+        
+        let pixelBuffer = arView.session.currentFrame?.capturedImage
 
-        let lock = raycastManager.createLock(position: position, orientation: orientation)
+        let lock = raycastManager.createLock(
+            position: position,
+            orientation: orientation,
+            pixelBuffer: pixelBuffer
+            )
         tapFeedback.impactOccurred()
         previewManager.dismiss()
         model.isAssetReady = false
@@ -126,7 +132,7 @@ extension ARSceneController: SurfaceRaycastProviding {
         raycastManager.locks.last
     }
 
-    var onLockCreated: ((PlacementLock) -> Void)? {
+    var onLockCreated: ((PlacementLock, CVPixelBuffer?) -> Void)? {
         get { raycastManager.onLockCreated }
         set { raycastManager.onLockCreated = newValue }
     }
