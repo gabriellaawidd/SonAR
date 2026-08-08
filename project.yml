@@ -1,6 +1,7 @@
 name: SonAR
+
 options:
-  bundleIdPrefix: com.sonar
+  bundleIdPrefix: com.sonar.SonAR
   createIntermediateGroups: true
 
 packages:
@@ -11,7 +12,8 @@ targets:
   SonAR:
     type: application
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "26.0"
+
     sources:
       - App
       - ARBridge
@@ -21,10 +23,13 @@ targets:
       - GlobalComponents
       - Resources
       - Services
+
     dependencies:
       - package: FeedbackRobot
+
     settings:
       base:
+        SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_NSCameraUsageDescription: "SonAR uses the camera to place the ultrasonic sensor in AR."
-        SWIFT_VERSION: 5.0

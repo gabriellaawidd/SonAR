@@ -2,6 +2,7 @@ import ARKit
 import RealityKit
 import simd
 import UIKit
+import CoreVideo
 
 final class ARSceneController: NSObject, ARSessionDelegate {
     private let model: ARSessionModel
@@ -12,6 +13,10 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private let raycastManager = ARRaycastManager()
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
 
+    // BARU — orchestrator Material Detection, subscribe otomatis ke
+    // onLockCreated saat di-init di bawah.
+    private var materialDetectionManager: MaterialDetectionManager?
+
     private var lastFrameTime: TimeInterval?
     private var waveTask: Task<Void, Never>?
 
@@ -19,6 +24,15 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         self.model = model
         super.init()
         tapFeedback.prepare()
+
+        // BARU — raycastProvider: self, karena ARSceneController sendiri
+        // conform ke SurfaceRaycastProviding lewat extension di bawah.
+        materialDetectionManager = MaterialDetectionManager(raycastProvider: self)
+        materialDetectionManager?.onReadingReady = { lock, reading in
+            // Sementara: print buat validasi manual di Console.
+            // Nanti ganti/lanjutkan ke Wave Behavior Logic atau UI display.
+            print("✅ SurfaceReading — angle: \(reading.angleDegrees?.description ?? "-")° (\(reading.angleCategory)), material: \(reading.materialCategory) (confidence: \(reading.materialConfidence))")
+        }
     }
 
     func attach(to arView: ARView) {

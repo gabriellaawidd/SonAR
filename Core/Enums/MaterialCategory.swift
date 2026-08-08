@@ -11,5 +11,17 @@ enum MaterialCategory: String, Codable {
     case soft
     case hard
     case unknown
-    case lowConfidence 
+    case lowConfidence
+    
+    var acousticImpedanceMRayl: Float {
+        switch self {
+            case .soft:
+                return 0.15
+            case .hard:
+                return 2.9
+            case .unknown, .lowConfidence:
+                return 0.0012
+        }
+    }
 }
+
