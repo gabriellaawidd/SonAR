@@ -1,5 +1,6 @@
 import Foundation
 import simd
+import CoreVideo
 
 struct RaycastHit {
     let worldPosition: simd_float3
@@ -7,6 +8,7 @@ struct RaycastHit {
     let distance: Float
     let screenPoint: CGPoint?
     let timestamp: TimeInterval
+    let pixelBuffer: CVPixelBuffer?
 
     func incidenceAngleDegrees(incoming direction: simd_float3) -> Float {
         let incoming = simd_normalize(direction)

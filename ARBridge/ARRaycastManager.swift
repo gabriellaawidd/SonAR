@@ -40,7 +40,8 @@ final class ARRaycastManager {
             normal: normal,
             distance: simd_distance(cameraPosition, worldPosition),
             screenPoint: center,
-            timestamp: frame.timestamp
+            timestamp: frame.timestamp,
+            pixelBuffer: frame.capturedImage
         )
 
         latestHit = hit
@@ -110,7 +111,8 @@ final class ARRaycastManager {
             normal: Self.normal(from: result.worldTransform),
             distance: simd_distance(origin, worldPosition),
             screenPoint: nil,
-            timestamp: latestFrameTimestamp
+            timestamp: latestFrameTimestamp,
+            pixelBuffer: session.currentFrame?.capturedImage
         )
     }
 

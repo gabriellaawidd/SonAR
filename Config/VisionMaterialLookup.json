@@ -1,0 +1,43 @@
+//
+//  VisionMaterialLookup.swift
+//  SonAR
+//
+//  Created by Gabriella Angelina Widjaja on 07/08/26.
+//
+
+{
+    "soft": [
+        "backpack",
+        "pillow",
+        "sofa",
+        "armchair",
+        "curtain",
+        "jacket",
+        "hoodie",
+        "clothing",
+        "stuffed_animals",
+        "scarf",
+        "sock",
+        "textile"
+    ],
+    "hard": [
+        "whiteboard",
+        "chalkboard",
+        "desk",
+        "table",
+        "chair",
+        "folding_chair",
+        "stool",
+        "computer_monitor",
+        "laptop",
+        "television",
+        "door",
+        "window",
+        "cabinet",
+        "bookshelf",
+        "book",
+        "brick",
+        "trash_can",
+        "clock"
+    ]
+}
