@@ -14,7 +14,8 @@ final class ARPlacementManager {
     func place(
         in arView: ARView,
         position: SIMD3<Float>,
-        orientation: simd_quatf
+        orientation: simd_quatf,
+        onSettled: ((AnchorEntity, Entity) -> Void)? = nil
     ) {
         SensorAsset.load { [weak self, weak arView] entity in
             guard let self, let entity, let arView else { return }
@@ -31,6 +32,7 @@ final class ARPlacementManager {
                 orientation: orientation
             ) { [weak self] in
                 self?.settleFeedback.impactOccurred(intensity: 0.7)
+                onSettled?(anchor, entity)
             }
         }
     }

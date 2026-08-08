@@ -8,3 +8,4 @@ xcuserdata/
 
 # XcodeGen
 # project.yml is tracked, so do NOT ignore it.
+.tokensave
