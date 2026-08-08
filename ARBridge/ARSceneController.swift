@@ -13,8 +13,6 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private let raycastManager = ARRaycastManager()
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
 
-    // BARU — orchestrator Material Detection, subscribe otomatis ke
-    // onLockCreated saat di-init di bawah.
     private var materialDetectionManager: MaterialDetectionManager?
 
     private var lastFrameTime: TimeInterval?
@@ -25,13 +23,9 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         super.init()
         tapFeedback.prepare()
 
-        // BARU — raycastProvider: self, karena ARSceneController sendiri
-        // conform ke SurfaceRaycastProviding lewat extension di bawah.
         materialDetectionManager = MaterialDetectionManager(raycastProvider: self)
         materialDetectionManager?.onReadingReady = { lock, reading in
-            // Sementara: print buat validasi manual di Console.
-            // Nanti ganti/lanjutkan ke Wave Behavior Logic atau UI display.
-            print("✅ SurfaceReading — angle: \(reading.angleDegrees?.description ?? "-")° (\(reading.angleCategory)), material: \(reading.materialCategory) (confidence: \(reading.materialConfidence))")
+        
         }
     }
 
