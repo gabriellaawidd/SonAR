@@ -13,6 +13,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
 
     private var lastFrameTime: TimeInterval?
+    private var waveTask: Task<Void, Never>?
 
     init(model: ARSessionModel) {
         self.model = model
@@ -65,6 +66,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
 
     func restartCarrying() {
         guard model.phase == .placed else { return }
+        waveTask?.cancel()
+        waveTask = nil
         placementManager.removeAll()
         beginCarrying()
     }
@@ -83,7 +86,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             let orientation = previewManager.currentOrientation
         else { return }
 
-        raycastManager.createLock(position: position, orientation: orientation)
+        let lock = raycastManager.createLock(position: position, orientation: orientation)
         tapFeedback.impactOccurred()
         previewManager.dismiss()
         model.isAssetReady = false
@@ -92,7 +95,15 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             in: arView,
             position: position,
             orientation: orientation
-        )
+        ) { [weak self] anchor, sensor in
+            guard let self else { return }
+            self.waveTask = Wave.startLoop(
+                sensor: sensor,
+                anchor: anchor,
+                lockID: lock.id,
+                refreshHit: { [weak self] id in self?.raycastManager.refreshLock(id: id) }
+            )
+        }
         model.phase = .placed
     }
 }
