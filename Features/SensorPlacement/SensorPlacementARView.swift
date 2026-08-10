@@ -9,12 +9,23 @@ struct SensorPlacementARView: View {
                 .ignoresSafeArea()
 
             VStack {
+                if model.isLowLight {
+                    HintPill(text: "Ruangan terlalu gelap · cari ruangan yang lebih terang")
+                        .padding(.top, 16)
+                        .transition(.opacity)
+                }
+
                 Spacer()
 
                 if model.phase == .carrying, model.isAssetReady {
                     HintPill(text: "Ketuk untuk meletakkan sensor")
                         .padding(.bottom, 32)
                         .transition(.opacity)
+                }
+
+                if model.phase == .placed, let reading = model.surfaceReading {
+                    HintPill(text: "\(reading.materialCategory.rawValue) · \(reading.angleCategory.rawValue)")
+                        .padding(.bottom, 12)
                 }
 
                 if model.phase == .placed {
@@ -33,6 +44,7 @@ struct SensorPlacementARView: View {
         }
         .animation(.easeInOut(duration: 0.25), value: model.phase)
         .animation(.easeInOut(duration: 0.2), value: model.isAssetReady)
+        .animation(.easeInOut(duration: 0.2), value: model.isLowLight)
     }
 }
 

@@ -17,6 +17,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
 
     private var lastFrameTime: TimeInterval?
     private var waveTask: Task<Void, Never>?
+    private weak var placedSensor: Entity?
+    private let coachingOverlay = ARCoachingOverlayView()
 
     init(model: ARSessionModel) {
         self.model = model
@@ -24,8 +26,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         tapFeedback.prepare()
 
         materialDetectionManager = MaterialDetectionManager(raycastProvider: self)
-        materialDetectionManager?.onReadingReady = { lock, reading in
-        
+        materialDetectionManager?.onReadingReady = { [weak model] _, reading in
+            model?.surfaceReading = reading
         }
     }
 
@@ -39,10 +41,40 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         arView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleTap))
         )
+
+        // Manually driven by isLowLight below, not ARKit's own tracking-state heuristic.
+        coachingOverlay.session = arView.session
+        coachingOverlay.goal = .tracking
+        coachingOverlay.activatesAutomatically = false
+        coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
+        arView.addSubview(coachingOverlay)
+        NSLayoutConstraint.activate([
+            coachingOverlay.topAnchor.constraint(equalTo: arView.topAnchor),
+            coachingOverlay.bottomAnchor.constraint(equalTo: arView.bottomAnchor),
+            coachingOverlay.leadingAnchor.constraint(equalTo: arView.leadingAnchor),
+            coachingOverlay.trailingAnchor.constraint(equalTo: arView.trailingAnchor)
+        ])
+
         beginCarrying()
     }
 
+    // Matches the low-light threshold used in AmbientIntensity.swift and SensorAsset.applyLowLightGlow.
+    private static let lowLightThreshold: Double = 400
+
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        arView?.adjustLightingForAmbient(frame: frame)
+
+        if let ambient = frame.lightEstimate?.ambientIntensity {
+            let lowLight = ambient < Self.lowLightThreshold
+            if model.isLowLight != lowLight {
+                coachingOverlay.setActive(lowLight, animated: true)
+            }
+            model.isLowLight = lowLight
+            if let placedSensor {
+                SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+            }
+        }
+
         guard model.phase == .carrying else { return }
 
         raycastManager.update(frame: frame)
@@ -77,6 +109,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         waveTask?.cancel()
         waveTask = nil
         placementManager.removeAll()
+        placedSensor = nil
         beginCarrying()
     }
 
@@ -111,11 +144,12 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             orientation: orientation
         ) { [weak self] anchor, sensor in
             guard let self else { return }
+            self.placedSensor = sensor
             self.waveTask = Wave.startLoop(
                 sensor: sensor,
                 anchor: anchor,
                 lockID: lock.id,
-                refreshHit: { [weak self] id in self?.raycastManager.refreshLock(id: id) }
+                refreshHit: { [weak self] id, dirs in self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] }
             )
         }
         model.phase = .placed
@@ -146,7 +180,7 @@ extension ARSceneController: SurfaceRaycastProviding {
     }
 
     @discardableResult
-    func refreshLock(id: UUID) -> RaycastHit? {
-        raycastManager.refreshLock(id: id)
+    func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?] {
+        raycastManager.refreshLock(id: id, directions: directions)
     }
 }
