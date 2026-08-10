@@ -57,3 +57,16 @@ To generate the project locally on your machine:
    xcodegen
    ```
 3. Open the newly generated `SonAR.xcodeproj` and start coding!
+
+## Contribution Guidelines (Git Workflow) 
+To maintain clean version control and avoid fatal merge conflicts, all contributors MUST adhere to the following Git workflow:
+1. Isolate Your Work
+Whenever you are developing a new feature, fixing a bug, or editing anything, it must be done in a dedicated branch. Never edit files or write code directly on the main branch.
+2. Branch Naming Convention
+Use branch names that clearly represent the feature or service being worked on so the team can easily track progress.
+Recommended format: feature/<feature-name>, fix/<bug-name>, or services/<service-name>
+Examples: feature/free-explore, services/material-detection, fix/splash-screen-ui
+3. No Direct Push to Main
+You are not allowed to push directly to main. Always push your code to your own branch (git push origin your-branch-name), then create a Pull Request (PR) on GitHub to be reviewed before merging into main.
+4. Always Pull from Main
+Ensure your code is always up-to-date. When pulling the latest updates, always pull from main (git pull origin main). Never pull from someone else's branch to avoid complex Git history conflicts.
