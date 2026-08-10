@@ -17,6 +17,11 @@ struct SensorPlacementARView: View {
                         .transition(.opacity)
                 }
 
+                if model.phase == .placed, let reading = model.surfaceReading {
+                    HintPill(text: "\(reading.materialCategory.rawValue) · \(reading.angleCategory.rawValue)")
+                        .padding(.bottom, 12)
+                }
+
                 if model.phase == .placed {
                     Button("Letakkan ulang") {
                         model.placeAgain()

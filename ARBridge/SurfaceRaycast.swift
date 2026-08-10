@@ -1,5 +1,6 @@
 import Foundation
 import simd
+import CoreVideo
 
 struct RaycastHit {
     let worldPosition: simd_float3
@@ -7,6 +8,7 @@ struct RaycastHit {
     let distance: Float
     let screenPoint: CGPoint?
     let timestamp: TimeInterval
+    let pixelBuffer: CVPixelBuffer?
 
     func incidenceAngleDegrees(incoming direction: simd_float3) -> Float {
         let incoming = simd_normalize(direction)
@@ -35,7 +37,7 @@ protocol SurfaceRaycastProviding: AnyObject {
     var onHitUpdate: ((RaycastHit) -> Void)? { get set }
     var locks: [PlacementLock] { get }
     var latestLock: PlacementLock? { get }
-    var onLockCreated: ((PlacementLock) -> Void)? { get set }
+    var onLockCreated: ((PlacementLock, CVPixelBuffer?) -> Void)? { get set }
 
     @discardableResult
     func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?]

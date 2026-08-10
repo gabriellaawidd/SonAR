@@ -2,6 +2,7 @@ import ARKit
 import RealityKit
 import simd
 import UIKit
+import CoreVideo
 
 final class ARSceneController: NSObject, ARSessionDelegate {
     private let model: ARSessionModel
@@ -12,13 +13,21 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private let raycastManager = ARRaycastManager()
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
 
+    private var materialDetectionManager: MaterialDetectionManager?
+
     private var lastFrameTime: TimeInterval?
     private var waveTask: Task<Void, Never>?
+    private weak var placedSensor: Entity?
 
     init(model: ARSessionModel) {
         self.model = model
         super.init()
         tapFeedback.prepare()
+
+        materialDetectionManager = MaterialDetectionManager(raycastProvider: self)
+        materialDetectionManager?.onReadingReady = { [weak model] _, reading in
+            model?.surfaceReading = reading
+        }
     }
 
     func attach(to arView: ARView) {
@@ -35,6 +44,12 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        arView?.adjustLightingForAmbient(frame: frame)
+
+        if let placedSensor, let ambient = frame.lightEstimate?.ambientIntensity {
+            SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+        }
+
         guard model.phase == .carrying else { return }
 
         raycastManager.update(frame: frame)
@@ -69,6 +84,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         waveTask?.cancel()
         waveTask = nil
         placementManager.removeAll()
+        placedSensor = nil
         beginCarrying()
     }
 
@@ -85,8 +101,14 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             let position = previewManager.currentPosition,
             let orientation = previewManager.currentOrientation
         else { return }
+        
+        let pixelBuffer = arView.session.currentFrame?.capturedImage
 
-        let lock = raycastManager.createLock(position: position, orientation: orientation)
+        let lock = raycastManager.createLock(
+            position: position,
+            orientation: orientation,
+            pixelBuffer: pixelBuffer
+            )
         tapFeedback.impactOccurred()
         previewManager.dismiss()
         model.isAssetReady = false
@@ -97,6 +119,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             orientation: orientation
         ) { [weak self] anchor, sensor in
             guard let self else { return }
+            self.placedSensor = sensor
             self.waveTask = Wave.startLoop(
                 sensor: sensor,
                 anchor: anchor,
@@ -126,7 +149,7 @@ extension ARSceneController: SurfaceRaycastProviding {
         raycastManager.locks.last
     }
 
-    var onLockCreated: ((PlacementLock) -> Void)? {
+    var onLockCreated: ((PlacementLock, CVPixelBuffer?) -> Void)? {
         get { raycastManager.onLockCreated }
         set { raycastManager.onLockCreated = newValue }
     }

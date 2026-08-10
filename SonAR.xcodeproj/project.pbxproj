@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */; };
+		0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */; };
+		132817BA2D1F1A0322D34B8B /* ini.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5819D5565862BC3A5E8FC /* ini.swift */; };
+		20D8772C475455A771CD9B16 /* kiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A4AC0C59C537AD32BF1055 /* kiw.swift */; };
+		234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */; };
+		26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E1B4278C6EFC2FC3673382 /* SonARApp.swift */; };
+		3185C93D5931D18F37948774 /* ARSessionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */; };
+		5CF0DD3E15D83785F9FBC81A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA3CE1941E32D7F129193F /* AppConfig.swift */; };
+		63AD195371707F345248B11D /* SurfaceReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2957E86628AB007285C5B7C9 /* SurfaceReading.swift */; };
+		76D077B5B9997BD84573A34C /* PlacementSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */; };
+		8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9088505855634499D2B8D68 /* ContentView.swift */; };
+		822E9C5AC1AC9DEBD9A18334 /* MaterialDetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829904FF7FB03AA1FB4559E0 /* MaterialDetectionManager.swift */; };
+		8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */; };
+		95CD6A78351077EC0236B7A8 /* ARPreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72056361DCF96401FFD35826 /* ARPreviewManager.swift */; };
+		95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */; };
+		986ACA23E76EC504A260326A /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */; };
+		9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA71B26DBBC878BC7FD155CE /* placeholder5.swift */; };
+		A1EE2288287C8B88A306AA18 /* ARPlacementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */; };
+		AC89CE7EB1CD247120F49923 /* MaterialLookupLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42007DA62C12C5F5034F0D6 /* MaterialLookupLoader.swift */; };
+		B22037A7999D37CBF8B8CABE /* PlacementAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */; };
+		B8D00F57F9F6E211C8BF8FB7 /* clementkece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79E4CD011B3479FB112288 /* clementkece.swift */; };
+		C5A05DF4E507A824C0F0DF6B /* SurfaceGeometryClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FD84DF9AED323F77A1AEE9 /* SurfaceGeometryClassifier.swift */; };
+		C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */; };
+		CFE5A1DB46ADB85F5ECDB233 /* MaterialVisionClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FA6B0D13BC372950E7BAD3 /* MaterialVisionClassifier.swift */; };
+		D35C594901620DB9577CBC81 /* ARRaycastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */; };
+		D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */; };
+		D773B5E90ED6B430287F9E43 /* AngleCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */; };
+		E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */; };
+		EA23920F810048C2B714E9C6 /* FeedbackRobot in Frameworks */ = {isa = PBXBuildFile; productRef = 3D6F2C7757B679482818DE3C /* FeedbackRobot */; };
+		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
+		EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */; };
+		F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA829AB492DC300568492E1 /* ARSessionModel.swift */; };
+		FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A59F87A4279D097A6C56522 /* AppPhase.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionConfigurator.swift; sourceTree = "<group>"; };
+		18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPlacementARView.swift; sourceTree = "<group>"; };
+		2957E86628AB007285C5B7C9 /* SurfaceReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceReading.swift; sourceTree = "<group>"; };
+		33E1B4278C6EFC2FC3673382 /* SonARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonARApp.swift; sourceTree = "<group>"; };
+		341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPlacementManager.swift; sourceTree = "<group>"; };
+		3A59F87A4279D097A6C56522 /* AppPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPhase.swift; sourceTree = "<group>"; };
+		3CDEF4F144AC1E5C404A883B /* FeedbackRobot */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FeedbackRobot; sourceTree = SOURCE_ROOT; };
+		4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleCategory.swift; sourceTree = "<group>"; };
+		50FD84DF9AED323F77A1AEE9 /* SurfaceGeometryClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceGeometryClassifier.swift; sourceTree = "<group>"; };
+		64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceRaycast.swift; sourceTree = "<group>"; };
+		72056361DCF96401FFD35826 /* ARPreviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPreviewManager.swift; sourceTree = "<group>"; };
+		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F79E4CD011B3479FB112288 /* clementkece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clementkece.swift; sourceTree = "<group>"; };
+		815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sensor_Ultrasonik_3D.usdz; sourceTree = "<group>"; };
+		8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denzelganteng123.swift; sourceTree = "<group>"; };
+		829904FF7FB03AA1FB4559E0 /* MaterialDetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDetectionManager.swift; sourceTree = "<group>"; };
+		86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneController.swift; sourceTree = "<group>"; };
+		93FA6B0D13BC372950E7BAD3 /* MaterialVisionClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialVisionClassifier.swift; sourceTree = "<group>"; };
+		A42007DA62C12C5F5034F0D6 /* MaterialLookupLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialLookupLoader.swift; sourceTree = "<group>"; };
+		A9088505855634499D2B8D68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA71B26DBBC878BC7FD155CE /* placeholder5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder5.swift; sourceTree = "<group>"; };
+		B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementSolver.swift; sourceTree = "<group>"; };
+		BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorAsset.swift; sourceTree = "<group>"; };
+		CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCategory.swift; sourceTree = "<group>"; };
+		CFA829AB492DC300568492E1 /* ARSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionModel.swift; sourceTree = "<group>"; };
+		D7EA3CE1941E32D7F129193F /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
+		E7AC517540A419EB236775FF /* inniiii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inniiii.swift; sourceTree = "<group>"; };
+		F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementAnimator.swift; sourceTree = "<group>"; };
+		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
+		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
+		FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRaycastManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F553F521B447CBFDD1BF4F69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA23920F810048C2B714E9C6 /* FeedbackRobot in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		013D42DEB724D5CDF62A99E2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A9088505855634499D2B8D68 /* ContentView.swift */,
+				33E1B4278C6EFC2FC3673382 /* SonARApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		09A0A922D7E97317608A6500 /* FreeExplore */ = {
+			isa = PBXGroup;
+			children = (
+				F9A4AC0C59C537AD32BF1055 /* kiw.swift */,
+			);
+			path = FreeExplore;
+			sourceTree = "<group>";
+		};
+		0DE6F0269B7F4A696219D11E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E7AC517540A419EB236775FF /* inniiii.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0F3297224374CD2B0548DC25 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				3CDEF4F144AC1E5C404A883B /* FeedbackRobot */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		17B6D9DFF23A5126B997F0B5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */,
+				815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		234566C63C175A70BB99D70E /* SensorPlacement */ = {
+			isa = PBXGroup;
+			children = (
+				18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */,
+			);
+			path = SensorPlacement;
+			sourceTree = "<group>";
+		};
+		351031AE3AA1BFA2EB2BE21B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D32B964231D58CAD4A90951 /* SonAR.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		36B5E774F9BF309DBEFBD024 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				09A0A922D7E97317608A6500 /* FreeExplore */,
+				B668739E355CB00F1744798B /* GuidedWalkthrough */,
+				234566C63C175A70BB99D70E /* SensorPlacement */,
+				58D31B338296C9928F361512 /* SplashScreen */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		58D31B338296C9928F361512 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7F79E4CD011B3479FB112288 /* clementkece.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		64AEB9C6391F5CEF18E1A5D9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				891429096C621770E722B4E5 /* MaterialDetection */,
+				EF0AE416878A2C304ED2F530 /* SensorPlacement */,
+				B4B67FBD7F1AA36B236DED14 /* Visualization */,
+				CB55AD411EC209195FDD38FC /* WaveLogic */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		66EC72583B392453533224D9 = {
+			isa = PBXGroup;
+			children = (
+				013D42DEB724D5CDF62A99E2 /* App */,
+				97D7A89155FC0B684AC09F38 /* ARBridge */,
+				85DA88C87DD2600B7F00F60A /* Config */,
+				70AE23EF72599A3C319986FC /* Core */,
+				36B5E774F9BF309DBEFBD024 /* Features */,
+				8FFA12713F1DB39272B65CD9 /* GlobalComponents */,
+				0F3297224374CD2B0548DC25 /* Packages */,
+				17B6D9DFF23A5126B997F0B5 /* Resources */,
+				64AEB9C6391F5CEF18E1A5D9 /* Services */,
+				351031AE3AA1BFA2EB2BE21B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		70AE23EF72599A3C319986FC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				75F29668E01405CAF8E2EA3E /* Enums */,
+				C8AFAE81DB0E1BA6A276DD73 /* Models */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		75F29668E01405CAF8E2EA3E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */,
+				3A59F87A4279D097A6C56522 /* AppPhase.swift */,
+				CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		85DA88C87DD2600B7F00F60A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D7EA3CE1941E32D7F129193F /* AppConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		891429096C621770E722B4E5 /* MaterialDetection */ = {
+			isa = PBXGroup;
+			children = (
+				829904FF7FB03AA1FB4559E0 /* MaterialDetectionManager.swift */,
+				A42007DA62C12C5F5034F0D6 /* MaterialLookupLoader.swift */,
+				93FA6B0D13BC372950E7BAD3 /* MaterialVisionClassifier.swift */,
+				50FD84DF9AED323F77A1AEE9 /* SurfaceGeometryClassifier.swift */,
+			);
+			path = MaterialDetection;
+			sourceTree = "<group>";
+		};
+		8FFA12713F1DB39272B65CD9 /* GlobalComponents */ = {
+			isa = PBXGroup;
+			children = (
+				F6B5819D5565862BC3A5E8FC /* ini.swift */,
+			);
+			path = GlobalComponents;
+			sourceTree = "<group>";
+		};
+		97D7A89155FC0B684AC09F38 /* ARBridge */ = {
+			isa = PBXGroup;
+			children = (
+				FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */,
+				885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */,
+				0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */,
+				086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */,
+				64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */,
+			);
+			path = ARBridge;
+			sourceTree = "<group>";
+		};
+		B4B67FBD7F1AA36B236DED14 /* Visualization */ = {
+			isa = PBXGroup;
+			children = (
+				AA71B26DBBC878BC7FD155CE /* placeholder5.swift */,
+			);
+			path = Visualization;
+			sourceTree = "<group>";
+		};
+		B668739E355CB00F1744798B /* GuidedWalkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				0DE6F0269B7F4A696219D11E /* Components */,
+			);
+			path = GuidedWalkthrough;
+			sourceTree = "<group>";
+		};
+		C8AFAE81DB0E1BA6A276DD73 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFA829AB492DC300568492E1 /* ARSessionModel.swift */,
+				2957E86628AB007285C5B7C9 /* SurfaceReading.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CB55AD411EC209195FDD38FC /* WaveLogic */ = {
+			isa = PBXGroup;
+			children = (
+				8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */,
+				DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */,
+			);
+			path = WaveLogic;
+			sourceTree = "<group>";
+		};
+		EF0AE416878A2C304ED2F530 /* SensorPlacement */ = {
+			isa = PBXGroup;
+			children = (
+				341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */,
+				72056361DCF96401FFD35826 /* ARPreviewManager.swift */,
+				F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */,
+				B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */,
+				BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */,
+			);
+			path = SensorPlacement;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E24237B623B528105D973A6 /* SonAR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43E77045072BCA6C1EA61D39 /* Build configuration list for PBXNativeTarget "SonAR" */;
+			buildPhases = (
+				2E5B876507155D17F1537EC7 /* Sources */,
+				47EB0B344E450555E92ECD25 /* Resources */,
+				F553F521B447CBFDD1BF4F69 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SonAR;
+			packageProductDependencies = (
+				3D6F2C7757B679482818DE3C /* FeedbackRobot */,
+			);
+			productName = SonAR;
+			productReference = 7D32B964231D58CAD4A90951 /* SonAR.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A679A6C6BE388C25EAD01D1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 3E6D4B79F79920AC9349CA62 /* Build configuration list for PBXProject "SonAR" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 66EC72583B392453533224D9;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C52102D2A132CF9AA8F84A35 /* XCLocalSwiftPackageReference "FeedbackRobot" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 351031AE3AA1BFA2EB2BE21B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E24237B623B528105D973A6 /* SonAR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47EB0B344E450555E92ECD25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */,
+				234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2E5B876507155D17F1537EC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1EE2288287C8B88A306AA18 /* ARPlacementManager.swift in Sources */,
+				95CD6A78351077EC0236B7A8 /* ARPreviewManager.swift in Sources */,
+				D35C594901620DB9577CBC81 /* ARRaycastManager.swift in Sources */,
+				95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */,
+				3185C93D5931D18F37948774 /* ARSessionConfigurator.swift in Sources */,
+				F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */,
+				D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */,
+				D773B5E90ED6B430287F9E43 /* AngleCategory.swift in Sources */,
+				5CF0DD3E15D83785F9FBC81A /* AppConfig.swift in Sources */,
+				FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */,
+				8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */,
+				0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */,
+				822E9C5AC1AC9DEBD9A18334 /* MaterialDetectionManager.swift in Sources */,
+				AC89CE7EB1CD247120F49923 /* MaterialLookupLoader.swift in Sources */,
+				CFE5A1DB46ADB85F5ECDB233 /* MaterialVisionClassifier.swift in Sources */,
+				B22037A7999D37CBF8B8CABE /* PlacementAnimator.swift in Sources */,
+				76D077B5B9997BD84573A34C /* PlacementSolver.swift in Sources */,
+				8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */,
+				C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */,
+				26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */,
+				C5A05DF4E507A824C0F0DF6B /* SurfaceGeometryClassifier.swift in Sources */,
+				EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */,
+				63AD195371707F345248B11D /* SurfaceReading.swift in Sources */,
+				986ACA23E76EC504A260326A /* Wave.swift in Sources */,
+				B8D00F57F9F6E211C8BF8FB7 /* clementkece.swift in Sources */,
+				E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */,
+				132817BA2D1F1A0322D34B8B /* ini.swift in Sources */,
+				EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */,
+				20D8772C475455A771CD9B16 /* kiw.swift in Sources */,
+				9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		04EFD7905E558D5B4211CF53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = GJYV542RRH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.SonAR;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1E814CA27B5829E2CC43C569 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = GJYV542RRH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.SonAR;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55411AA316FFA12D8C081D31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CF265D42682B021707E9E18E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E6D4B79F79920AC9349CA62 /* Build configuration list for PBXProject "SonAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55411AA316FFA12D8C081D31 /* Debug */,
+				CF265D42682B021707E9E18E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		43E77045072BCA6C1EA61D39 /* Build configuration list for PBXNativeTarget "SonAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E814CA27B5829E2CC43C569 /* Debug */,
+				04EFD7905E558D5B4211CF53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		C52102D2A132CF9AA8F84A35 /* XCLocalSwiftPackageReference "FeedbackRobot" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = FeedbackRobot;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3D6F2C7757B679482818DE3C /* FeedbackRobot */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedbackRobot;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1A679A6C6BE388C25EAD01D1 /* Project object */;
+}
