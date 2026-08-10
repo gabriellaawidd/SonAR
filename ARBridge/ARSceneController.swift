@@ -18,6 +18,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private var lastFrameTime: TimeInterval?
     private var waveTask: Task<Void, Never>?
     private weak var placedSensor: Entity?
+    private let coachingOverlay = ARCoachingOverlayView()
 
     init(model: ARSessionModel) {
         self.model = model
@@ -40,14 +41,38 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         arView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleTap))
         )
+
+        // Manually driven by isLowLight below, not ARKit's own tracking-state heuristic.
+        coachingOverlay.session = arView.session
+        coachingOverlay.goal = .tracking
+        coachingOverlay.activatesAutomatically = false
+        coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
+        arView.addSubview(coachingOverlay)
+        NSLayoutConstraint.activate([
+            coachingOverlay.topAnchor.constraint(equalTo: arView.topAnchor),
+            coachingOverlay.bottomAnchor.constraint(equalTo: arView.bottomAnchor),
+            coachingOverlay.leadingAnchor.constraint(equalTo: arView.leadingAnchor),
+            coachingOverlay.trailingAnchor.constraint(equalTo: arView.trailingAnchor)
+        ])
+
         beginCarrying()
     }
+
+    // Matches the low-light threshold used in AmbientIntensity.swift and SensorAsset.applyLowLightGlow.
+    private static let lowLightThreshold: Double = 400
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         arView?.adjustLightingForAmbient(frame: frame)
 
-        if let placedSensor, let ambient = frame.lightEstimate?.ambientIntensity {
-            SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+        if let ambient = frame.lightEstimate?.ambientIntensity {
+            let lowLight = ambient < Self.lowLightThreshold
+            if model.isLowLight != lowLight {
+                coachingOverlay.setActive(lowLight, animated: true)
+            }
+            model.isLowLight = lowLight
+            if let placedSensor {
+                SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+            }
         }
 
         guard model.phase == .carrying else { return }
