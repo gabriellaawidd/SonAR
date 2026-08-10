@@ -153,6 +153,26 @@ enum SensorAsset {
         return found ? BoundingBox(min: minV, max: maxV) : nil
     }
 
+    // Below ~400 lumens the room is too dark to see the sensor by reflected light alone.
+    private static let lowLightThreshold: Double = 400
+
+    static func applyLowLightGlow(_ entity: Entity, ambientIntensity: Double) {
+        let darkness = Float(max(0, min(1, (lowLightThreshold - ambientIntensity) / lowLightThreshold)))
+
+        func walk(_ node: Entity) {
+            if let model = node as? ModelEntity, model.model != nil {
+                model.model?.materials = model.model!.materials.map { material in
+                    guard var pbr = material as? PhysicallyBasedMaterial else { return material }
+                    pbr.emissiveColor = .init(color: .white)
+                    pbr.emissiveIntensity = darkness
+                    return pbr
+                }
+            }
+            node.children.forEach(walk)
+        }
+        walk(entity)
+    }
+
     static func applyPreviewTint(_ entity: Entity, color: UIColor, alpha: CGFloat = 0.45) {
         var material = SimpleMaterial(color: color, isMetallic: false)
         material.color = .init(tint: color.withAlphaComponent(alpha))

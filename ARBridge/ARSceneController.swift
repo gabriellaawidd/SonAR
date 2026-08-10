@@ -17,6 +17,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
 
     private var lastFrameTime: TimeInterval?
     private var waveTask: Task<Void, Never>?
+    private weak var placedSensor: Entity?
 
     init(model: ARSessionModel) {
         self.model = model
@@ -24,8 +25,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         tapFeedback.prepare()
 
         materialDetectionManager = MaterialDetectionManager(raycastProvider: self)
-        materialDetectionManager?.onReadingReady = { lock, reading in
-        
+        materialDetectionManager?.onReadingReady = { [weak model] _, reading in
+            model?.surfaceReading = reading
         }
     }
 
@@ -43,6 +44,12 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        arView?.adjustLightingForAmbient(frame: frame)
+
+        if let placedSensor, let ambient = frame.lightEstimate?.ambientIntensity {
+            SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+        }
+
         guard model.phase == .carrying else { return }
 
         raycastManager.update(frame: frame)
@@ -77,6 +84,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         waveTask?.cancel()
         waveTask = nil
         placementManager.removeAll()
+        placedSensor = nil
         beginCarrying()
     }
 
@@ -111,6 +119,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             orientation: orientation
         ) { [weak self] anchor, sensor in
             guard let self else { return }
+            self.placedSensor = sensor
             self.waveTask = Wave.startLoop(
                 sensor: sensor,
                 anchor: anchor,
