@@ -73,24 +73,24 @@ final class ARRaycastManager {
     }
 
     @discardableResult
-    func refreshLock(id: UUID) -> RaycastHit? {
-        guard let index = locks.firstIndex(where: { $0.id == id }) else { return nil }
+    func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?] {
+        guard let index = locks.firstIndex(where: { $0.id == id }) else { return [] }
         let lock = locks[index]
 
-        guard let hit = worldRaycast(
-            origin: lock.sensorPosition,
-            direction: lock.facingDirection
-        ) else { return nil }
+        let hits = directions.map { direction in
+            worldRaycast(origin: lock.sensorPosition, direction: direction)
+        }
 
+        // Keep the central hit as the primary hit for the lock state
         locks[index] = PlacementLock(
             id: lock.id,
             sensorPosition: lock.sensorPosition,
             sensorOrientation: lock.sensorOrientation,
             facingDirection: lock.facingDirection,
-            hit: hit,
+            hit: hits.first ?? nil,
             timestamp: lock.timestamp
         )
-        return hit
+        return hits
     }
 
     private func worldRaycast(
