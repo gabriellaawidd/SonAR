@@ -22,7 +22,6 @@ enum Wave {
     /// Beyond this incidence angle a real echo's specular reflection no longer sweeps back
     /// near the sensor, so it never returns to the receiver.
     private static let echoReturnAngleLimitDeg: Float = 10
-    private static let pulseRadius: Float = 0.003
 
     /// Fires one pulse: a beam from the transmitter to the hit point (or `maxRange` if nothing
     /// hit), then, only if the surface angle allows an echo, a return beam to the receiver.
@@ -42,7 +41,7 @@ enum Wave {
             let hitPoint = hit?.worldPosition ?? origin + forward * distance
 
             let outDuration = legDuration(distance)
-            spawnPulse(color: .cyan, from: origin, to: hitPoint, anchor: anchor, duration: outDuration)
+            WaveRenderer.spawnPulse(color: .cyan, from: origin, to: hitPoint, anchor: anchor, duration: outDuration)
 
             var totalDuration = outDuration
             if let hit = hit {
@@ -52,7 +51,7 @@ enum Wave {
                     let backDuration = legDuration(simd_distance(hitPoint, receiverPosition))
             
                     DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
-                        spawnPulse(color: .green, from: hitPoint, to: receiverPosition, anchor: anchor, duration: backDuration)
+                        WaveRenderer.spawnPulse(color: .green, from: hitPoint, to: receiverPosition, anchor: anchor, duration: backDuration)
                     }
                     totalDuration += backDuration
                 } else {
@@ -63,7 +62,7 @@ enum Wave {
                     let bounceDuration = legDuration(remainingDistance)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
-                        spawnPulse(color: .red, from: hitPoint, to: bounceTarget, anchor: anchor, duration: bounceDuration)
+                        WaveRenderer.spawnPulse(color: .red, from: hitPoint, to: bounceTarget, anchor: anchor, duration: bounceDuration)
                     }
                     totalDuration += bounceDuration
                 }
@@ -119,22 +118,5 @@ enum Wave {
 
     private static func legDuration(_ distance: Float) -> TimeInterval {
         max(TimeInterval(distance / travelSpeed), minLegDuration)
-    }
-
-    private static func spawnPulse(
-        color: UIColor, from start: SIMD3<Float>, to end: SIMD3<Float>, anchor: AnchorEntity, duration: TimeInterval
-    ) {
-        let pulse = ModelEntity(
-            mesh: .generateSphere(radius: pulseRadius),
-            materials: [UnlitMaterial(color: color)]
-        )
-        pulse.setPosition(start, relativeTo: nil)
-        anchor.addChild(pulse)
-
-        pulse.move(to: Transform(translation: end), relativeTo: nil, duration: duration, timingFunction: .easeInOut)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            pulse.removeFromParent()
-        }
     }
 }
