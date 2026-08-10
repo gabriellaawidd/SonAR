@@ -38,5 +38,5 @@ protocol SurfaceRaycastProviding: AnyObject {
     var onLockCreated: ((PlacementLock) -> Void)? { get set }
 
     @discardableResult
-    func refreshLock(id: UUID) -> RaycastHit?
+    func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?]
 }
