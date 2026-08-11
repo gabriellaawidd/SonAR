@@ -16,9 +16,9 @@ enum Wave {
     static let receiverName = "_1"
 
     private static let maxRange: Float = 2 // Dikecilin dari 4 jadi 2 supaya jeda antar spawnPulse gak terlalu lama (UX things)
-    private static let travelSpeed: Float = 0.75
+    private static let travelSpeed: Float = 0.85
     private static let minLegDuration: TimeInterval = 0.15
-    private static let pulseGap: TimeInterval = 0.20
+    private static let pulseGap: TimeInterval = 0.05
     /// Beyond this incidence angle a real echo's specular reflection no longer sweeps back
     /// near the sensor, so it never returns to the receiver.
     private static let echoReturnAngleLimitDeg: Float = 10
@@ -27,7 +27,7 @@ enum Wave {
     /// hit), then, only if the surface angle allows an echo, a return beam to the receiver.
     /// Returns how long the pulse takes to fully finish, so a loop can wait before firing again.
     @discardableResult
-    static func fire(from sensor: Entity, anchor: AnchorEntity, hits: [RaycastHit?], directions: [SIMD3<Float>]) -> TimeInterval {
+    static func fire(from sensor: Entity, anchor: AnchorEntity, hits: [RaycastHit?], directions: [SIMD3<Float>], material: MaterialCategory?) -> TimeInterval {
         guard let transmitter = sensor.findEntity(named: transmitterName),
               let receiver = sensor.findEntity(named: receiverName) else {
             return 0
@@ -48,21 +48,37 @@ enum Wave {
                 if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg {
                     // Return echo
                     let receiverPosition = receiver.position(relativeTo: nil)
-                    let backDuration = legDuration(simd_distance(hitPoint, receiverPosition))
+                    let fullDist = simd_distance(hitPoint, receiverPosition)
+                    let bounceDistance = material == .soft ? min(fullDist, 0.5) : fullDist
+                    let speedMult: Float = 1.0
+                    let backDuration = legDuration(bounceDistance, speedMultiplier: speedMult)
+                    
+                    let targetPos = material == .soft && fullDist > 0.5
+                        ? hitPoint + simd_normalize(receiverPosition - hitPoint) * 0.5
+                        : receiverPosition
+                        
+                    let opacity: Float = material == .soft ? 1.0 : 1.0
+                    let scale: Float = material == .soft ? 0.5 : 1.0
             
                     DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
-                        WaveRenderer.spawnPulse(color: .green, from: hitPoint, to: receiverPosition, anchor: anchor, duration: backDuration)
+                        WaveRenderer.spawnPulse(color: .green, from: hitPoint, to: targetPos, anchor: anchor, duration: backDuration, opacity: opacity, scale: scale)
                     }
                     totalDuration += backDuration
                 } else {
                     // Specular reflection bouncing away
                     let reflectedDirection = simd_reflect(simd_normalize(forward), simd_normalize(hit.normal))
                     let remainingDistance = max(maxRange - distance, 0)
-                    let bounceTarget = hit.worldPosition + reflectedDirection * remainingDistance
-                    let bounceDuration = legDuration(remainingDistance)
+                    let bounceDistance = material == .soft ? min(remainingDistance, 0.5) : remainingDistance
+                    
+                    let bounceTarget = hit.worldPosition + reflectedDirection * bounceDistance
+                    let speedMult: Float = 1.0
+                    let bounceDuration = legDuration(bounceDistance, speedMultiplier: speedMult)
+                    
+                    let opacity: Float = material == .soft ? 1.0 : 1.0
+                    let scale: Float = material == .soft ? 0.5 : 1.0
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
-                        WaveRenderer.spawnPulse(color: .red, from: hitPoint, to: bounceTarget, anchor: anchor, duration: bounceDuration)
+                        WaveRenderer.spawnPulse(color: .red, from: hitPoint, to: bounceTarget, anchor: anchor, duration: bounceDuration, opacity: opacity, scale: scale)
                     }
                     totalDuration += bounceDuration
                 }
@@ -79,28 +95,27 @@ enum Wave {
         sensor: Entity,
         anchor: AnchorEntity,
         lockID: UUID,
-        refreshHit: @escaping (UUID, [SIMD3<Float>]) -> [RaycastHit?]
+        refreshHit: @escaping (UUID, [SIMD3<Float>]) -> [RaycastHit?],
+        getMaterial: @escaping () -> MaterialCategory?
     ) -> Task<Void, Never> {
         Task { @MainActor in
             while !Task.isCancelled {
-                // Generate 25 directions: 1 Center + 3 layers of 8 (5, 10, and 15 deg)
+                // Generate dynamically: 1 Center + layers of varying counts
                 let orientation = sensor.orientation(relativeTo: nil)
-                let invSqrt2: Float = 0.70710678
-                let axes: [SIMD3<Float>] = [
-                    [1, 0, 0], // Up
-                    [invSqrt2, invSqrt2, 0], // Up-Right
-                    [0, 1, 0], // Right
-                    [-invSqrt2, invSqrt2, 0], // Down-Right
-                    [-1, 0, 0], // Down
-                    [-invSqrt2, -invSqrt2, 0], // Down-Left
-                    [0, -1, 0], // Left
-                    [invSqrt2, -invSqrt2, 0] // Up-Left
+                
+                let layerConfigs: [(angle: Float, count: Int)] = [
+                    (3.75, 8),
+                    (7.5, 12),
+                    (11.25, 16),
+                    (15.0, 20)
                 ]
                 
                 var angles: [(Float, SIMD3<Float>)] = [(0, [1, 0, 0])] // Center
-                for angle in [5.0, 10.0, 15.0] as [Float] {
-                    for axis in axes {
-                        angles.append((angle, axis))
+                for config in layerConfigs {
+                    for i in 0..<config.count {
+                        let theta = Float(i) * 2.0 * .pi / Float(config.count)
+                        let axis = SIMD3<Float>(cos(theta), sin(theta), 0)
+                        angles.append((config.angle, axis))
                     }
                 }
                 
@@ -110,13 +125,14 @@ enum Wave {
                 }
                 
                 let hits = refreshHit(lockID, directions)
-                let pulseDuration = fire(from: sensor, anchor: anchor, hits: hits, directions: directions)
-                try? await Task.sleep(for: .seconds(pulseDuration + pulseGap))
+                let material = getMaterial()
+                fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material)
+                try? await Task.sleep(for: .seconds(1.0))
             }
         }
     }
 
-    private static func legDuration(_ distance: Float) -> TimeInterval {
-        max(TimeInterval(distance / travelSpeed), minLegDuration)
+    private static func legDuration(_ distance: Float, speedMultiplier: Float = 1.0) -> TimeInterval {
+        max(TimeInterval(distance / (travelSpeed * speedMultiplier)), minLegDuration)
     }
 }
