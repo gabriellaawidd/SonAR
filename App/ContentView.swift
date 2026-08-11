@@ -30,7 +30,7 @@ struct ContentView: View {
             case .guidedWalkthrough:
                 Text("Guided Walkthrough Screen")
             case .freeExplore:
-                Text("Free Explore Screen")
+                SensorPlacementARView(appState: $currentAppState)
             }
         }
         .animation(.easeInOut, value: currentAppState)
