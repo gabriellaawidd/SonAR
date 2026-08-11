@@ -126,6 +126,7 @@ enum Wave {
                 
                 let hits = refreshHit(lockID, directions)
                 let material = getMaterial()
+                BeepSynthesizer.shared.playLowBeep()
                 fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material)
                 try? await Task.sleep(for: .seconds(1.0))
             }

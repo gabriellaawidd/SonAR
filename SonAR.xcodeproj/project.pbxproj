@@ -19,6 +19,7 @@
 		5CF0DD3E15D83785F9FBC81A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA3CE1941E32D7F129193F /* AppConfig.swift */; };
 		633F3E68EEE70858937B49A5 /* AmbientIntensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D5CF44815D164BEFF183D /* AmbientIntensity.swift */; };
 		63AD195371707F345248B11D /* SurfaceReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2957E86628AB007285C5B7C9 /* SurfaceReading.swift */; };
+		677E0958D49650ADECD4F0E9 /* BeepSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEED6E5A26D0DE4A0633842B /* BeepSynthesizer.swift */; };
 		76D077B5B9997BD84573A34C /* PlacementSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */; };
 		8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9088505855634499D2B8D68 /* ContentView.swift */; };
 		822E9C5AC1AC9DEBD9A18334 /* MaterialDetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829904FF7FB03AA1FB4559E0 /* MaterialDetectionManager.swift */; };
@@ -87,6 +88,7 @@
 		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
 		FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRaycastManager.swift; sourceTree = "<group>"; };
+		FEED6E5A26D0DE4A0633842B /* BeepSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepSynthesizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 		B4B67FBD7F1AA36B236DED14 /* Visualization */ = {
 			isa = PBXGroup;
 			children = (
+				FEED6E5A26D0DE4A0633842B /* BeepSynthesizer.swift */,
 				AA71B26DBBC878BC7FD155CE /* placeholder5.swift */,
 				606194F78918AC32DC6625DA /* WaveRenderer.swift */,
 			);
@@ -396,6 +399,7 @@
 				D773B5E90ED6B430287F9E43 /* AngleCategory.swift in Sources */,
 				5CF0DD3E15D83785F9FBC81A /* AppConfig.swift in Sources */,
 				FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */,
+				677E0958D49650ADECD4F0E9 /* BeepSynthesizer.swift in Sources */,
 				8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */,
 				0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */,
 				822E9C5AC1AC9DEBD9A18334 /* MaterialDetectionManager.swift in Sources */,
