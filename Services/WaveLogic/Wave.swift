@@ -16,7 +16,7 @@ enum Wave {
     static let receiverName = "_1"
 
     private static let maxRange: Float = 2 // Dikecilin dari 4 jadi 2 supaya jeda antar spawnPulse gak terlalu lama (UX things)
-    private static let travelSpeed: Float = 0.55
+    private static let travelSpeed: Float = 0.85
     private static let minLegDuration: TimeInterval = 0.15
     private static let pulseGap: TimeInterval = 0.05
     /// Beyond this incidence angle a real echo's specular reflection no longer sweeps back
@@ -126,8 +126,8 @@ enum Wave {
                 
                 let hits = refreshHit(lockID, directions)
                 let material = getMaterial()
-                let pulseDuration = fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material)
-                try? await Task.sleep(for: .seconds(pulseDuration + pulseGap))
+                fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material)
+                try? await Task.sleep(for: .seconds(1.0))
             }
         }
     }
