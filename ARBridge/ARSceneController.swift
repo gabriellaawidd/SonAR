@@ -149,7 +149,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
                 sensor: sensor,
                 anchor: anchor,
                 lockID: lock.id,
-                refreshHit: { [weak self] id, dirs in self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] }
+                refreshHit: { [weak self] id, dirs in self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] },
+                getMaterial: { [weak self] in self?.model.surfaceReading?.materialCategory }
             )
         }
         model.phase = .placed
