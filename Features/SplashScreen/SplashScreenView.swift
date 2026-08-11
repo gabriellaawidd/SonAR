@@ -73,7 +73,7 @@ struct SplashScreenView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 appState = .sensorIntro
             }
         }
