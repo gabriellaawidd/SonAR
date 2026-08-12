@@ -35,10 +35,28 @@ enum Wave {
 
         let origin = transmitter.position(relativeTo: nil)
         var maxDuration: TimeInterval = 0
+        
+        let centerHit = hits.first ?? nil
+        let centerPosition = centerHit?.worldPosition ?? origin // origin = transmitter.position(relativeTo: nil)
+        print("[waveAsset] center point: \(centerPosition)")
+        
+        let centerDirection = directions.first ?? SIMD3<Float>(0, 0, -1)
+        let centerAngle = centerHit?.incidenceAngleDegrees(incoming: centerDirection)
+        print("[waveAsset] center angle: \(centerAngle.map { "\($0)°" } ?? "no hit")")
+        
+        let centerAngleCategory: AngleCategory
+        if let centerAngle {
+            centerAngleCategory = centerAngle <= echoReturnAngleLimitDeg ? .flat : .angled
+        } else {
+            centerAngleCategory = .unknown
+        }
+        
+        print("[waveAsset] center angle category: \(centerAngleCategory.rawValue)")
 
         for (hit, forward) in zip(hits, directions) {
             let distance = min(hit?.distance ?? maxRange, maxRange)
             let hitPoint = hit?.worldPosition ?? origin + forward * distance
+//            print("[waveAsset] distance: \(distance) -> hitPoint: \(hitPoint)")
 
             let outDuration = legDuration(distance)
             WaveRenderer.spawnPulse(color: .cyan, from: origin, to: hitPoint, anchor: anchor, duration: outDuration)
