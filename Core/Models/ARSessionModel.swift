@@ -1,10 +1,10 @@
 import SwiftUI
 
-final class ARSessionModel: ObservableObject {
-    @Published var phase: AppPhase = .carrying
-    @Published var isAssetReady = false
-    @Published var surfaceReading: SurfaceReading?
-    @Published var isLowLight = false
+final class ARSessionModel: Observable {
+    var phase: AppPhase = .carrying
+    var isAssetReady = false
+    var surfaceReading: SurfaceReading?
+    var isLowLight = false
 
     weak var controller: ARSceneController?
 

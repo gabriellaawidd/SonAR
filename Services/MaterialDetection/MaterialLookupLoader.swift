@@ -17,12 +17,13 @@ enum MaterialLookupLoader {
         MaterialLookupTable(
             soft: [
                 "backpack", "pillow", "sofa", "armchair", "curtain","jacket", "hoodie",
-                "clothing", "stuffed_animals", "scarf", "sock", "textile"
+                "clothing", "stuffed_animals", "scarf", "sock", "textile", "rug", "carpet"
             ],
             hard: [
                 "whiteboard", "chalkboard", "desk", "table", "chair", "folding_chair", "stool",
-                "computer_monitor", "laptop", "television", "door", "window", "cabinet", "bookshelf",
-                "book", "wood_natural", "wood_processed", "brick", "trash_can", "clock"
+                "desktop_computer", "laptop", "television", "door", "window", "cabinet", "bookshelf",
+                "book", "wood_natural", "wood_processed", "brick", "trash_can", "clock", "bottle", "cup",
+                "mouse", "remote", "keyboard", "cell phone", "clock", "scissors", "marker"
             ]
         )
     }

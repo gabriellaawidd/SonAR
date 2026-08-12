@@ -20,4 +20,3 @@ extension ARView {
             ambientIntensity < Self.lowLightThreshold ? Self.lowLightExponent : 1.0
     }
 }
- 

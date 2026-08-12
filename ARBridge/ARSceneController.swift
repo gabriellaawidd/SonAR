@@ -47,6 +47,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         coachingOverlay.goal = .tracking
         coachingOverlay.activatesAutomatically = false
         coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
+        // Used as a passive dark-room hint only; must not swallow the tap-to-place gesture underneath it.
+        coachingOverlay.isUserInteractionEnabled = false
         arView.addSubview(coachingOverlay)
         NSLayoutConstraint.activate([
             coachingOverlay.topAnchor.constraint(equalTo: arView.topAnchor),

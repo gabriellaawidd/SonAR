@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SensorPlacementARView: View {
-    @StateObject private var model = ARSessionModel()
+    @State private var model = ARSessionModel()
     @Binding var appState: AppState
 
     var body: some View {

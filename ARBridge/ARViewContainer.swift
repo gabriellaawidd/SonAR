@@ -2,7 +2,7 @@ import RealityKit
 import SwiftUI
 
 struct ARViewContainer: UIViewRepresentable {
-    @ObservedObject var model: ARSessionModel
+    var model: ARSessionModel
 
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(
