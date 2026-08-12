@@ -73,13 +73,35 @@ final class ARRaycastManager {
     }
 
     @discardableResult
-    func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?] {
+    func refreshLock(id: UUID, directions: [SIMD3<Float>]) async -> [RaycastHit?] {
         guard let index = locks.firstIndex(where: { $0.id == id }) else { return [] }
         let lock = locks[index]
 
-        let hits = directions.map { direction in
-            worldRaycast(origin: lock.sensorPosition, direction: direction)
-        }
+        guard let session = arView?.session else { return [] }
+        let currentFrameTimestamp = latestFrameTimestamp
+        let capturedImage = session.currentFrame?.capturedImage
+
+        let hits = await Task.detached(priority: .userInitiated) {
+            directions.map { direction -> RaycastHit? in
+                let query = ARRaycastQuery(
+                    origin: lock.sensorPosition,
+                    direction: simd_normalize(direction),
+                    allowing: .estimatedPlane,
+                    alignment: .any
+                )
+                guard let result = session.raycast(query).first else { return nil }
+
+                let worldPosition = Self.position(from: result.worldTransform)
+                return RaycastHit(
+                    worldPosition: worldPosition,
+                    normal: Self.normal(from: result.worldTransform),
+                    distance: simd_distance(lock.sensorPosition, worldPosition),
+                    screenPoint: nil,
+                    timestamp: currentFrameTimestamp,
+                    pixelBuffer: capturedImage
+                )
+            }
+        }.value
 
         // Keep the central hit as the primary hit for the lock state
         locks[index] = PlacementLock(

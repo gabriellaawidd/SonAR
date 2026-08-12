@@ -8,6 +8,13 @@ class BeepSynthesizer {
     private let player = AVAudioPlayerNode()
 
     init() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to configure audio session: \(error)")
+        }
+        
         engine.attach(player)
         engine.connect(player, to: engine.mainMixerNode, format: nil)
         try? engine.start()

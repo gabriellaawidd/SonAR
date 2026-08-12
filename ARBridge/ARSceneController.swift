@@ -47,6 +47,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         coachingOverlay.goal = .tracking
         coachingOverlay.activatesAutomatically = false
         coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
+        // Used as a passive dark-room hint only; must not swallow the tap-to-place gesture underneath it.
+        coachingOverlay.isUserInteractionEnabled = false
         arView.addSubview(coachingOverlay)
         NSLayoutConstraint.activate([
             coachingOverlay.topAnchor.constraint(equalTo: arView.topAnchor),
@@ -149,7 +151,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
                 sensor: sensor,
                 anchor: anchor,
                 lockID: lock.id,
-                refreshHit: { [weak self] id, dirs in self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] },
+                refreshHit: { [weak self] id, dirs in await self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] },
                 getMaterial: { [weak self] in self?.model.surfaceReading?.materialCategory }
             )
         }
@@ -181,7 +183,7 @@ extension ARSceneController: SurfaceRaycastProviding {
     }
 
     @discardableResult
-    func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?] {
-        raycastManager.refreshLock(id: id, directions: directions)
+    func refreshLock(id: UUID, directions: [SIMD3<Float>]) async -> [RaycastHit?] {
+        await raycastManager.refreshLock(id: id, directions: directions)
     }
 }
