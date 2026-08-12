@@ -34,6 +34,7 @@ struct ContentView: View {
             }
         }
         .animation(.easeInOut, value: currentAppState)
+        .preferredColorScheme(.light)
     }
 }
 
