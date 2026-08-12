@@ -28,9 +28,9 @@ struct ContentView: View {
             case .modeSelection:
                 ModeSelectionView(appState: $currentAppState)
             case .guidedWalkthrough:
-                Text("Guided Walkthrough Screen")
+                GuidedWalkthroughView(appState: $currentAppState)
             case .freeExplore:
-                SensorPlacementARView(appState: $currentAppState)
+                FreeExploreView(appState: $currentAppState)
             }
         }
         .animation(.easeInOut, value: currentAppState)

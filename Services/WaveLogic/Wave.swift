@@ -23,18 +23,42 @@ enum Wave {
     /// near the sensor, so it never returns to the receiver.
     private static let echoReturnAngleLimitDeg: Float = 10
 
+    /// Minimum returning rays for the walkthrough to call a surface flat. Only read by the
+    /// guided flow — the visualisation itself is unaffected.
+    static let minReturningRays = 3
+
+    /// Soft surfaces scatter sound inside their pores, so only a couple of rays make it back.
+    private static let softMaxEchoes = 2
+
+    /// Summary of one pulse, used by the guided walkthrough to judge a placement.
+    struct PulseReport: Equatable {
+        let returned: Int
+        let total: Int
+        let centerDistance: Float?
+        let centerAngle: Float?
+
+        var isBounceBack: Bool { returned >= Wave.minReturningRays }
+
+        var distanceCentimeters: Int? {
+            guard let centerDistance else { return nil }
+            return Int((centerDistance * 100).rounded())
+        }
+    }
+
     /// Fires one pulse: a beam from the transmitter to the hit point (or `maxRange` if nothing
     /// hit), then, only if the surface angle allows an echo, a return beam to the receiver.
     /// Returns how long the pulse takes to fully finish, so a loop can wait before firing again.
     @discardableResult
-    static func fire(from sensor: Entity, anchor: AnchorEntity, hits: [RaycastHit?], directions: [SIMD3<Float>], material: MaterialCategory?) -> TimeInterval {
+    static func fire(from sensor: Entity, anchor: AnchorEntity, hits: [RaycastHit?], directions: [SIMD3<Float>], material: MaterialCategory?, onReport: ((PulseReport) -> Void)? = nil) -> TimeInterval {
         guard let transmitter = sensor.findEntity(named: transmitterName),
               let receiver = sensor.findEntity(named: receiverName) else {
             return 0
         }
 
         let origin = transmitter.position(relativeTo: nil)
+        let absorbent = (material == .soft)
         var maxDuration: TimeInterval = 0
+        var returnedCount = 0
         
         let centerHit = hits.first ?? nil
         let centerPosition = centerHit?.worldPosition ?? origin // origin = transmitter.position(relativeTo: nil)
@@ -69,8 +93,10 @@ enum Wave {
                     WaveRenderer.spawnHitDecal(at: hit.worldPosition, normal: hit.normal, anchor: anchor)
                 }
                 
-                if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg {
+                if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg,
+                   !absorbent || returnedCount < softMaxEchoes {
                     // Return echo
+                    returnedCount += 1
                     let receiverPosition = receiver.position(relativeTo: nil)
                     let fullDist = simd_distance(hitPoint, receiverPosition)
                     
@@ -90,8 +116,9 @@ enum Wave {
                         WaveRenderer.spawnPulse(color: .green, from: hitPoint, to: targetPos, anchor: anchor, duration: backDuration, opacity: opacity, scale: scale)
                     }
                     totalDuration += backDuration
-                } else {
-                    // Specular reflection bouncing away
+                } else if !absorbent {
+                    // Specular reflection bouncing away. Soft surfaces skip this entirely:
+                    // they diffuse the sound rather than deflecting it like a mirror.
                     let reflectedDirection = simd_reflect(simd_normalize(forward), simd_normalize(hit.normal))
                     let remainingDistance = max(maxRange - distance, 0)
                     let bounceDistance = material == .soft ? min(remainingDistance, 0.5) : remainingDistance
@@ -112,6 +139,15 @@ enum Wave {
             maxDuration = max(maxDuration, totalDuration)
         }
 
+        // Distance only means something when enough echoes actually came back.
+        let measurable = returnedCount >= minReturningRays
+        onReport?(PulseReport(
+            returned: returnedCount,
+            total: directions.count,
+            centerDistance: measurable ? centerHit?.distance : nil,
+            centerAngle: centerAngle
+        ))
+
         return maxDuration
     }
 
@@ -122,10 +158,13 @@ enum Wave {
         anchor: AnchorEntity,
         lockID: UUID,
         refreshHit: @escaping (UUID, [SIMD3<Float>]) async -> [RaycastHit?],
-        getMaterial: @escaping () -> MaterialCategory?
+        getMaterial: @escaping () -> MaterialCategory?,
+        onPulse: ((PulseReport) -> Void)? = nil
     ) -> Task<Void, Never> {
         Task { @MainActor in
             while !Task.isCancelled {
+                guard sensor.parent != nil else { break }
+
                 // Generate dynamically: 1 Center + layers of varying counts
                 let orientation = sensor.orientation(relativeTo: nil)
                 
@@ -153,7 +192,7 @@ enum Wave {
                 let hits = await refreshHit(lockID, directions)
                 let material = getMaterial()
                 BeepSynthesizer.shared.playLowBeep()
-                fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material)
+                fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material, onReport: onPulse)
                 try? await Task.sleep(for: .seconds(1.0))
             }
         }
