@@ -51,24 +51,62 @@ struct TransparentRealityView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject {
-        var panStartX: Float = 0.0
-        var currentAngleY: Float = 0.0
         var modelEntity: Entity?
+        
+        var angleX: Float = 0.0
+        var angleY: Float = 0.0
+        
+        var displayLink: CADisplayLink?
+        var velocity: CGPoint = .zero
         
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             guard let view = gesture.view as? ARView,
                   let model = modelEntity else { return }
             
-            let translation = gesture.translation(in: view)
-            
             if gesture.state == .began {
-                panStartX = currentAngleY
-            } else if gesture.state == .changed {
-                currentAngleY = panStartX + Float(translation.x) * 0.01
+                displayLink?.invalidate()
+                displayLink = nil
+                velocity = .zero
                 
-                let rotation = simd_quatf(angle: currentAngleY, axis: [0, 1, 0])
-                model.transform.rotation = rotation
+            } else if gesture.state == .changed {
+                let translation = gesture.translation(in: view)
+                
+                angleY += Float(translation.x) * 0.01
+                angleX += Float(translation.y) * 0.01
+                applyRotation(to: model)
+                
+                gesture.setTranslation(.zero, in: view)
+                
+            } else if gesture.state == .ended || gesture.state == .cancelled {
+                let gestureVelocity = gesture.velocity(in: view)
+                
+                velocity = CGPoint(x: gestureVelocity.x * 0.0002, y: gestureVelocity.y * 0.0002)
+                
+                displayLink = CADisplayLink(target: self, selector: #selector(applyMomentum))
+                displayLink?.add(to: .main, forMode: .common)
             }
+        }
+        
+        @objc func applyMomentum() {
+            guard let model = modelEntity else { return }
+            
+            angleY += Float(velocity.x)
+            angleX += Float(velocity.y)
+            applyRotation(to: model)
+            
+            velocity.x *= 0.92
+            velocity.y *= 0.92
+            
+            if abs(velocity.x) < 0.001 && abs(velocity.y) < 0.001 {
+                displayLink?.invalidate()
+                displayLink = nil
+            }
+        }
+        
+        func applyRotation(to model: Entity) {
+            let rotationY = simd_quatf(angle: angleY, axis: [0, 1, 0])
+            let rotationX = simd_quatf(angle: angleX, axis: [1, 0, 0])
+            model.transform.rotation = rotationY * rotationX
         }
     }
 }
