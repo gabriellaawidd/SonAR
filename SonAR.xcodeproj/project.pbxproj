@@ -65,8 +65,6 @@
 		EA23920F810048C2B714E9C6 /* FeedbackRobot in Frameworks */ = {isa = PBXBuildFile; productRef = 3D6F2C7757B679482818DE3C /* FeedbackRobot */; };
 		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
 		EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */; };
-		F2A412A9302C620500CA6E65 /* StepRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A412A8302C61F800CA6E65 /* StepRowView.swift */; };
-		F2A412AB302C620F00CA6E65 /* HowItWorksSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A412AA302C620900CA6E65 /* HowItWorksSheetView.swift */; };
 		F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA829AB492DC300568492E1 /* ARSessionModel.swift */; };
 		FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A59F87A4279D097A6C56522 /* AppPhase.swift */; };
 /* End PBXBuildFile section */
@@ -128,8 +126,6 @@
 		D7EA3CE1941E32D7F129193F /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		E7AC517540A419EB236775FF /* inniiii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inniiii.swift; sourceTree = "<group>"; };
-		F2A412A8302C61F800CA6E65 /* StepRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRowView.swift; sourceTree = "<group>"; };
-		F2A412AA302C620900CA6E65 /* HowItWorksSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksSheetView.swift; sourceTree = "<group>"; };
 		F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementAnimator.swift; sourceTree = "<group>"; };
 		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
@@ -322,8 +318,6 @@
 				095A01FD302CF0EC00862892 /* SpeechBubble.swift */,
 				095A01FE302CF0EC00862892 /* StepRowView.swift */,
 				F6B5819D5565862BC3A5E8FC /* ini.swift */,
-				F2A412A8302C61F800CA6E65 /* StepRowView.swift */,
-				F2A412AA302C620900CA6E65 /* HowItWorksSheetView.swift */,
 			);
 			path = GlobalComponents;
 			sourceTree = "<group>";
@@ -488,9 +482,7 @@
 				FDDDF98A1FE8595EFBDCC9CB /* AppPhase.swift in Sources */,
 				677E0958D49650ADECD4F0E9 /* BeepSynthesizer.swift in Sources */,
 				8204BFC42395CECB22A71A90 /* ContentView.swift in Sources */,
-				F2A412AB302C620F00CA6E65 /* HowItWorksSheetView.swift in Sources */,
 				0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */,
-				F2A412A9302C620500CA6E65 /* StepRowView.swift in Sources */,
 				822E9C5AC1AC9DEBD9A18334 /* MaterialDetectionManager.swift in Sources */,
 				AC89CE7EB1CD247120F49923 /* MaterialLookupLoader.swift in Sources */,
 				CFE5A1DB46ADB85F5ECDB233 /* MaterialVisionClassifier.swift in Sources */,
