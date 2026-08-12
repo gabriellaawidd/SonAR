@@ -56,6 +56,13 @@ struct ModeSelectionView: View {
                 Spacer()
             }
         }
+        .gesture(
+            DragGesture().onEnded { value in
+                if value.translation.width > 50 {
+                    appState = .sensorIntro
+                }
+            }
+        )
     }
 }
 
