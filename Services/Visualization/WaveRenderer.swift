@@ -5,7 +5,7 @@ import UIKit
 enum WaveRenderer {
     private static let pulseRadius: Float = 0.003
 
-    static func spawnPulse(
+    static func spawnPulse( // munculin bola soundwave
         color: UIColor, from start: SIMD3<Float>, to end: SIMD3<Float>, anchor: AnchorEntity, duration: TimeInterval,
         opacity: Float = 1.0, scale: Float = 1.0
     ) {
