@@ -58,7 +58,6 @@ enum Wave {
         let origin = transmitter.position(relativeTo: nil)
         let absorbent = (material == .soft)
         var maxDuration: TimeInterval = 0
-        var returnedCount = 0
         
         let centerHit = hits.first ?? nil
         let centerPosition = centerHit?.worldPosition ?? origin // origin = transmitter.position(relativeTo: nil)
@@ -93,8 +92,7 @@ enum Wave {
                     WaveRenderer.spawnHitDecal(at: hit.worldPosition, normal: hit.normal, anchor: anchor)
                 }
                 
-                if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg,
-                   !absorbent || returnedCount < softMaxEchoes {
+                if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg {
                     // Return echo
                     returnedCount += 1
                     let receiverPosition = receiver.position(relativeTo: nil)
