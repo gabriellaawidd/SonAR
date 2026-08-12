@@ -11,6 +11,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private let previewManager = ARPreviewManager()
     private let placementManager = ARPlacementManager()
     private let raycastManager = ARRaycastManager()
+    private let robotPresenter = RobotFeedbackPresenter()
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
 
     private var materialDetectionManager: MaterialDetectionManager?
@@ -28,12 +29,19 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         materialDetectionManager = MaterialDetectionManager(raycastProvider: self)
         materialDetectionManager?.onReadingReady = { [weak model] _, reading in
             model?.surfaceReading = reading
+            print(String(
+                format: "[Material] terdeteksi %@ (confidence %.3f, sudut %.1f derajat)",
+                reading.materialCategory.rawValue,
+                reading.materialConfidence,
+                reading.angleDegrees ?? -1
+            ))
         }
     }
 
     func attach(to arView: ARView) {
         self.arView = arView
         raycastManager.attach(to: arView)
+        robotPresenter.attach(to: arView)
         arView.session.delegate = self
 
         guard ARSessionConfigurator.run(on: arView) else { return }
@@ -77,13 +85,13 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             }
         }
 
+        let delta = deltaTime(from: frame.timestamp)
+        robotPresenter.update(cameraTransform: frame.camera.transform, deltaTime: delta)
+
         guard model.phase == .carrying else { return }
 
         raycastManager.update(frame: frame)
-        previewManager.update(
-            frame: frame,
-            deltaTime: deltaTime(from: frame.timestamp)
-        )
+        previewManager.update(frame: frame, deltaTime: delta)
     }
 
     func beginCarrying() {
@@ -100,10 +108,25 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         lastFrameTime = nil
         model.phase = .carrying
         model.isAssetReady = false
+        model.lastPulse = nil
+        model.surfaceReading = nil
 
         previewManager.prepare(in: arView) { [weak self] isReady in
             self?.model.isAssetReady = isReady
         }
+    }
+
+    func teardown() {
+        waveTask?.cancel()
+        waveTask = nil
+        placementManager.removeAll()
+        placedSensor = nil
+        robotPresenter.dismiss()
+        arView?.session.pause()
+    }
+
+    deinit {
+        waveTask?.cancel()
     }
 
     func restartCarrying() {
@@ -112,7 +135,31 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         waveTask = nil
         placementManager.removeAll()
         placedSensor = nil
+        dismissFeedbackRobot()
         beginCarrying()
+    }
+
+    func presentFeedbackRobot(_ presentation: FeedbackPresentation) {
+        let cameraTransform = arView?.session.currentFrame?.camera.transform
+        var surfaceDistance: Float?
+        if let cameraTransform, let placedSensor {
+            let camera = SIMD3<Float>(
+                cameraTransform.columns.3.x,
+                cameraTransform.columns.3.y,
+                cameraTransform.columns.3.z
+            )
+            surfaceDistance = simd_distance(camera, placedSensor.position(relativeTo: nil))
+        }
+
+        robotPresenter.present(
+            presentation,
+            cameraTransform: cameraTransform,
+            surfaceDistance: surfaceDistance
+        )
+    }
+
+    func dismissFeedbackRobot() {
+        robotPresenter.dismiss()
     }
 
     private func deltaTime(from timestamp: TimeInterval) -> Float {
@@ -136,6 +183,10 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             orientation: orientation,
             pixelBuffer: pixelBuffer
             )
+        if lock.hit == nil {
+            print("[Material] raycast tidak mengenai permukaan, Vision tidak dijalankan")
+        }
+
         tapFeedback.impactOccurred()
         previewManager.dismiss()
         model.isAssetReady = false
@@ -152,7 +203,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
                 anchor: anchor,
                 lockID: lock.id,
                 refreshHit: { [weak self] id, dirs in await self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] },
-                getMaterial: { [weak self] in self?.model.surfaceReading?.materialCategory }
+                getMaterial: { [weak self] in self?.model.effectiveMaterial },
+                onPulse: { [weak self] report in self?.model.lastPulse = report }
             )
         }
         model.phase = .placed

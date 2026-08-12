@@ -8,6 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		08F5C490E5F2FFC3B28EEFF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */; };
+		095A01DB302CEFE700862892 /* GuidedWalkthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01D8302CEFE700862892 /* GuidedWalkthroughView.swift */; };
+		095A01DE302CEFE700862892 /* GuidedWalkthroughViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01D9302CEFE700862892 /* GuidedWalkthroughViewModel.swift */; };
+		095A01E4302CF08300862892 /* PlacementOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01E3302CF08300862892 /* PlacementOutcome.swift */; };
+		095A01E5302CF08300862892 /* GuidedLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01E1302CF08300862892 /* GuidedLesson.swift */; };
+		095A01E6302CF08300862892 /* GuidedStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01E2302CF08300862892 /* GuidedStep.swift */; };
+		095A01E9302CF09800862892 /* GuidedProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01E7302CF09800862892 /* GuidedProgress.swift */; };
+		095A01F6302CF0D600862892 /* RobotHintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01F4302CF0D600862892 /* RobotHintCard.swift */; };
+		095A01F7302CF0D600862892 /* RobotFeedbackAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01F2302CF0D600862892 /* RobotFeedbackAsset.swift */; };
+		095A01F8302CF0D600862892 /* RobotFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01F3302CF0D600862892 /* RobotFeedbackPresenter.swift */; };
+		095A01FF302CF0EC00862892 /* CircleIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01FA302CF0EC00862892 /* CircleIconButton.swift */; };
+		095A0200302CF0EC00862892 /* HowItWorksSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01FB302CF0EC00862892 /* HowItWorksSheetView.swift */; };
+		095A0201302CF0EC00862892 /* CapsuleControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01F9302CF0EC00862892 /* CapsuleControls.swift */; };
+		095A0202302CF0EC00862892 /* MascotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01FC302CF0EC00862892 /* MascotImage.swift */; };
+		095A0203302CF0EC00862892 /* SpeechBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01FD302CF0EC00862892 /* SpeechBubble.swift */; };
+		095A0204302CF0EC00862892 /* StepRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A01FE302CF0EC00862892 /* StepRowView.swift */; };
+		095A0209302CF11E00862892 /* GuidedOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0205302CF11E00862892 /* GuidedOverlayView.swift */; };
+		095A020A302CF11E00862892 /* MascotPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0207302CF11E00862892 /* MascotPromptView.swift */; };
+		095A020C302CF74700862892 /* FeedbackPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020B302CF74200862892 /* FeedbackPresentation.swift */; };
+		095A020E302CF76700862892 /* GuidedTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020D302CF76200862892 /* GuidedTiming.swift */; };
+		095A0210302CFA8C00862892 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020F302CFA8400862892 /* NavBarView.swift */; };
+		095A0212302CFAB000862892 /* FreeExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0211302CFAA600862892 /* FreeExploreView.swift */; };
 		0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */; };
 		132817BA2D1F1A0322D34B8B /* ini.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5819D5565862BC3A5E8FC /* ini.swift */; };
 		20D8772C475455A771CD9B16 /* kiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A4AC0C59C537AD32BF1055 /* kiw.swift */; };
@@ -50,6 +71,27 @@
 
 /* Begin PBXFileReference section */
 		086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		095A01D8302CEFE700862892 /* GuidedWalkthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedWalkthroughView.swift; sourceTree = "<group>"; };
+		095A01D9302CEFE700862892 /* GuidedWalkthroughViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedWalkthroughViewModel.swift; sourceTree = "<group>"; };
+		095A01E1302CF08300862892 /* GuidedLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedLesson.swift; sourceTree = "<group>"; };
+		095A01E2302CF08300862892 /* GuidedStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedStep.swift; sourceTree = "<group>"; };
+		095A01E3302CF08300862892 /* PlacementOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementOutcome.swift; sourceTree = "<group>"; };
+		095A01E7302CF09800862892 /* GuidedProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedProgress.swift; sourceTree = "<group>"; };
+		095A01F2302CF0D600862892 /* RobotFeedbackAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotFeedbackAsset.swift; sourceTree = "<group>"; };
+		095A01F3302CF0D600862892 /* RobotFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotFeedbackPresenter.swift; sourceTree = "<group>"; };
+		095A01F4302CF0D600862892 /* RobotHintCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotHintCard.swift; sourceTree = "<group>"; };
+		095A01F9302CF0EC00862892 /* CapsuleControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleControls.swift; sourceTree = "<group>"; };
+		095A01FA302CF0EC00862892 /* CircleIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleIconButton.swift; sourceTree = "<group>"; };
+		095A01FB302CF0EC00862892 /* HowItWorksSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksSheetView.swift; sourceTree = "<group>"; };
+		095A01FC302CF0EC00862892 /* MascotImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotImage.swift; sourceTree = "<group>"; };
+		095A01FD302CF0EC00862892 /* SpeechBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubble.swift; sourceTree = "<group>"; };
+		095A01FE302CF0EC00862892 /* StepRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRowView.swift; sourceTree = "<group>"; };
+		095A0205302CF11E00862892 /* GuidedOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedOverlayView.swift; sourceTree = "<group>"; };
+		095A0207302CF11E00862892 /* MascotPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotPromptView.swift; sourceTree = "<group>"; };
+		095A020B302CF74200862892 /* FeedbackPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPresentation.swift; sourceTree = "<group>"; };
+		095A020D302CF76200862892 /* GuidedTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedTiming.swift; sourceTree = "<group>"; };
+		095A020F302CFA8400862892 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		095A0211302CFAA600862892 /* FreeExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeExploreView.swift; sourceTree = "<group>"; };
 		0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionConfigurator.swift; sourceTree = "<group>"; };
 		18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPlacementARView.swift; sourceTree = "<group>"; };
 		2957E86628AB007285C5B7C9 /* SurfaceReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceReading.swift; sourceTree = "<group>"; };
@@ -112,9 +154,20 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		095A01F5302CF0D600862892 /* RobotFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				095A01F2302CF0D600862892 /* RobotFeedbackAsset.swift */,
+				095A01F3302CF0D600862892 /* RobotFeedbackPresenter.swift */,
+				095A01F4302CF0D600862892 /* RobotHintCard.swift */,
+			);
+			path = RobotFeedback;
+			sourceTree = "<group>";
+		};
 		09A0A922D7E97317608A6500 /* FreeExplore */ = {
 			isa = PBXGroup;
 			children = (
+				095A0211302CFAA600862892 /* FreeExploreView.swift */,
 				F9A4AC0C59C537AD32BF1055 /* kiw.swift */,
 			);
 			path = FreeExplore;
@@ -123,6 +176,8 @@
 		0DE6F0269B7F4A696219D11E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				095A0205302CF11E00862892 /* GuidedOverlayView.swift */,
+				095A0207302CF11E00862892 /* MascotPromptView.swift */,
 				E7AC517540A419EB236775FF /* inniiii.swift */,
 			);
 			path = Components;
@@ -186,6 +241,7 @@
 		64AEB9C6391F5CEF18E1A5D9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				095A01F5302CF0D600862892 /* RobotFeedback */,
 				891429096C621770E722B4E5 /* MaterialDetection */,
 				EF0AE416878A2C304ED2F530 /* SensorPlacement */,
 				B4B67FBD7F1AA36B236DED14 /* Visualization */,
@@ -222,6 +278,9 @@
 		75F29668E01405CAF8E2EA3E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				095A01E1302CF08300862892 /* GuidedLesson.swift */,
+				095A01E2302CF08300862892 /* GuidedStep.swift */,
+				095A01E3302CF08300862892 /* PlacementOutcome.swift */,
 				4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */,
 				3A59F87A4279D097A6C56522 /* AppPhase.swift */,
 				CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */,
@@ -251,6 +310,13 @@
 		8FFA12713F1DB39272B65CD9 /* GlobalComponents */ = {
 			isa = PBXGroup;
 			children = (
+				095A020F302CFA8400862892 /* NavBarView.swift */,
+				095A01F9302CF0EC00862892 /* CapsuleControls.swift */,
+				095A01FA302CF0EC00862892 /* CircleIconButton.swift */,
+				095A01FB302CF0EC00862892 /* HowItWorksSheetView.swift */,
+				095A01FC302CF0EC00862892 /* MascotImage.swift */,
+				095A01FD302CF0EC00862892 /* SpeechBubble.swift */,
+				095A01FE302CF0EC00862892 /* StepRowView.swift */,
 				F6B5819D5565862BC3A5E8FC /* ini.swift */,
 			);
 			path = GlobalComponents;
@@ -282,6 +348,8 @@
 		B668739E355CB00F1744798B /* GuidedWalkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				095A01D8302CEFE700862892 /* GuidedWalkthroughView.swift */,
+				095A01D9302CEFE700862892 /* GuidedWalkthroughViewModel.swift */,
 				0DE6F0269B7F4A696219D11E /* Components */,
 			);
 			path = GuidedWalkthrough;
@@ -290,6 +358,9 @@
 		C8AFAE81DB0E1BA6A276DD73 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				095A020D302CF76200862892 /* GuidedTiming.swift */,
+				095A020B302CF74200862892 /* FeedbackPresentation.swift */,
+				095A01E7302CF09800862892 /* GuidedProgress.swift */,
 				CFA829AB492DC300568492E1 /* ARSessionModel.swift */,
 				2957E86628AB007285C5B7C9 /* SurfaceReading.swift */,
 			);
@@ -393,8 +464,18 @@
 				D35C594901620DB9577CBC81 /* ARRaycastManager.swift in Sources */,
 				95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */,
 				3185C93D5931D18F37948774 /* ARSessionConfigurator.swift in Sources */,
+				095A01F6302CF0D600862892 /* RobotHintCard.swift in Sources */,
+				095A01F7302CF0D600862892 /* RobotFeedbackAsset.swift in Sources */,
+				095A01F8302CF0D600862892 /* RobotFeedbackPresenter.swift in Sources */,
 				F8138D1510A7328D724EC46F /* ARSessionModel.swift in Sources */,
+				095A01FF302CF0EC00862892 /* CircleIconButton.swift in Sources */,
+				095A0200302CF0EC00862892 /* HowItWorksSheetView.swift in Sources */,
+				095A0201302CF0EC00862892 /* CapsuleControls.swift in Sources */,
+				095A0202302CF0EC00862892 /* MascotImage.swift in Sources */,
+				095A0203302CF0EC00862892 /* SpeechBubble.swift in Sources */,
+				095A0204302CF0EC00862892 /* StepRowView.swift in Sources */,
 				D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */,
+				095A0212302CFAB000862892 /* FreeExploreView.swift in Sources */,
 				633F3E68EEE70858937B49A5 /* AmbientIntensity.swift in Sources */,
 				D773B5E90ED6B430287F9E43 /* AngleCategory.swift in Sources */,
 				5CF0DD3E15D83785F9FBC81A /* AppConfig.swift in Sources */,
@@ -411,18 +492,29 @@
 				76D077B5B9997BD84573A34C /* PlacementSolver.swift in Sources */,
 				8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */,
 				46B93251F93B135BABF94768 /* SensorIntroView.swift in Sources */,
+				095A01E9302CF09800862892 /* GuidedProgress.swift in Sources */,
+				095A020E302CF76700862892 /* GuidedTiming.swift in Sources */,
 				C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */,
 				26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */,
+				095A0209302CF11E00862892 /* GuidedOverlayView.swift in Sources */,
+				095A020C302CF74700862892 /* FeedbackPresentation.swift in Sources */,
+				095A020A302CF11E00862892 /* MascotPromptView.swift in Sources */,
 				223300FAB2EE86A47C4661DF /* SplashScreenView.swift in Sources */,
 				C5A05DF4E507A824C0F0DF6B /* SurfaceGeometryClassifier.swift in Sources */,
 				EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */,
+				095A0210302CFA8C00862892 /* NavBarView.swift in Sources */,
 				63AD195371707F345248B11D /* SurfaceReading.swift in Sources */,
 				986ACA23E76EC504A260326A /* Wave.swift in Sources */,
 				A1F4FB413093CF47B04186A7 /* WaveRenderer.swift in Sources */,
 				E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */,
+				095A01E4302CF08300862892 /* PlacementOutcome.swift in Sources */,
+				095A01E5302CF08300862892 /* GuidedLesson.swift in Sources */,
+				095A01E6302CF08300862892 /* GuidedStep.swift in Sources */,
 				132817BA2D1F1A0322D34B8B /* ini.swift in Sources */,
 				EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */,
 				20D8772C475455A771CD9B16 /* kiw.swift in Sources */,
+				095A01DB302CEFE700862892 /* GuidedWalkthroughView.swift in Sources */,
+				095A01DE302CEFE700862892 /* GuidedWalkthroughViewModel.swift in Sources */,
 				9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +527,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4S6V9894Z7;
+				DEVELOPMENT_TEAM = S37DL4NT3S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -444,7 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.denzel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.tiff;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -456,7 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4S6V9894Z7;
+				DEVELOPMENT_TEAM = S37DL4NT3S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -465,7 +557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.denzel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.tiff;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

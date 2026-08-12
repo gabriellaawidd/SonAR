@@ -21,4 +21,8 @@ struct ARViewContainer: UIViewRepresentable {
     func makeCoordinator() -> ARSceneController {
         ARSceneController(model: model)
     }
+
+    static func dismantleUIView(_ uiView: ARView, coordinator: ARSceneController) {
+        coordinator.teardown()
+    }
 }
