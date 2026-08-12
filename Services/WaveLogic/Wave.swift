@@ -15,8 +15,8 @@ enum Wave {
     static let transmitterName = "_0"
     static let receiverName = "_1"
 
-    private static let maxRange: Float = 2 // Dikecilin dari 4 jadi 2 supaya jeda antar spawnPulse gak terlalu lama (UX things)
-    private static let travelSpeed: Float = 0.85
+    private static let maxRange: Float = 2   // Dikecilin dari 4 jadi 2 supaya jeda antar spawnPulse gak terlalu lama (UX things)
+    private static let travelSpeed: Float = 0.7
     private static let minLegDuration: TimeInterval = 0.15
     private static let pulseGap: TimeInterval = 0.05
     /// Beyond this incidence angle a real echo's specular reflection no longer sweeps back
@@ -53,8 +53,10 @@ enum Wave {
         
         print("[waveAsset] center angle category: \(centerAngleCategory.rawValue)")
 
-        for (hit, forward) in zip(hits, directions) {
-            let distance = min(hit?.distance ?? maxRange, maxRange)
+        for (originalHit, forward) in zip(hits, directions) {
+            let hit = originalHit.flatMap { $0.distance <= maxRange ? $0 : nil }
+            
+            let distance = hit?.distance ?? maxRange
             let hitPoint = hit?.worldPosition ?? origin + forward * distance
 //            print("[waveAsset] distance: \(distance) -> hitPoint: \(hitPoint)")
 
@@ -63,17 +65,23 @@ enum Wave {
 
             var totalDuration = outDuration
             if let hit = hit {
+                DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
+                    WaveRenderer.spawnHitDecal(at: hit.worldPosition, normal: hit.normal, anchor: anchor)
+                }
+                
                 if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg {
                     // Return echo
                     let receiverPosition = receiver.position(relativeTo: nil)
                     let fullDist = simd_distance(hitPoint, receiverPosition)
-                    let bounceDistance = material == .soft ? min(fullDist, 0.5) : fullDist
+                    
+                    let remainingDistance = max(maxRange - distance, 0)
+                    let maxBounceDist = material == .soft ? min(remainingDistance, 0.5) : remainingDistance
+                    let bounceDistance = min(fullDist, maxBounceDist)
+                    
                     let speedMult: Float = 1.0
                     let backDuration = legDuration(bounceDistance, speedMultiplier: speedMult)
                     
-                    let targetPos = material == .soft && fullDist > 0.5
-                        ? hitPoint + simd_normalize(receiverPosition - hitPoint) * 0.5
-                        : receiverPosition
+                    let targetPos = hitPoint + simd_normalize(receiverPosition - hitPoint) * bounceDistance
                         
                     let opacity: Float = material == .soft ? 1.0 : 1.0
                     let scale: Float = material == .soft ? 0.5 : 1.0
@@ -113,7 +121,7 @@ enum Wave {
         sensor: Entity,
         anchor: AnchorEntity,
         lockID: UUID,
-        refreshHit: @escaping (UUID, [SIMD3<Float>]) -> [RaycastHit?],
+        refreshHit: @escaping (UUID, [SIMD3<Float>]) async -> [RaycastHit?],
         getMaterial: @escaping () -> MaterialCategory?
     ) -> Task<Void, Never> {
         Task { @MainActor in
@@ -142,7 +150,7 @@ enum Wave {
                     return (orientation * rotation).act(SIMD3<Float>(0, 0, -1))
                 }
                 
-                let hits = refreshHit(lockID, directions)
+                let hits = await refreshHit(lockID, directions)
                 let material = getMaterial()
                 BeepSynthesizer.shared.playLowBeep()
                 fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material)

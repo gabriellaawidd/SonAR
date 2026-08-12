@@ -151,7 +151,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
                 sensor: sensor,
                 anchor: anchor,
                 lockID: lock.id,
-                refreshHit: { [weak self] id, dirs in self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] },
+                refreshHit: { [weak self] id, dirs in await self?.raycastManager.refreshLock(id: id, directions: dirs) ?? [] },
                 getMaterial: { [weak self] in self?.model.surfaceReading?.materialCategory }
             )
         }
@@ -183,7 +183,7 @@ extension ARSceneController: SurfaceRaycastProviding {
     }
 
     @discardableResult
-    func refreshLock(id: UUID, directions: [SIMD3<Float>]) -> [RaycastHit?] {
-        raycastManager.refreshLock(id: id, directions: directions)
+    func refreshLock(id: UUID, directions: [SIMD3<Float>]) async -> [RaycastHit?] {
+        await raycastManager.refreshLock(id: id, directions: directions)
     }
 }
