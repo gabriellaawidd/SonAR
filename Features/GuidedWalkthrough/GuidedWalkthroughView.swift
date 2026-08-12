@@ -42,6 +42,8 @@ struct GuidedWalkthroughView: View {
         }
         .sheet(isPresented: $showHowItWorks) {
             HowItWorksSheetView()
+                .presentationDetents([.fraction(0.85), .large])
+                .presentationDragIndicator(.visible)
         }
         .alert(
             GuidedCopy.leaveTitle,

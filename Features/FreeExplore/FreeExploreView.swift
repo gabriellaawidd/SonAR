@@ -20,7 +20,7 @@ struct FreeExploreView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                NavBarView(
+                ToolBarView(
                     onHome: { showLeaveConfirm = true },
                     onHowItWorks: { showHowItWorks = true }
                 )

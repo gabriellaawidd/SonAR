@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NavBarView: View {
+struct ToolBarView: View {
     var onHome: () -> Void
     var onHowItWorks: () -> Void
 

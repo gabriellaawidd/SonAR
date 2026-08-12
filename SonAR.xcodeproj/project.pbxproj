@@ -27,10 +27,9 @@
 		095A020A302CF11E00862892 /* MascotPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0207302CF11E00862892 /* MascotPromptView.swift */; };
 		095A020C302CF74700862892 /* FeedbackPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020B302CF74200862892 /* FeedbackPresentation.swift */; };
 		095A020E302CF76700862892 /* GuidedTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020D302CF76200862892 /* GuidedTiming.swift */; };
-		095A0210302CFA8C00862892 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020F302CFA8400862892 /* NavBarView.swift */; };
+		095A0210302CFA8C00862892 /* ToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020F302CFA8400862892 /* ToolBarView.swift */; };
 		095A0212302CFAB000862892 /* FreeExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0211302CFAA600862892 /* FreeExploreView.swift */; };
 		0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */; };
-		132817BA2D1F1A0322D34B8B /* ini.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5819D5565862BC3A5E8FC /* ini.swift */; };
 		20D8772C475455A771CD9B16 /* kiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A4AC0C59C537AD32BF1055 /* kiw.swift */; };
 		223300FAB2EE86A47C4661DF /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6432400E6787596F87401B /* SplashScreenView.swift */; };
 		234793D9637D3AF3C1B858E9 /* Sensor_Ultrasonik_3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */; };
@@ -49,7 +48,6 @@
 		95F7FC9E8337D15F52990A54 /* ARSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */; };
 		986ACA23E76EC504A260326A /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */; };
 		9AA889210310DDDE934AE590 /* MenuCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9B0EB3ED09577B01AF2A39 /* MenuCardView.swift */; };
-		9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA71B26DBBC878BC7FD155CE /* placeholder5.swift */; };
 		A1EE2288287C8B88A306AA18 /* ARPlacementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341500EDF41F74C5C20152A3 /* ARPlacementManager.swift */; };
 		A1F4FB413093CF47B04186A7 /* WaveRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606194F78918AC32DC6625DA /* WaveRenderer.swift */; };
 		AC89CE7EB1CD247120F49923 /* MaterialLookupLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42007DA62C12C5F5034F0D6 /* MaterialLookupLoader.swift */; };
@@ -61,7 +59,6 @@
 		D35C594901620DB9577CBC81 /* ARRaycastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */; };
 		D678769E837FE96129B5145E /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */; };
 		D773B5E90ED6B430287F9E43 /* AngleCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE614020AADA54E8DCBEE57 /* AngleCategory.swift */; };
-		E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */; };
 		EA23920F810048C2B714E9C6 /* FeedbackRobot in Frameworks */ = {isa = PBXBuildFile; productRef = 3D6F2C7757B679482818DE3C /* FeedbackRobot */; };
 		EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC517540A419EB236775FF /* inniiii.swift */; };
 		EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F5536514F9EDF8ABC5A6 /* SurfaceRaycast.swift */; };
@@ -90,7 +87,7 @@
 		095A0207302CF11E00862892 /* MascotPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotPromptView.swift; sourceTree = "<group>"; };
 		095A020B302CF74200862892 /* FeedbackPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPresentation.swift; sourceTree = "<group>"; };
 		095A020D302CF76200862892 /* GuidedTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedTiming.swift; sourceTree = "<group>"; };
-		095A020F302CFA8400862892 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		095A020F302CFA8400862892 /* ToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarView.swift; sourceTree = "<group>"; };
 		095A0211302CFAA600862892 /* FreeExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeExploreView.swift; sourceTree = "<group>"; };
 		0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionConfigurator.swift; sourceTree = "<group>"; };
 		18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPlacementARView.swift; sourceTree = "<group>"; };
@@ -110,14 +107,12 @@
 		7D32B964231D58CAD4A90951 /* SonAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6432400E6787596F87401B /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		815A9602300D3A53747A9DE0 /* Sensor_Ultrasonik_3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sensor_Ultrasonik_3D.usdz; sourceTree = "<group>"; };
-		8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denzelganteng123.swift; sourceTree = "<group>"; };
 		829904FF7FB03AA1FB4559E0 /* MaterialDetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDetectionManager.swift; sourceTree = "<group>"; };
 		86D8C3954BE0F2006B78B1C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885FE8442CEBB8A4AA0772F0 /* ARSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneController.swift; sourceTree = "<group>"; };
 		93FA6B0D13BC372950E7BAD3 /* MaterialVisionClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialVisionClassifier.swift; sourceTree = "<group>"; };
 		A42007DA62C12C5F5034F0D6 /* MaterialLookupLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialLookupLoader.swift; sourceTree = "<group>"; };
 		A9088505855634499D2B8D68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AA71B26DBBC878BC7FD155CE /* placeholder5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placeholder5.swift; sourceTree = "<group>"; };
 		B1A795CFDC2038CDAE8C2CD3 /* PlacementSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementSolver.swift; sourceTree = "<group>"; };
 		BABB2F5BAF8EB867DDDE4505 /* SensorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorAsset.swift; sourceTree = "<group>"; };
 		CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCategory.swift; sourceTree = "<group>"; };
@@ -127,7 +122,6 @@
 		DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		E7AC517540A419EB236775FF /* inniiii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inniiii.swift; sourceTree = "<group>"; };
 		F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementAnimator.swift; sourceTree = "<group>"; };
-		F6B5819D5565862BC3A5E8FC /* ini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ini.swift; sourceTree = "<group>"; };
 		F9A4AC0C59C537AD32BF1055 /* kiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kiw.swift; sourceTree = "<group>"; };
 		FEE8B0819440CBD41BA81655 /* ARRaycastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRaycastManager.swift; sourceTree = "<group>"; };
 		FEED6E5A26D0DE4A0633842B /* BeepSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepSynthesizer.swift; sourceTree = "<group>"; };
@@ -310,14 +304,13 @@
 		8FFA12713F1DB39272B65CD9 /* GlobalComponents */ = {
 			isa = PBXGroup;
 			children = (
-				095A020F302CFA8400862892 /* NavBarView.swift */,
+				095A020F302CFA8400862892 /* ToolBarView.swift */,
 				095A01F9302CF0EC00862892 /* CapsuleControls.swift */,
 				095A01FA302CF0EC00862892 /* CircleIconButton.swift */,
 				095A01FB302CF0EC00862892 /* HowItWorksSheetView.swift */,
 				095A01FC302CF0EC00862892 /* MascotImage.swift */,
 				095A01FD302CF0EC00862892 /* SpeechBubble.swift */,
 				095A01FE302CF0EC00862892 /* StepRowView.swift */,
-				F6B5819D5565862BC3A5E8FC /* ini.swift */,
 			);
 			path = GlobalComponents;
 			sourceTree = "<group>";
@@ -339,7 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				FEED6E5A26D0DE4A0633842B /* BeepSynthesizer.swift */,
-				AA71B26DBBC878BC7FD155CE /* placeholder5.swift */,
 				606194F78918AC32DC6625DA /* WaveRenderer.swift */,
 			);
 			path = Visualization;
@@ -370,7 +362,6 @@
 		CB55AD411EC209195FDD38FC /* WaveLogic */ = {
 			isa = PBXGroup;
 			children = (
-				8266EE10AEF51BF8C4907E02 /* denzelganteng123.swift */,
 				DEB2DACC2FAE30B4BCAF9F7D /* Wave.swift */,
 			);
 			path = WaveLogic;
@@ -502,20 +493,17 @@
 				223300FAB2EE86A47C4661DF /* SplashScreenView.swift in Sources */,
 				C5A05DF4E507A824C0F0DF6B /* SurfaceGeometryClassifier.swift in Sources */,
 				EE4CAF0F4297DCA2CDDCCE0F /* SurfaceRaycast.swift in Sources */,
-				095A0210302CFA8C00862892 /* NavBarView.swift in Sources */,
+				095A0210302CFA8C00862892 /* ToolBarView.swift in Sources */,
 				63AD195371707F345248B11D /* SurfaceReading.swift in Sources */,
 				986ACA23E76EC504A260326A /* Wave.swift in Sources */,
 				A1F4FB413093CF47B04186A7 /* WaveRenderer.swift in Sources */,
-				E26E94779F35C6CEF1B15B79 /* denzelganteng123.swift in Sources */,
 				095A01E4302CF08300862892 /* PlacementOutcome.swift in Sources */,
 				095A01E5302CF08300862892 /* GuidedLesson.swift in Sources */,
 				095A01E6302CF08300862892 /* GuidedStep.swift in Sources */,
-				132817BA2D1F1A0322D34B8B /* ini.swift in Sources */,
 				EC3CBBC2B2AD3EC8793445CE /* inniiii.swift in Sources */,
 				20D8772C475455A771CD9B16 /* kiw.swift in Sources */,
 				095A01DB302CEFE700862892 /* GuidedWalkthroughView.swift in Sources */,
 				095A01DE302CEFE700862892 /* GuidedWalkthroughViewModel.swift in Sources */,
-				9DE1EBD2C33D6EC14D6AB4C5 /* placeholder5.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = S37DL4NT3S;
+				DEVELOPMENT_TEAM = GJYV542RRH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -548,7 +536,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = S37DL4NT3S;
+				DEVELOPMENT_TEAM = GJYV542RRH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

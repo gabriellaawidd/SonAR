@@ -18,7 +18,7 @@ struct GuidedOverlayView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            NavBarView(onHome: onHome, onHowItWorks: onHowItWorks)
+            ToolBarView(onHome: onHome, onHowItWorks: onHowItWorks)
 
             stepContent
                 .allowsHitTesting(false)
