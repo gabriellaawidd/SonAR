@@ -18,21 +18,22 @@ struct StepRowView: View {
                 .font(.subheadline)
                 .bold()
                 .foregroundColor(.white)
-                .frame(width: 28, height: 28)
+                .frame(width: 30, height: 30)
                 .background(Circle().fill(Color.black))
             
             Text(text)
-                .font(.subheadline)
+                .font(.subheadline.bold())
                 .foregroundColor(.black)
                 .fixedSize(horizontal: false, vertical: true)
             
             if let img = imageName {
-                Spacer()
                 
+                Spacer()
+
                 Image(img)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 60, height: 60)
+                    .frame(width: 96)
             }
         }
     }

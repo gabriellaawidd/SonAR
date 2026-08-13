@@ -33,8 +33,6 @@ struct HowItWorksSheetView: View {
             .padding(.top, 24)
             .padding(.horizontal, 20)
             
-            Divider()
-            
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     StepRowView(
