@@ -13,6 +13,8 @@ struct FreeExploreView: View {
     @State private var model = ARSessionModel()
     @State private var showHowItWorks = false
     @State private var showLeaveConfirm = false
+    @State private var hasPlacedOnce = false
+    @State private var showAnnotationHint = false
 
     var body: some View {
         ZStack {
@@ -33,13 +35,17 @@ struct FreeExploreView: View {
                 footer
             }
             .padding(.horizontal, 20)
-
-
         }
         .animation(.easeInOut(duration: 0.25), value: model.phase)
+        .animation(.easeInOut(duration: 0.25), value: showAnnotationHint)
+        .task {
+            model.onAnnotationTapped = { revealRobot() }
+        }
         .onChange(of: model.phase) { _, newPhase in
+            showAnnotationHint = false
             if newPhase == .placed {
-                scheduleRobot()
+                hasPlacedOnce = true
+                scheduleAnnotation()
             } else {
                 model.dismissFeedbackRobot()
             }
@@ -62,12 +68,11 @@ struct FreeExploreView: View {
         } message: {
             Text(FreeExploreCopy.leaveMessage)
         }
-
     }
 
     @ViewBuilder
     private var content: some View {
-        if model.phase == .carrying {
+        if model.phase == .carrying && !hasPlacedOnce {
             MascotPromptView(
                 mascot: MascotAsset.neutral,
                 text: FreeExploreCopy.placePrompt,
@@ -86,8 +91,14 @@ struct FreeExploreView: View {
                     HintCapsule(text: FreeExploreCopy.tapHint)
                         .allowsHitTesting(false)
                 }
+            } else if model.isAnnotationVisible {
+                if showAnnotationHint {
+                    HintCapsule(text: FreeExploreCopy.annotationHint, systemImage: "hand.tap.fill")
+                        .allowsHitTesting(false)
+                }
             } else {
                 CapsuleActionButton(title: FreeExploreCopy.reposition) {
+                    showAnnotationHint = false
                     model.dismissFeedbackRobot()
                     model.placeAgain()
                 }
@@ -110,18 +121,34 @@ struct FreeExploreView: View {
         return FeedbackPresentation(lesson: lesson, report: pulse)
     }
 
-    private func scheduleRobot() {
+    private func scheduleAnnotation() {
         Task {
-            try? await Task.sleep(for: GuidedTiming.robotDelay)
-            guard model.phase == .placed, let presentation = currentFeedback else { return }
-            model.presentFeedbackRobot(presentation)
+            let waveStart = ContinuousClock.now
+
+            try? await Task.sleep(for: GuidedTiming.annotationDelay)
+            guard model.phase == .placed, !model.isFeedbackRobotVisible else { return }
+            model.showAnnotation()
+
+            let remaining = GuidedTiming.annotationHintDelay - (ContinuousClock.now - waveStart)
+            if remaining > .zero {
+                try? await Task.sleep(for: remaining)
+            }
+            guard model.phase == .placed, model.isAnnotationVisible else { return }
+            showAnnotationHint = true
         }
+    }
+
+    private func revealRobot() {
+        showAnnotationHint = false
+        guard let presentation = currentFeedback else { return }
+        model.presentFeedbackRobot(presentation)
     }
 }
 
 enum FreeExploreCopy {
     static let placePrompt = "Place your sensor to begin exploring."
     static let tapHint = "Tap anywhere to place"
+    static let annotationHint = "Tap the ? to see what happened"
     static let reposition = "Reposition Sensor"
     static let leaveTitle = "Back to Menu?"
     static let leaveMessage = "Do you want to stop exploring and go back home?"

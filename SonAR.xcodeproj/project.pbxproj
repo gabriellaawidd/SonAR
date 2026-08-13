@@ -29,6 +29,7 @@
 		095A020E302CF76700862892 /* GuidedTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020D302CF76200862892 /* GuidedTiming.swift */; };
 		095A0210302CFA8C00862892 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A020F302CFA8400862892 /* NavBarView.swift */; };
 		095A0212302CFAB000862892 /* FreeExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0211302CFAA600862892 /* FreeExploreView.swift */; };
+		095A0214302D5AA700862892 /* AnnotationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A0213302D5A9F00862892 /* AnnotationMarker.swift */; };
 		0A34D067148B3EADEC816835 /* MaterialCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDCB4695BBF2A64619158ED /* MaterialCategory.swift */; };
 		132817BA2D1F1A0322D34B8B /* ini.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5819D5565862BC3A5E8FC /* ini.swift */; };
 		20D8772C475455A771CD9B16 /* kiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A4AC0C59C537AD32BF1055 /* kiw.swift */; };
@@ -92,6 +93,7 @@
 		095A020D302CF76200862892 /* GuidedTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedTiming.swift; sourceTree = "<group>"; };
 		095A020F302CFA8400862892 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
 		095A0211302CFAA600862892 /* FreeExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeExploreView.swift; sourceTree = "<group>"; };
+		095A0213302D5A9F00862892 /* AnnotationMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationMarker.swift; sourceTree = "<group>"; };
 		0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionConfigurator.swift; sourceTree = "<group>"; };
 		18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPlacementARView.swift; sourceTree = "<group>"; };
 		2957E86628AB007285C5B7C9 /* SurfaceReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceReading.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		095A01F5302CF0D600862892 /* RobotFeedback */ = {
 			isa = PBXGroup;
 			children = (
+				095A0213302D5A9F00862892 /* AnnotationMarker.swift */,
 				095A01F2302CF0D600862892 /* RobotFeedbackAsset.swift */,
 				095A01F3302CF0D600862892 /* RobotFeedbackPresenter.swift */,
 				095A01F4302CF0D600862892 /* RobotHintCard.swift */,
@@ -493,6 +496,7 @@
 				8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */,
 				46B93251F93B135BABF94768 /* SensorIntroView.swift in Sources */,
 				095A01E9302CF09800862892 /* GuidedProgress.swift in Sources */,
+				095A0214302D5AA700862892 /* AnnotationMarker.swift in Sources */,
 				095A020E302CF76700862892 /* GuidedTiming.swift in Sources */,
 				C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */,
 				26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */,

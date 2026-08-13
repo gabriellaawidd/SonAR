@@ -12,6 +12,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private let placementManager = ARPlacementManager()
     private let raycastManager = ARRaycastManager()
     private let robotPresenter = RobotFeedbackPresenter()
+    private var annotationAnchor: AnchorEntity?
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
 
     private var materialDetectionManager: MaterialDetectionManager?
@@ -121,6 +122,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         waveTask = nil
         placementManager.removeAll()
         placedSensor = nil
+        hideAnnotation()
         robotPresenter.dismiss()
         arView?.session.pause()
     }
@@ -135,6 +137,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         waveTask = nil
         placementManager.removeAll()
         placedSensor = nil
+        hideAnnotation()
         dismissFeedbackRobot()
         beginCarrying()
     }
@@ -142,20 +145,80 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     func presentFeedbackRobot(_ presentation: FeedbackPresentation) {
         let cameraTransform = arView?.session.currentFrame?.camera.transform
         var surfaceDistance: Float?
-        if let cameraTransform, let placedSensor {
+        let sensorPosition = placedSensor?.position(relativeTo: nil)
+
+        if let cameraTransform, let sensorPosition {
             let camera = SIMD3<Float>(
                 cameraTransform.columns.3.x,
                 cameraTransform.columns.3.y,
                 cameraTransform.columns.3.z
             )
-            surfaceDistance = simd_distance(camera, placedSensor.position(relativeTo: nil))
+            surfaceDistance = simd_distance(camera, sensorPosition)
         }
+
+        hideAnnotation()
 
         robotPresenter.present(
             presentation,
             cameraTransform: cameraTransform,
             surfaceDistance: surfaceDistance
         )
+    }
+
+    func showAnnotation() {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { [weak self] in self?.showAnnotation() }
+            return
+        }
+        guard annotationAnchor == nil,
+              let arView,
+              let placedSensor,
+              let marker = AnnotationMarker.makeEntity() else { return }
+
+        let base = placedSensor.position(relativeTo: nil)
+
+        let anchor = AnchorEntity(world: base)
+        anchor.addChild(AnnotationMarker.makeTapZone())
+
+        marker.position = SIMD3<Float>(0, AnnotationMarkerLayout.heightAboveSensor, 0)
+        anchor.addChild(marker)
+        arView.scene.addAnchor(anchor)
+        annotationAnchor = anchor
+
+        model.isAnnotationVisible = true
+        bobAnnotation(marker, goingUp: true)
+    }
+
+    func hideAnnotation() {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { [weak self] in self?.hideAnnotation() }
+            return
+        }
+        annotationAnchor?.removeFromParent()
+        annotationAnchor = nil
+        model.isAnnotationVisible = false
+    }
+
+    private func bobAnnotation(_ marker: Entity, goingUp: Bool) {
+        guard annotationAnchor != nil, marker.parent != nil else { return }
+
+        var target = marker.transform
+        target.translation.y = AnnotationMarkerLayout.heightAboveSensor
+            + (goingUp ? AnnotationMarkerLayout.bobHeight : 0)
+
+        marker.move(
+            to: target,
+            relativeTo: marker.parent,
+            duration: AnnotationMarkerLayout.bobDuration,
+            timingFunction: .easeInOut
+        )
+
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + AnnotationMarkerLayout.bobDuration
+        ) { [weak self, weak marker] in
+            guard let self, let marker else { return }
+            self.bobAnnotation(marker, goingUp: !goingUp)
+        }
     }
 
     func dismissFeedbackRobot() {
@@ -169,6 +232,15 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     }
 
     @objc private func handleTap(_ recognizer: UITapGestureRecognizer) {
+        if model.phase == .placed {
+            guard model.isAnnotationVisible, let arView else { return }
+            let point = recognizer.location(in: arView)
+            guard let tapped = arView.entity(at: point),
+                  AnnotationMarker.isTappable(tapped) else { return }
+            model.annotationTapped()
+            return
+        }
+
         guard model.phase == .carrying else { return }
         guard
             let arView,

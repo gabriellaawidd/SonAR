@@ -9,6 +9,9 @@ final class ARSessionModel {
     var lastPulse: Wave.PulseReport?
     var isFeedbackRobotVisible = false
     var materialOverride: MaterialCategory?
+    var isAnnotationVisible = false
+
+    @ObservationIgnored var onAnnotationTapped: (() -> Void)?
 
     @ObservationIgnored weak var controller: ARSceneController?
 
@@ -32,6 +35,18 @@ final class ARSessionModel {
     func presentFeedbackRobot(_ presentation: FeedbackPresentation) {
         isFeedbackRobotVisible = true
         controller?.presentFeedbackRobot(presentation)
+    }
+
+    func annotationTapped() {
+        onAnnotationTapped?()
+    }
+
+    func showAnnotation() {
+        controller?.showAnnotation()
+    }
+
+    func hideAnnotation() {
+        controller?.hideAnnotation()
     }
 
     func dismissFeedbackRobot() {
