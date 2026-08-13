@@ -1,0 +1,112 @@
+{
+  "03873CAA-A778-44F0-B8CC-5ED4451576C5" : {
+    "objectMetadataList" : [
+      [
+        "03873CAA-A778-44F0-B8CC-5ED4451576C5",
+        "Root",
+        "Appearance"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "03873CAA-A778-44F0-B8CC-5ED4451576C5",
+        "Root",
+        "Appearance",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "03873CAA-A778-44F0-B8CC-5ED4451576C5",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "6EC0BDCE-3DF4-4243-B8EB-366A273E836C" : {
+    "objectMetadataList" : [
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "Intro",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "Disappearance"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "Appearance"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "HoverLoop",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "HoverLoop"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "Appearance",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6EC0BDCE-3DF4-4243-B8EB-366A273E836C",
+        "Root",
+        "Disappearance",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  }
+}

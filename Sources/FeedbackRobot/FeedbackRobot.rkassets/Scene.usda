@@ -1,0 +1,169 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.100.6)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Robot", "HoverLoop", "HintAnchor", "Appearance", "Disappearance"]
+    def "Robot" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -5.803685e-8, 7.318544e-8)
+        }
+        references = @d928527c14e6c707dea97fbbd7164759.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.70710677, -4.639408e-8, 5.355834e-9)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            uniform token info:id = "RealityKit.AnimationLibrary"
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Robot/OnNotification>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnNotification"
+        {
+            rel actions = </Root/Robot/OnNotification/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Robot/OnNotification/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Robot>
+                token info:id = "Notification"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/HoverLoop>
+                rel animationLibraryKeyOverrideKey = </Root/Robot/OnNotification/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def RealityKitTimeline "HoverLoop"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_By"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 1.4945053903663115
+                uniform token info:id = "2F4282CB-18FA-4A66-AA60-480F09264102"
+                float3 position = (0, 0, 0.1)
+                double startTime = 0
+                rel target = </Root/Robot>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeIn"
+                }
+            }
+
+            def RealityKitAction "Transform_By2"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 1.512606624676004
+                uniform token info:id = "60F6623D-0F9E-4CB7-A048-02B91CCABCEA"
+                float3 position = (0, 0, -0.1)
+                double startTime = 1.4945053904663115
+                rel target = </Root/Robot>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeOut"
+                }
+            }
+        }
+    }
+
+    def Xform "HintAnchor" (
+        active = true
+    )
+    {
+        float3 xformOp:translate = (-1.1344584, 0.79025084, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def RealityKitTimeline "Appearance"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_To"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0.6
+                uniform token info:id = "7114F883-9BC6-43DE-9909-F8456B99F914"
+                float3 position = (0, 0, 0)
+                quatf rotation = (0.70710677, -0.7071067, -4.639408e-8, 5.3558327e-9)
+                float3 scale = (0.99999994, 0.99999994, 0.99999994)
+                double startTime = 0
+                rel target = </Root/Robot>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeOut"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Disappearance"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_To"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0.4
+                uniform token info:id = "C88573FE-E20B-470D-AF19-4CCFAE6245FE"
+                float3 position = (0, 0, 0)
+                quatf rotation = (0.70710677, -0.7071067, -4.639408e-8, 5.3558327e-9)
+                float3 scale = (0.001, 0.001, 0.001)
+                double startTime = 0
+                rel target = </Root/Robot>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeIn"
+                }
+            }
+        }
+    }
+}
+
