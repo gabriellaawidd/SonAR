@@ -71,6 +71,7 @@ final class ARSceneController: NSObject, ARSessionDelegate {
 
     // Matches the low-light threshold used in AmbientIntensity.swift and SensorAsset.applyLowLightGlow.
     private static let lowLightThreshold: Double = 400
+    private var lastAppliedAmbientIntensity: Double?
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         arView?.adjustLightingForAmbient(frame: frame)
@@ -82,7 +83,12 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             }
             model.isLowLight = lowLight
             if let placedSensor {
-                SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+                if let last = lastAppliedAmbientIntensity, abs(last - ambient) < 10.0 {
+                    // Skip material reallocation if lighting hasn't significantly changed
+                } else {
+                    lastAppliedAmbientIntensity = ambient
+                    SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
+                }
             }
         }
 

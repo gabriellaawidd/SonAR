@@ -113,7 +113,8 @@ enum WaveRenderer {
         
         arrowContainer.move(to: targetTransform, relativeTo: anchor, duration: duration, timingFunction: .linear)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(duration))
             arrowContainer.removeFromParent()
         }
     }
@@ -129,15 +130,15 @@ enum WaveRenderer {
         
         anchor.addChild(decal)
         
-        // Start shrinking (scale down) at 0.3s
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        Task { @MainActor in
+            // Start shrinking (scale down) at 0.5s
+            try? await Task.sleep(for: .seconds(0.5))
             var targetTransform = decal.transform
             targetTransform.scale = [0.01, 0.01, 0.01]
             decal.move(to: targetTransform, relativeTo: decal.parent, duration: 0.2, timingFunction: .easeOut)
-        }
-        
-        // Destroy at 0.5s
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            
+            // Destroy at 0.7s
+            try? await Task.sleep(for: .seconds(0.2))
             decal.removeFromParent()
         }
     }

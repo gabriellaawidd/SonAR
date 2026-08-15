@@ -89,7 +89,8 @@ enum Wave {
 
             var totalDuration = outDuration
             if let hit = hit {
-                DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
+                Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(outDuration))
                     WaveRenderer.spawnHitDecal(at: hit.worldPosition, normal: hit.normal, anchor: anchor)
                 }
                 
@@ -112,7 +113,8 @@ enum Wave {
                     let opacity: Float = material == .soft ? 1.0 : 1.0
                     let scale: Float = material == .soft ? 0.5 : 1.0
             
-                    DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .seconds(outDuration))
                         WaveRenderer.spawnPulse(color: .green, from: hitPoint, to: targetPos, anchor: anchor, duration: backDuration, opacity: opacity, scale: scale)
                     }
                     totalDuration += backDuration
@@ -130,7 +132,8 @@ enum Wave {
                     let opacity: Float = material == .soft ? 1.0 : 1.0
                     let scale: Float = material == .soft ? 0.5 : 1.0
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + outDuration) {
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .seconds(outDuration))
                         WaveRenderer.spawnPulse(color: .red, from: hitPoint, to: bounceTarget, anchor: anchor, duration: bounceDuration, opacity: opacity, scale: scale)
                     }
                     totalDuration += bounceDuration
@@ -162,35 +165,37 @@ enum Wave {
         onPulse: ((PulseReport) -> Void)? = nil
     ) -> Task<Void, Never> {
         Task { @MainActor in
+            // Generate dynamically ONCE: 1 Center + layers of varying counts
+            let orientation = sensor.orientation(relativeTo: nil)
+            
+            let layerConfigs: [(angle: Float, count: Int)] = [
+                (3.75, 8),
+                (7.5, 12),
+                (11.25, 16),
+                (15.0, 20)
+            ]
+            
+            var angles: [(Float, SIMD3<Float>)] = [(0, [1, 0, 0])] // Center
+            for config in layerConfigs {
+                for i in 0..<config.count {
+                    let theta = Float(i) * 2.0 * .pi / Float(config.count)
+                    let axis = SIMD3<Float>(cos(theta), sin(theta), 0)
+                    angles.append((config.angle, axis))
+                }
+            }
+            
+            let directions = angles.map { angle, axis in
+                let rotation = simd_quatf(angle: angle * .pi / 180, axis: axis)
+                return (orientation * rotation).act(SIMD3<Float>(0, 0, -1))
+            }
+            
+            // TAKE THE STATIC SNAPSHOT ONCE
+            let hits = await refreshHit(lockID, directions)
+            let material = getMaterial()
+
             while !Task.isCancelled {
                 guard sensor.parent != nil else { break }
 
-                // Generate dynamically: 1 Center + layers of varying counts
-                let orientation = sensor.orientation(relativeTo: nil)
-                
-                let layerConfigs: [(angle: Float, count: Int)] = [
-                    (3.75, 8),
-                    (7.5, 12),
-                    (11.25, 16),
-                    (15.0, 20)
-                ]
-                
-                var angles: [(Float, SIMD3<Float>)] = [(0, [1, 0, 0])] // Center
-                for config in layerConfigs {
-                    for i in 0..<config.count {
-                        let theta = Float(i) * 2.0 * .pi / Float(config.count)
-                        let axis = SIMD3<Float>(cos(theta), sin(theta), 0)
-                        angles.append((config.angle, axis))
-                    }
-                }
-                
-                let directions = angles.map { angle, axis in
-                    let rotation = simd_quatf(angle: angle * .pi / 180, axis: axis)
-                    return (orientation * rotation).act(SIMD3<Float>(0, 0, -1))
-                }
-                
-                let hits = await refreshHit(lockID, directions)
-                let material = getMaterial()
                 BeepSynthesizer.shared.playLowBeep()
                 fire(from: sensor, anchor: anchor, hits: hits, directions: directions, material: material, onReport: onPulse)
                 try? await Task.sleep(for: .seconds(1.0))

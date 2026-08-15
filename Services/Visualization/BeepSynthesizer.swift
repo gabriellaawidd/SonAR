@@ -6,6 +6,9 @@ class BeepSynthesizer {
     static let shared = BeepSynthesizer()
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
+    
+    private var cachedBuffer: AVAudioPCMBuffer?
+    private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
 
     init() {
         do {
@@ -18,9 +21,11 @@ class BeepSynthesizer {
         engine.attach(player)
         engine.connect(player, to: engine.mainMixerNode, format: nil)
         try? engine.start()
+        
+        prepareBuffer()
     }
-
-    func playLowBeep() {
+    
+    private func prepareBuffer() {
         let sampleRate = engine.mainMixerNode.outputFormat(forBus: 0).sampleRate
         let duration = 0.1
         let frameCount = AVAudioFrameCount(sampleRate * duration)
@@ -34,7 +39,6 @@ class BeepSynthesizer {
         
         for i in 0..<Int(frameCount) {
             let val = sinf(2.0 * Float.pi * frequency * Float(i) / Float(sampleRate))
-            // Apply a simple envelope to prevent clicking noises at the start/end
             let envelope: Float
             if i < 100 {
                 envelope = Float(i) / 100.0
@@ -45,16 +49,21 @@ class BeepSynthesizer {
             }
             
             for channel in 0..<channels {
-                buffer.floatChannelData?[channel][i] = val * 0.5 * envelope // 50% volume with envelope
+                buffer.floatChannelData?[channel][i] = val * 0.5 * envelope
             }
         }
+        self.cachedBuffer = buffer
+    }
+
+    func playLowBeep() {
+        guard let buffer = cachedBuffer else { return }
         
         player.scheduleBuffer(buffer, at: nil, options: .interrupts, completionHandler: nil)
         player.play()
         
         DispatchQueue.main.async {
-            let haptic = UIImpactFeedbackGenerator(style: .medium)
-            haptic.impactOccurred()
+            self.hapticGenerator.prepare()
+            self.hapticGenerator.impactOccurred()
         }
     }
 }
