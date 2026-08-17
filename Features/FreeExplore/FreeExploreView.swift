@@ -60,7 +60,7 @@ struct FreeExploreView: View {
         ) {
             Button(FreeExploreCopy.leaveConfirm, role: .destructive) {
                 model.teardown()
-                appState = .modeSelection
+                appState = .home
             }
             Button(GuidedCopy.cancel, role: .cancel) {
                 showLeaveConfirm = false

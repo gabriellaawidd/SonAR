@@ -2,30 +2,30 @@
 //  SplashScreenView.swift
 //  SonAR
 //
-//  Created by Gabriella Angelina Widjaja on 10/08/26.
+//  Created by Gabriella Angelina Widjaja on 17/08/26.
 //
 
 import SwiftUI
 
 struct SplashScreenView: View {
     @Binding var appState: AppState
-    
-    let sonGradient = LinearGradient(
+
+    private let sonGradient = LinearGradient(
         colors: [Color("sonGrad1"), Color("sonGrad2"), Color("sonGrad3")],
         startPoint: .leading,
         endPoint: .trailing
     )
-    
-    let arGradient = LinearGradient(
+
+    private let arGradient = LinearGradient(
         colors: [Color("arGrad1"), Color("arGrad2"), Color("arGrad3")],
         startPoint: .leading,
         endPoint: .trailing
     )
-    
+
     var body: some View {
         ZStack {
             Color("bgMain").ignoresSafeArea()
-            
+
             VStack {
                 HStack {
                     Image("cloudTop")
@@ -37,44 +37,56 @@ struct SplashScreenView: View {
                     Spacer()
                 }
                 Spacer()
-            }
-            
-            VStack {
-                Spacer()
                 HStack {
                     Spacer()
                     Image("cloudBottom")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 140)
-                        .padding(.trailing, -50)
+                        .padding(.trailing, -30)
                 }
             }
-            
-            VStack(spacing: 20) {
-                Image("mascotRobot")
+
+            VStack(spacing: 16) {
+                Spacer()
+
+                Image("mascot2")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 300)
-                
-                VStack(spacing: 4) {
-                    HStack(spacing: 0) {
-                        Text("Son")
-                            .foregroundStyle(sonGradient)
-                        Text("AR")
-                            .foregroundStyle(arGradient)
-                    }
-                    .font(.system(size: 72, weight: .bold, design: .rounded))
-                    
-                    Text("Ultrasonic wave visualization")
-                        .font(.headline)
-                        .foregroundColor(.black) 
+                    .frame(height: 280)
+
+                HStack(spacing: 2) {
+                    Text("Son")
+                        .foregroundStyle(sonGradient)
+                    Text("AR")
+                        .foregroundStyle(arGradient)
+                }
+                .font(.system(size: 72, weight: .black, design: .rounded))
+
+                Text("Learn how a robot sees with\nultrasonic wave")
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color.black.opacity(0.8))
+
+                Spacer()
+
+                Text("Generative AI is used for the assets")
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundStyle(.black.opacity(0.4))
+                    .padding(.bottom, 24)
+            }
+            .padding(.horizontal, 24)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+                withAnimation(.spring(response: 0.7, dampingFraction: 0.8)) {
+                    appState = .home
                 }
             }
         }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                appState = .sensorIntro
+        .onTapGesture {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                appState = .home
             }
         }
     }

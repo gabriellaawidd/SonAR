@@ -50,7 +50,7 @@ struct GuidedWalkthroughView: View {
             isPresented: $showLeaveConfirm
         ) {
             Button(GuidedCopy.leaveConfirm, role: .destructive) {
-                flow.homeTapped { appState = .modeSelection }
+                flow.homeTapped { appState = .home }
             }
             Button(GuidedCopy.cancel, role: .cancel) {
                 showLeaveConfirm = false
