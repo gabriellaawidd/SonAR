@@ -142,8 +142,10 @@ enum Wave {
             maxDuration = max(maxDuration, totalDuration)
         }
 
-        // Distance only means something when enough echoes actually came back.
-        let measurable = returnedCount >= minReturningRays
+        // Distance only means something when enough echoes actually came back. Soft surfaces
+        // absorb the echo almost entirely, so their distance instead just needs a raw hit at
+        // the center — waiting for a returning echo would nearly always leave it "Unknown".
+        let measurable = absorbent ? (centerHit != nil) : returnedCount >= minReturningRays
         onReport?(PulseReport(
             returned: returnedCount,
             total: directions.count,
