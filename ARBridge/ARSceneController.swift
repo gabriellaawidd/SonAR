@@ -72,14 +72,18 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     // Matches the low-light threshold used in AmbientIntensity.swift and SensorAsset.applyLowLightGlow.
     private static let lowLightThreshold: Double = 400
     private var lastAppliedAmbientIntensity: Double?
+    private var hasShownLowLightOverlay = false
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         arView?.adjustLightingForAmbient(frame: frame)
 
         if let ambient = frame.lightEstimate?.ambientIntensity {
             let lowLight = ambient < Self.lowLightThreshold
-            if model.isLowLight != lowLight {
-                coachingOverlay.setActive(lowLight, animated: true)
+            if lowLight, !hasShownLowLightOverlay {
+                hasShownLowLightOverlay = true
+                coachingOverlay.setActive(true, animated: true)
+            } else if !lowLight, coachingOverlay.isActive {
+                coachingOverlay.setActive(false, animated: true)
             }
             model.isLowLight = lowLight
             if let placedSensor {

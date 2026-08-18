@@ -14,8 +14,8 @@ enum GuidedLesson: String, CaseIterable, Codable, Equatable {
 
     var badge: String {
         switch self {
-        case .bounceBack: return "ECHO DETECTED"
-        case .bounceAway: return "SIGNAL LOST"
+        case .bounceBack: return "WAVE RETURNED!"
+        case .bounceAway: return "WAVE LOST"
         case .absorbed: return "WEAK ECHO"
         }
     }
@@ -23,7 +23,7 @@ enum GuidedLesson: String, CaseIterable, Codable, Equatable {
     var feedbackMessage: String {
         switch self {
         case .bounceBack:
-            return "Flat surfaces act like a mirror, bouncing the sound wave straight back to the sensor."
+            return "The sound wave bounced off the wall and returned to the sensor"
         case .bounceAway:
             return "Sloped surfaces deflect the wave away. Without a returning echo, distance cannot be measured."
         case .absorbed:

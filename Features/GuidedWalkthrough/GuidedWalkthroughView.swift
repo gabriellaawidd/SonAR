@@ -24,6 +24,7 @@ struct GuidedWalkthroughView: View {
                 step: flow.step,
                 onHome: { showLeaveConfirm = true },
                 onHowItWorks: { showHowItWorks = true },
+                onBriefingContinue: { flow.briefingContinueTapped() },
                 onContinue: { flow.continueTapped() },
                 onRetry: { flow.retryTapped() },
                 onFinish: {

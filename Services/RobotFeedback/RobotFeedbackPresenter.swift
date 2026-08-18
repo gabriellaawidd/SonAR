@@ -18,25 +18,23 @@ enum RobotFeedbackLayout {
 
     static let distanceFromCamera: Float = 0.80
 
-    static let lateralOffset: Float = 0.22
+    static let lateralOffset: Float = 0.19
 
-    static let verticalOffset: Float = -0.18
+    static let verticalOffset: Float = 0.05
 
-    static let maxBillboardPitchDegrees: Float = 14
+    static let pitchVerticalCompensation: Float = 0.10
 
-    static let billboardPitchFactor: Float = 0.3
-
-    static let positionPitchFactor: Float = 0.75
+    static let maxOnScreenAngleDegrees: Float = 20
 
     static let minDistanceFromCamera: Float = 0.28
 
     static let minDistanceScale: Float = 0.35
 
-    static let clearanceFromSurface: Float = 0.18
+    static let clearanceFromSurface: Float = 0.10
 
     static let hintCardWidth: Float = 0.28
 
-    static let hintCardLift: Float = 0.03
+    static let hintCardLift: Float = 0.0
 
     static let billboardSmoothing: Float = 0.12
 
@@ -163,34 +161,24 @@ final class RobotFeedbackPresenter {
         )
 
         var toCamera = cameraPosition - root.position(relativeTo: nil)
-
-        let horizontalLength = simd_length(SIMD3<Float>(toCamera.x, 0, toCamera.z))
-        guard horizontalLength > 1e-4 else { return }
-
-        let maxRise = horizontalLength * tan(RobotFeedbackLayout.maxBillboardPitchDegrees * .pi / 180)
-        let softened = toCamera.y * RobotFeedbackLayout.billboardPitchFactor
-        toCamera.y = min(max(softened, -maxRise), maxRise)
+        toCamera.y = 0
+        guard simd_length_squared(toCamera) > 1e-6 else { return }
 
         let direction = simd_normalize(toCamera)
         let facing = RobotFeedbackLayout.facesPositiveZ ? direction : -direction
-
-        var right = simd_cross(SIMD3<Float>(0, 1, 0), facing)
-        guard simd_length_squared(right) > 1e-6 else { return }
-        right = simd_normalize(right)
-        let up = simd_normalize(simd_cross(facing, right))
-        let target = simd_quatf(simd_float3x3(right, up, facing))
+        let targetYaw = simd_quatf(angle: atan2(facing.x, facing.z), axis: SIMD3<Float>(0, 1, 0))
 
         let factor = PlacementSolver.lerpFactor(
             deltaTime: deltaTime,
             smoothing: RobotFeedbackLayout.billboardSmoothing
         )
-        root.orientation = simd_slerp(root.orientation, target, factor)
+        root.orientation = simd_slerp(root.orientation, targetYaw, factor)
     }
 
     private func install(
         root: Entity,
         in arView: ARView,
-        at spawn: (position: SIMD3<Float>, yaw: simd_quatf, scale: Float),
+        at spawn: SpawnPlacement,
         presentation: FeedbackPresentation
     ) {
         let robot = root.findEntity(named: RobotFeedbackAsset.robotName) ?? root
@@ -389,14 +377,56 @@ final class RobotFeedbackPresenter {
         )
     }
 
+    private struct SpawnPlacement {
+        var position: SIMD3<Float>
+        var yaw: simd_quatf
+        var scale: Float
+        var distance: Float
+    }
+
     private func spawnTransform(
         cameraTransform: simd_float4x4?,
         surfaceDistance: Float?
-    ) -> (position: SIMD3<Float>, yaw: simd_quatf, scale: Float) {
+    ) -> SpawnPlacement {
         guard let cameraTransform else {
-            return (SIMD3<Float>(0, 0, -RobotFeedbackLayout.distanceFromCamera), simd_quatf(), 1)
+            return SpawnPlacement(
+                position: SIMD3<Float>(0, 0, -RobotFeedbackLayout.distanceFromCamera),
+                yaw: simd_quatf(),
+                scale: 1,
+                distance: RobotFeedbackLayout.distanceFromCamera
+            )
         }
 
+        var distance = RobotFeedbackLayout.distanceFromCamera
+        if let surfaceDistance, surfaceDistance.isFinite, surfaceDistance > 0 {
+            distance = surfaceDistance - RobotFeedbackLayout.clearanceFromSurface
+        }
+        distance = max(distance, RobotFeedbackLayout.minDistanceFromCamera)
+
+        let scale = min(
+            max(distance / RobotFeedbackLayout.distanceFromCamera, RobotFeedbackLayout.minDistanceScale),
+            1
+        )
+
+        let solved = placement(
+            cameraTransform: cameraTransform,
+            distance: distance,
+            scale: scale
+        )
+
+        return SpawnPlacement(
+            position: solved.position,
+            yaw: solved.yaw,
+            scale: scale,
+            distance: distance
+        )
+    }
+
+    private func placement(
+        cameraTransform: simd_float4x4,
+        distance: Float,
+        scale: Float
+    ) -> (position: SIMD3<Float>, yaw: simd_quatf) {
         let origin = SIMD3<Float>(
             cameraTransform.columns.3.x,
             cameraTransform.columns.3.y,
@@ -415,20 +445,11 @@ final class RobotFeedbackPresenter {
             ? simd_normalize(flattened)
             : SIMD3<Float>(0, 0, -1)
 
-        var aim = horizontal
-        aim.y = viewDirection.y * RobotFeedbackLayout.positionPitchFactor
-        aim = simd_normalize(aim)
+        let aim = simd_length_squared(viewDirection) > 1e-6
+            ? simd_normalize(viewDirection)
+            : horizontal
 
-        var distance = RobotFeedbackLayout.distanceFromCamera
-        if let surfaceDistance, surfaceDistance.isFinite, surfaceDistance > 0 {
-            distance = min(distance, surfaceDistance - RobotFeedbackLayout.clearanceFromSurface)
-        }
-        distance = max(distance, RobotFeedbackLayout.minDistanceFromCamera)
-
-        let scale = min(
-            max(distance / RobotFeedbackLayout.distanceFromCamera, RobotFeedbackLayout.minDistanceScale),
-            1
-        )
+        let base = origin + aim * distance
 
         var lateral = simd_cross(horizontal, SIMD3<Float>(0, 1, 0))
         lateral = simd_length_squared(lateral) > 1e-6
@@ -440,10 +461,20 @@ final class RobotFeedbackPresenter {
             ? simd_normalize(screenUp)
             : SIMD3<Float>(0, 1, 0)
 
-        let position = origin
-            + aim * distance
-            + lateral * (RobotFeedbackLayout.lateralOffset * scale)
-            + screenUp * RobotFeedbackLayout.verticalOffset
+        let pitch = aim.y
+        let verticalBias = RobotFeedbackLayout.verticalOffset
+            - pitch * RobotFeedbackLayout.pitchVerticalCompensation
+
+        var offset = lateral * (RobotFeedbackLayout.lateralOffset * scale)
+            + screenUp * (verticalBias * scale)
+
+        let maxOffset = distance * tan(RobotFeedbackLayout.maxOnScreenAngleDegrees * .pi / 180)
+        let offsetLength = simd_length(offset)
+        if offsetLength > maxOffset, offsetLength > 1e-6 {
+            offset *= (maxOffset / offsetLength)
+        }
+
+        let position = base + offset
 
         var toCamera = origin - position
         toCamera.y = 0
@@ -453,7 +484,7 @@ final class RobotFeedbackPresenter {
         let facing = RobotFeedbackLayout.facesPositiveZ ? facingSource : -facingSource
         let yaw = simd_quatf(angle: atan2(facing.x, facing.z), axis: SIMD3<Float>(0, 1, 0))
 
-        return (position, yaw, scale)
+        return (position, yaw)
     }
 
     private func removeImmediately() {

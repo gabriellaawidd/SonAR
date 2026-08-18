@@ -10,11 +10,11 @@ import UIKit
 import simd
 
 enum AnnotationMarkerLayout {
-    static let diameter: Float = 0.03
-    static let heightAboveSensor: Float = 0.07
+    static let width: Float = 0.075
+    static let heightAboveSensor: Float = 0.08
     static let bobHeight: Float = 0.008
     static let bobDuration: TimeInterval = 0.9
-    static let tapZoneRadius: Float = 0.26
+    static let tapZoneRadius: Float = 0.05
 }
 
 enum AnnotationMarker {
@@ -23,7 +23,7 @@ enum AnnotationMarker {
     static let tapZoneName = "annotationTapZone"
 
     static func makeEntity() -> ModelEntity? {
-        guard let cgImage = render()?.cgImage else { return nil }
+        guard let image = render(), let cgImage = image.cgImage else { return nil }
 
         do {
             let texture = try TextureResource.generate(
@@ -37,9 +37,10 @@ enum AnnotationMarker {
             material.blending = .transparent(opacity: 1.0)
             material.faceCulling = .none
 
+            let aspect = Float(image.size.height / image.size.width)
             let mesh = MeshResource.generatePlane(
-                width: AnnotationMarkerLayout.diameter,
-                height: AnnotationMarkerLayout.diameter
+                width: AnnotationMarkerLayout.width,
+                height: AnnotationMarkerLayout.width * aspect
             )
             let marker = ModelEntity(mesh: mesh, materials: [material])
             marker.name = entityName
@@ -65,7 +66,9 @@ enum AnnotationMarker {
     static func isTappable(_ entity: Entity) -> Bool {
         var current: Entity? = entity
         while let node = current {
-            if node.name == entityName || node.name == tapZoneName {
+            if node.name == entityName
+                || node.name == tapZoneName
+                || node.name == SensorAsset.rootName {
                 return true
             }
             current = node.parent
@@ -73,37 +76,75 @@ enum AnnotationMarker {
         return false
     }
 
+    private static let canvasWidth: CGFloat = 402
+    private static let bodyHeight: CGFloat = 100
+    private static let tailHeight: CGFloat = 37
+    private static let tailHalfWidth: CGFloat = 26
+    private static let cornerRadius: CGFloat = 26
+
     private static func render() -> UIImage? {
-        let side: CGFloat = 240
-        let size = CGSize(width: side, height: side)
+        let size = CGSize(width: canvasWidth, height: bodyHeight + tailHeight)
 
         let format = UIGraphicsImageRendererFormat.default()
         format.opaque = false
         format.scale = 1
 
         return UIGraphicsImageRenderer(size: size, format: format).image { context in
-            let inset: CGFloat = 12
-            let circle = CGRect(origin: .zero, size: size).insetBy(dx: inset, dy: inset)
+            let w = canvasWidth
+            let h = bodyHeight
+            let r = min(cornerRadius, min(w, h) / 2)
+
+            let tipX = w / 2
+            let tipY = h + tailHeight
+            let baseLeft = tipX - tailHalfWidth
+            let baseRight = tipX + tailHalfWidth
+
+            let bubble = UIBezierPath()
+            bubble.move(to: CGPoint(x: r, y: 0))
+            bubble.addLine(to: CGPoint(x: w - r, y: 0))
+            bubble.addArc(
+                withCenter: CGPoint(x: w - r, y: r), radius: r,
+                startAngle: -.pi / 2, endAngle: 0, clockwise: true
+            )
+            bubble.addLine(to: CGPoint(x: w, y: h - r))
+            bubble.addArc(
+                withCenter: CGPoint(x: w - r, y: h - r), radius: r,
+                startAngle: 0, endAngle: .pi / 2, clockwise: true
+            )
+            bubble.addLine(to: CGPoint(x: baseRight, y: h))
+            bubble.addLine(to: CGPoint(x: tipX, y: tipY))
+            bubble.addLine(to: CGPoint(x: baseLeft, y: h))
+            bubble.addLine(to: CGPoint(x: r, y: h))
+            bubble.addArc(
+                withCenter: CGPoint(x: r, y: h - r), radius: r,
+                startAngle: .pi / 2, endAngle: .pi, clockwise: true
+            )
+            bubble.addLine(to: CGPoint(x: 0, y: r))
+            bubble.addArc(
+                withCenter: CGPoint(x: r, y: r), radius: r,
+                startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true
+            )
+            bubble.close()
 
             context.cgContext.setShadow(
-                offset: .zero,
-                blur: 18,
-                color: UIColor.black.withAlphaComponent(0.35).cgColor
+                offset: CGSize(width: 0, height: 4),
+                blur: 14,
+                color: UIColor.black.withAlphaComponent(0.25).cgColor
             )
-            UIColor.white.setFill()
-            UIBezierPath(ovalIn: circle).fill()
+            UIColor(red: 0xF7 / 255, green: 0xF4 / 255, blue: 0xEE / 255, alpha: 1).setFill()
+            bubble.fill()
             context.cgContext.setShadow(offset: .zero, blur: 0, color: nil)
 
             let text = "?" as NSString
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.systemFont(ofSize: 128, weight: .bold),
+                .font: UIFont.systemFont(ofSize: 58, weight: .bold),
                 .foregroundColor: UIColor.black
             ]
             let textSize = text.size(withAttributes: attributes)
             text.draw(
                 at: CGPoint(
-                    x: circle.midX - textSize.width / 2,
-                    y: circle.midY - textSize.height / 2
+                    x: w / 2 - textSize.width / 2,
+                    y: h / 2 - textSize.height / 2
                 ),
                 withAttributes: attributes
             )

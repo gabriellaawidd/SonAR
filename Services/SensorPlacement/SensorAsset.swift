@@ -6,6 +6,7 @@ import simd
 enum SensorAsset {
 
     static let fileName = "Sensor_Ultrasonik_3D"
+    static let rootName = "ultrasonicSensor"
     static let realBoardWidth: Float = 0.045
     private static let widthIfUnitsApplied: Float = 0.354519
     private static let widthIfUnitsIgnored: Float = 35.4519
@@ -69,7 +70,7 @@ enum SensorAsset {
 
     private static func normalise(_ entity: Entity) -> Entity {
         let wrapper = Entity()
-        wrapper.name = "ultrasonicSensor"
+        wrapper.name = rootName
 
         let sizer = Entity()
         sizer.name = "sizer"

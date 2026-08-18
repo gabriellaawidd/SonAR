@@ -21,7 +21,7 @@ enum GuidedObjective: Equatable {
     }
 }
 
-enum GuidedPrompt: Equatable {
+enum GuidedPrompt: Equatable, Hashable {
     case findFlat
     case findFlatAgain
     case findSteep
@@ -34,11 +34,13 @@ enum GuidedPrompt: Equatable {
         case .findFlatAgain:
             return "Now try pointing at a flat surface and tap to place again!"
         case .findSteep:
-            return "Now try pointing at a steep surface and tap to place again!"
+            return "Think like a robot! Move your phone around. Can you spot the waves from a new angle?"
         case .findSoft:
-            return "Try pointing it to a soft objects (e.g. sofa, pillow)"
+            return "Try pointing it to a soft objects (e.e. sofa, pillow)"
         }
     }
+
+    var needsBriefing: Bool { true }
 
     var mascot: String { MascotAsset.neutral }
 
@@ -69,6 +71,7 @@ enum GuidedRetryReason: Equatable {
 }
 
 enum GuidedStep: Equatable {
+    case briefing(GuidedPrompt)
     case placePrompt(GuidedPrompt)
     case feedback(GuidedLesson)
     case retry(GuidedRetryReason)
@@ -76,6 +79,7 @@ enum GuidedStep: Equatable {
 
     var helpText: String {
         switch self {
+        case .briefing(let prompt): return prompt.bubbleText
         case .placePrompt(let prompt): return prompt.bubbleText
         case .retry(let reason): return reason.bubbleText
         case .feedback(let lesson): return lesson.feedbackMessage
@@ -91,5 +95,7 @@ enum GuidedCopy {
     static let leaveConfirm = "End Tour"
     static let cancel = "Cancel"
     static let continueTitle = "Try another spot"
+    static let briefingContinue = "Continue"
+    static let gotIt = "Got it"
     static let exploreTitle = "Explore on my own"
 }

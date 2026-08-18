@@ -12,4 +12,5 @@ enum GuidedTiming {
     static let robotExitDuration: Duration = .milliseconds(450)
     static let annotationDelay: Duration = .milliseconds(1200)
     static let annotationHintDelay: Duration = .seconds(5)
+    static let briefingButtonDelay: Duration = .seconds(2)
 }

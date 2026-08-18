@@ -25,9 +25,10 @@ enum RobotHintCard {
     private static let badgeHorizontalPadding: CGFloat = 44
     private static let badgeSpacing: CGFloat = 34
 
-    private static let messageFontSize: CGFloat = 42
-    private static let distanceFontSize: CGFloat = 44
-    private static let distanceSpacing: CGFloat = 30
+    private static let messageFontSize: CGFloat = 46
+    private static let distanceFontSize: CGFloat = 38
+    private static let distanceSpacing: CGFloat = 26
+    private static let distanceColor = UIColor(white: 0.28, alpha: 1)
 
     static func makeEntity(for presentation: FeedbackPresentation, width: Float) -> ModelEntity? {
         guard let image = render(presentation), let cgImage = image.cgImage else { return nil }
@@ -59,8 +60,8 @@ enum RobotHintCard {
 
     private static func render(_ presentation: FeedbackPresentation) -> UIImage? {
         let badgeFont = UIFont.systemFont(ofSize: badgeFontSize, weight: .bold)
-        let messageFont = UIFont.systemFont(ofSize: messageFontSize, weight: .regular)
-        let distanceFont = UIFont.systemFont(ofSize: distanceFontSize, weight: .bold)
+        let messageFont = UIFont.systemFont(ofSize: messageFontSize, weight: .bold)
+        let distanceFont = UIFont.systemFont(ofSize: distanceFontSize, weight: .regular)
         let textWidth = canvasWidth - horizontalPadding * 2
 
         let paragraph = NSMutableParagraphStyle()
@@ -74,7 +75,7 @@ enum RobotHintCard {
         ]
         let distanceAttributes: [NSAttributedString.Key: Any] = [
             .font: distanceFont,
-            .foregroundColor: bodyText,
+            .foregroundColor: distanceColor,
             .paragraphStyle: paragraph
         ]
 

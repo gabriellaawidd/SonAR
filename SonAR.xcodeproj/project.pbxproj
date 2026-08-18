@@ -515,7 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = GJYV542RRH;
+				DEVELOPMENT_TEAM = S37DL4NT3S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -524,7 +524,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.denzel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.tiff;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -536,7 +536,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = GJYV542RRH;
+				DEVELOPMENT_TEAM = S37DL4NT3S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "SonAR uses the camera to place the ultrasonic sensor in AR.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -545,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.denzel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonar.SonAR.tiff;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

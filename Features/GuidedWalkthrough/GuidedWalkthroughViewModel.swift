@@ -11,7 +11,7 @@ import Foundation
 @Observable
 final class GuidedWalkthroughViewModel {
 
-    private(set) var step: GuidedStep = .placePrompt(.findFlat)
+    private(set) var step: GuidedStep = .briefing(.findFlat)
     private(set) var progress = GuidedProgress()
     private(set) var feedback: FeedbackPresentation?
 
@@ -41,7 +41,7 @@ final class GuidedWalkthroughViewModel {
             measurementTask = nil
             feedback = nil
             syncMaterialOverride()
-            if !progress.isFinished {
+            if !progress.isFinished, !isBriefing, !isRetry {
                 step = .placePrompt(progress.prompt)
             }
         case .placed:
@@ -58,9 +58,25 @@ final class GuidedWalkthroughViewModel {
         advanceFromFeedback()
     }
 
+    func briefingContinueTapped() {
+        guard case .briefing(let prompt) = step else { return }
+        step = .placePrompt(prompt)
+    }
+
+    private var isBriefing: Bool {
+        if case .briefing = step { return true }
+        return false
+    }
+
+    private var isRetry: Bool {
+        if case .retry = step { return true }
+        return false
+    }
+
     func retryTapped() {
         measurementTask?.cancel()
         model?.dismissFeedbackRobot()
+        step = .placePrompt(progress.prompt)
         model?.placeAgain()
     }
 
@@ -70,7 +86,7 @@ final class GuidedWalkthroughViewModel {
         syncMaterialOverride()
         isAdvancing = false
         feedback = nil
-        step = .placePrompt(progress.prompt)
+        step = .briefing(progress.prompt)
         model?.dismissFeedbackRobot()
         model?.placeAgain()
     }
@@ -151,7 +167,8 @@ final class GuidedWalkthroughViewModel {
             if self.progress.isFinished {
                 self.step = .finale
             } else {
-                self.step = .placePrompt(self.progress.prompt)
+                let prompt = self.progress.prompt
+                self.step = prompt.needsBriefing ? .briefing(prompt) : .placePrompt(prompt)
                 model.placeAgain()
             }
         }
