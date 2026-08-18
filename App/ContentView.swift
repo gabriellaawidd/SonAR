@@ -17,7 +17,10 @@ enum AppState {
 
 struct ContentView: View {
     @State private var currentAppState: AppState = .splash
-    
+    @State private var isGuidedIntro: Bool = true
+
+    @Namespace private var mascotNamespace
+
     var body: some View {
         Group {
             switch currentAppState {
@@ -26,15 +29,22 @@ struct ContentView: View {
                     .transition(.opacity.combined(with: .scale(scale: 0.96)))
 
             case .home:
-                ModeSelectionView(appState: $currentAppState)
-                    .transition(.asymmetric(
-                        insertion: .move(edge: .bottom).combined(with: .opacity),
-                        removal: .scale(scale: 0.92).combined(with: .opacity)
-                    ))
+                ModeSelectionView(
+                    appState: $currentAppState,
+                    mascotNamespace: mascotNamespace,
+                    isGuidedIntro: $isGuidedIntro
+                )
+                .transition(.opacity)
+
 
             case .sensorIntro:
-                SensorIntroView(appState: $currentAppState)
-                    .transition(.scale(scale: 1.1).combined(with: .opacity))
+                SensorIntroView(
+                    isGuided: isGuidedIntro,
+                    appState: $currentAppState,
+                    mascotNamespace: mascotNamespace,
+                    onBack: { currentAppState = .home }
+                )
+                .transition(.opacity)
 
             case .guidedWalkthrough:
                 GuidedWalkthroughView(appState: $currentAppState)

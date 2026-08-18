@@ -1,5 +1,5 @@
 //
-//  HomeSelectionView.swift
+//  ModeSelectionView.swift
 //  SonAR
 //
 //  Created by Gabriella Angelina Widjaja on 17/08/26.
@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ModeSelectionView: View {
     @Binding var appState: AppState
+    var mascotNamespace: Namespace.ID
+    @Binding var isGuidedIntro: Bool
 
     private let sonGradient = LinearGradient(
         colors: [Color("sonGrad1"), Color("sonGrad2"), Color("sonGrad3")],
@@ -51,12 +53,13 @@ struct ModeSelectionView: View {
                 VStack(spacing: 0) {
                     Spacer(minLength: 0)
 
-                    Image("mascotRobot")
+                    Image("mascotHome")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 220)
                         .offset(y: 28)
                         .zIndex(1)
+                        .matchedGeometryEffect(id: "mascotHero", in: mascotNamespace)
 
                     VStack(spacing: 20) {
                         HStack(spacing: 2) {
@@ -74,8 +77,9 @@ struct ModeSelectionView: View {
                             .foregroundStyle(Color.black.opacity(0.75))
                             .padding(.horizontal, 24)
 
-                        NavigationLink {
-                            SensorIntroView(isGuided: true, appState: $appState)
+                        Button {
+                            isGuidedIntro = true
+                            appState = .sensorIntro
                         } label: {
                             HStack(spacing: 12) {
                                 Image("quickTour")
@@ -98,8 +102,9 @@ struct ModeSelectionView: View {
                         .buttonStyle(.plain)
                         .padding(.horizontal, 28)
 
-                        NavigationLink {
-                            SensorIntroView(isGuided: false, appState: $appState)
+                        Button {
+                            isGuidedIntro = false
+                            appState = .sensorIntro
                         } label: {
                             HStack(spacing: 12) {
                                 Image("freeExplore")
@@ -138,5 +143,13 @@ struct ModeSelectionView: View {
 }
 
 #Preview {
-    ModeSelectionView(appState: .constant(.home))
+    PreviewWrapper()
+}
+
+private struct PreviewWrapper: View {
+    @Namespace private var ns
+    @State private var isGuided = true
+    var body: some View {
+        ModeSelectionView(appState: .constant(.home), mascotNamespace: ns, isGuidedIntro: $isGuided)
+    }
 }

@@ -18,7 +18,7 @@ struct TransparentRealityView: UIViewRepresentable {
         
         let camera = PerspectiveCamera()
         let cameraAnchor = AnchorEntity(world: .zero)
-        camera.position = [0, 0, 0.5]
+        camera.position = [0, 0, 0.4]
         cameraAnchor.addChild(camera)
         arView.scene.addAnchor(cameraAnchor)
         
