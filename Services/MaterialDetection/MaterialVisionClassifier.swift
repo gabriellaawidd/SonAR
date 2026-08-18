@@ -43,16 +43,17 @@ final class MaterialVisionClassifier {
             let classifyRequest = VNClassifyImageRequest()
             do {
                 try handler.perform([classifyRequest])
-                guard let observations = classifyRequest.results,
-                      let topResult = observations.first else {
+                guard let observations = classifyRequest.results, !observations.isEmpty else {
                     self.finish(.init(category: .unknown, topLabel: nil, confidence: 0), completion)
                     return
                 }
-                let mapped = self.mapToCategory(label: topResult.identifier, confidence: topResult.confidence)
+                let mapped = self.pickBestMatch(from: observations)
+                print("[topResult confidence ]: \(mapped.confidence)")
                 self.finish(mapped, completion)
             } catch {
                 self.finish(.init(category: .unknown, topLabel: nil, confidence: 0), completion)
             }
+            print("[classify request] : \(classifyRequest.results)")
         }
     }
 
@@ -62,11 +63,32 @@ final class MaterialVisionClassifier {
     }
 
     private func finish(_ result: MaterialClassificationResult, _ completion: @escaping (MaterialClassificationResult) -> Void) {
-        DispatchQueue.main.async { completion(result) }
+        DispatchQueue.main.async {
+            print("[Result Material Classification] \(result)")
+            completion(result)
+        }
+    }
+
+    /// Vision's top-1 guess is sometimes a generic label (e.g. "structure") that's in neither
+    /// lookup table, while a specific soft/hard label sits a few ranks below it. Scan a few
+    /// more candidates before giving up.
+    private static let topNCandidates = 5
+
+    private func pickBestMatch(from observations: [VNClassificationObservation]) -> MaterialClassificationResult {
+        for candidate in observations.prefix(Self.topNCandidates) {
+            let result = mapToCategory(label: candidate.identifier, confidence: candidate.confidence)
+            if result.category == .soft || result.category == .hard {
+                return result
+            }
+        }
+        let top = observations[0]
+        return mapToCategory(label: top.identifier, confidence: top.confidence)
     }
 
     private func mapToCategory(label: String, confidence: VNConfidence) -> MaterialClassificationResult {
         let confidenceValue = Float(confidence)
+        print("[confidenceValue ] : \(confidenceValue)")
+        print("[labelValue] : \(label)")
         guard confidenceValue >= AppConfig.visionConfidenceThreshold else {
             return .init(category: .lowConfidence, topLabel: label, confidence: confidenceValue)
         }
