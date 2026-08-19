@@ -9,24 +9,15 @@ import SwiftUI
 import AVFoundation
 
 struct CameraPreviewBackdrop: UIViewRepresentable {
-    var isActive: Bool = true
-
     func makeUIView(context: Context) -> CameraView {
         CameraView()
     }
 
-    func updateUIView(_ uiView: CameraView, context: Context) {
-        if isActive {
-            uiView.startSessionIfNeeded()
-        } else {
-            uiView.stopSession()
-        }
-    }
+    func updateUIView(_ uiView: CameraView, context: Context) {}
 
     final class CameraView: UIView {
         private let session = AVCaptureSession()
         private var previewLayer: AVCaptureVideoPreviewLayer?
-        private var isConfigured = false
 
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -49,22 +40,9 @@ struct CameraPreviewBackdrop: UIViewRepresentable {
             layer.videoGravity = .resizeAspectFill
             self.layer.addSublayer(layer)
             self.previewLayer = layer
-            isConfigured = true
 
-            startSessionIfNeeded()
-        }
-
-        func startSessionIfNeeded() {
-            guard isConfigured, !session.isRunning else { return }
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.session.startRunning()
-            }
-        }
-
-        func stopSession() {
-            guard session.isRunning else { return }
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.session.stopRunning()
             }
         }
 
