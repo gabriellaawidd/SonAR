@@ -32,9 +32,7 @@ struct HowItWorksSheetView: View {
             }
             .padding(.top, 24)
             .padding(.horizontal, 20)
-            
-            Divider()
-            
+                        
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     StepRowView(
@@ -61,11 +59,6 @@ struct HowItWorksSheetView: View {
                         imageName: "step4"
                     )
                     
-                    StepRowView(
-                        number: "5",
-                        text: "It multiplies the time by the speed of sound (343 m/s) and cuts it in half since the wave made a round trip!",
-                        imageName: nil
-                    )
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
