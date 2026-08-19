@@ -26,8 +26,8 @@ enum AnnotationMarker {
         guard let image = render(), let cgImage = image.cgImage else { return nil }
 
         do {
-            let texture = try TextureResource.generate(
-                from: cgImage,
+            let texture = try TextureResource(
+                image: cgImage,
                 withName: nil,
                 options: .init(semantic: .color)
             )
