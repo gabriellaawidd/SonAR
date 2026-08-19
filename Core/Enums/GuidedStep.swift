@@ -40,9 +40,9 @@ enum GuidedPrompt: Equatable, Hashable {
         case .findStraight:
             return "Point straight at the wall, then place it"
         case .findSoft:
-            return "Try pointing it to a soft objects, like shoes"
+            return "Try pointing it to a soft objects, like shoes or carpet"
         case .findSoftRetry:
-            return "Try pointing it directly to a shoe"
+            return "Try pointing it directly to a shoe or carpet"
         }
     }
 
