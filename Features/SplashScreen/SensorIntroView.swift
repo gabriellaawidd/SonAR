@@ -76,15 +76,6 @@ struct SensorIntroView: View {
                             .scaleEffect(isWiggling ? 1.04 : 1.0)
                             .transition(.opacity)
                     }
-
-                    Image("mascotHome")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 180)
-                        .scaleEffect(mascotState == .movingDownAndGrowing ? 2.5 : 1.0, anchor: .bottom)
-                        .offset(y: mascotState == .movingDownAndGrowing ? 500 : 0)
-                        .opacity(showSensor ? 0 : 1)
-                        .matchedGeometryEffect(id: "mascotHero", in: mascotNamespace)
                 }
                 .frame(height: 240)
                  
@@ -117,15 +108,23 @@ struct SensorIntroView: View {
                 .opacity(showButton ? 1 : 0)
                 .offset(y: showButton ? 0 : 20)
             }
+            Image("mascotHome")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 180)
+                .scaleEffect(mascotState == .movingDownAndGrowing ? 3.0 : 1.0, anchor: .bottom)
+                .offset(y: mascotState == .movingDownAndGrowing ? 320 : 0)
+                .opacity(showSensor ? 0 : 1)
+                .matchedGeometryEffect(id: "mascotHero", in: mascotNamespace)
         }
         .tint(.white)
         .task {
             try? await Task.sleep(nanoseconds: 200_000_000)
-            withAnimation(.spring(response: 1.4, dampingFraction: 0.85, blendDuration: 0)) {
+            withAnimation(.spring(response: 1, dampingFraction: 0.85, blendDuration: 0)) {
                 mascotState = .movingDownAndGrowing
             }
 
-            try? await Task.sleep(nanoseconds: 600_000_000)
+            try? await Task.sleep(nanoseconds: 800_000_000)
             withAnimation(.easeInOut(duration: 0.7)) {
                 showSensor = true
             }
