@@ -49,7 +49,6 @@
 		B016618872AA8F60BF34BA30 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2DF5D08E74290659BD95A5 /* ModeSelectionView.swift */; };
 		B22037A7999D37CBF8B8CABE /* PlacementAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D90F1FC103D5FD1557F369 /* PlacementAnimator.swift */; };
 		C5A05DF4E507A824C0F0DF6B /* SurfaceGeometryClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FD84DF9AED323F77A1AEE9 /* SurfaceGeometryClassifier.swift */; };
-		C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */; };
 		CBA444BF51C2E47517306D10 /* CapsuleControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F283766D649DB70861240856 /* CapsuleControls.swift */; };
 		CD92824A195E081C7957410C /* GuidedOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE51C7DA89D487B5C597E7C8 /* GuidedOverlayView.swift */; };
 		CFE5A1DB46ADB85F5ECDB233 /* MaterialVisionClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FA6B0D13BC372950E7BAD3 /* MaterialVisionClassifier.swift */; };
@@ -73,7 +72,6 @@
 		086A4ACCA32711F7F6C6D0A0 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		0B47CA3FAC8F0397785676F4 /* ARSessionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionConfigurator.swift; sourceTree = "<group>"; };
 		0C4DD6941668DBCFDDEECA40 /* GuidedStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedStep.swift; sourceTree = "<group>"; };
-		18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPlacementARView.swift; sourceTree = "<group>"; };
 		1F08873860FE1841B85AB31C /* FeedbackPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPresentation.swift; sourceTree = "<group>"; };
 		2957E86628AB007285C5B7C9 /* SurfaceReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceReading.swift; sourceTree = "<group>"; };
 		2AFEBD0308BB8E22040102CE /* GuidedWalkthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedWalkthroughView.swift; sourceTree = "<group>"; };
@@ -182,14 +180,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		234566C63C175A70BB99D70E /* SensorPlacement */ = {
-			isa = PBXGroup;
-			children = (
-				18B9B3D42F5D5886B1C05312 /* SensorPlacementARView.swift */,
-			);
-			path = SensorPlacement;
-			sourceTree = "<group>";
-		};
 		351031AE3AA1BFA2EB2BE21B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +193,6 @@
 			children = (
 				09A0A922D7E97317608A6500 /* FreeExplore */,
 				B668739E355CB00F1744798B /* GuidedWalkthrough */,
-				234566C63C175A70BB99D70E /* SensorPlacement */,
 				58D31B338296C9928F361512 /* SplashScreen */,
 			);
 			path = Features;
@@ -493,7 +482,6 @@
 				107204B2E59F3196E5F8D89D /* RobotHintCard.swift in Sources */,
 				8632C22CF552DDB3CB7A37F8 /* SensorAsset.swift in Sources */,
 				46B93251F93B135BABF94768 /* SensorIntroView.swift in Sources */,
-				C879BA2B9603755AA1CA3B40 /* SensorPlacementARView.swift in Sources */,
 				26B66938FAE0FC9974157BD8 /* SonARApp.swift in Sources */,
 				4B01B094339CB9F0CB7611C7 /* SpeechBubble.swift in Sources */,
 				223300FAB2EE86A47C4661DF /* SplashScreenView.swift in Sources */,

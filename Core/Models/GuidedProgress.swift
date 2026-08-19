@@ -19,6 +19,8 @@ struct GuidedProgress: Equatable {
     private(set) var completed: Set<GuidedLesson> = []
     private(set) var objective: GuidedObjective = .anyAngle
 
+    private(set) var attempts: Int = 0
+
     init() {}
 
     var usesMaterialDetection: Bool { objective.usesMaterialDetection }
@@ -32,11 +34,11 @@ struct GuidedProgress: Equatable {
         case .anyAngle:
             return .findFlat
         case .angle(.bounceBack):
-            return completed.isEmpty ? .findFlat : .findFlatAgain
+            return completed.isEmpty ? .findFlat : .findStraight
         case .angle(.bounceAway), .angle(.absorbed):
             return .findSteep
         case .soft:
-            return .findSoft
+            return attempts >= 2 ? .findSoftRetry : .findSoft
         case .finished:
             return .findSoft
         }
@@ -47,6 +49,8 @@ struct GuidedProgress: Equatable {
     }
 
     mutating func record(_ outcome: PlacementOutcome) -> GuidedResolution {
+        attempts += 1
+
         switch objective {
 
         case .anyAngle:
@@ -56,18 +60,18 @@ struct GuidedProgress: Equatable {
             return .lesson(lesson)
 
         case .angle(let target):
-            guard outcome.lesson == target else {
-                return .retry(target == .bounceBack ? .tooSteep : .notSteepEnough)
+            if outcome.lesson == target {
+                complete(target)
+                return .lesson(target)
             }
-            complete(target)
-            return .lesson(target)
+            return .retry(target == .bounceBack ? .tooSteep : .notSteepEnough)
 
         case .soft:
-            guard outcome == .absorbed else {
-                return .retry(.notSoft)
+            if outcome == .absorbed {
+                complete(.absorbed)
+                return .lesson(.absorbed)
             }
-            complete(.absorbed)
-            return .lesson(.absorbed)
+            return .retry(.notSoft)
 
         case .finished:
             return .lesson(.absorbed)
@@ -77,11 +81,13 @@ struct GuidedProgress: Equatable {
     mutating func reset() {
         completed.removeAll()
         objective = .anyAngle
+        attempts = 0
     }
 
     private mutating func complete(_ lesson: GuidedLesson) {
         completed.insert(lesson)
         objective = nextObjective()
+        attempts = 0
     }
 
     private func nextObjective() -> GuidedObjective {

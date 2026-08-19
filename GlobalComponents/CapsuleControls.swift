@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CapsuleActionButton: View {
     let title: String
-    var background: Color = AppPalette.cyan
+    var background: AnyShapeStyle = AnyShapeStyle(AppPalette.buttonTeal)
+    var shadowColor: Color = AppPalette.buttonTealBottom
     var foreground: Color = .white
     let action: () -> Void
 
@@ -23,7 +24,7 @@ struct CapsuleActionButton: View {
                 .background(
                     Capsule()
                         .fill(background)
-                        .shadow(color: background.opacity(0.5), radius: 15, y: 8)
+                        .shadow(color: shadowColor.opacity(0.5), radius: 15, y: 8)
                 )
         }
         .buttonStyle(.plain)

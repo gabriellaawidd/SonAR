@@ -191,6 +191,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         anchor.addChild(AnnotationMarker.makeTapZone())
 
         marker.position = SIMD3<Float>(0, AnnotationMarkerLayout.heightAboveSensor, 0)
+        // Selalu menghadap kamera (yaw + pitch) memakai billboard bawaan RealityKit.
+        marker.components.set(BillboardComponent())
         anchor.addChild(marker)
         arView.scene.addAnchor(anchor)
         annotationAnchor = anchor
@@ -212,12 +214,18 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private func bobAnnotation(_ marker: Entity, goingUp: Bool) {
         guard annotationAnchor != nil, marker.parent != nil else { return }
 
-        var target = marker.transform
-        target.translation.y = AnnotationMarkerLayout.heightAboveSensor
+        // Hanya animasikan posisi Y. Rotasi diserahkan sepenuhnya ke
+        // BillboardComponent agar tidak berebut dengan animasi transform.
+        let targetY = AnnotationMarkerLayout.heightAboveSensor
             + (goingUp ? AnnotationMarkerLayout.bobHeight : 0)
+        let targetPosition = SIMD3<Float>(marker.position.x, targetY, marker.position.z)
 
         marker.move(
-            to: target,
+            to: Transform(
+                scale: marker.scale,
+                rotation: marker.orientation,
+                translation: targetPosition
+            ),
             relativeTo: marker.parent,
             duration: AnnotationMarkerLayout.bobDuration,
             timingFunction: .easeInOut

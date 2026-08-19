@@ -13,6 +13,28 @@ enum AppPalette {
     static let cyan = Color("buttonCyan")
     static let ink = Color.black
     static let mutedInk = Color.black.opacity(0.55)
+
+    static let buttonTealTop = Color(hex: 0x7CE8D7)
+    static let buttonTealBottom = Color(hex: 0x1E8F95)
+
+    static let statusGreen = Color(hex: 0x34C759)
+    static let statusOrange = Color(hex: 0xFF8D28)
+    static let statusRed = Color(hex: 0xFF383C)
+
+    static let buttonTeal = LinearGradient(
+        colors: [buttonTealTop, buttonTealBottom],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+}
+
+extension Color {
+    init(hex: UInt32, alpha: Double = 1) {
+        let r = Double((hex >> 16) & 0xFF) / 255
+        let g = Double((hex >> 8) & 0xFF) / 255
+        let b = Double(hex & 0xFF) / 255
+        self.init(.sRGB, red: r, green: g, blue: b, opacity: alpha)
+    }
 }
 
 struct SpeechBubble: Shape {

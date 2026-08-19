@@ -10,9 +10,9 @@ import UIKit
 import simd
 
 enum AnnotationMarkerLayout {
-    static let width: Float = 0.075
-    static let heightAboveSensor: Float = 0.08
-    static let bobHeight: Float = 0.008
+    static let width: Float = 0.04
+    static let heightAboveSensor: Float = 0.045
+    static let bobHeight: Float = 0.006
     static let bobDuration: TimeInterval = 0.9
     static let tapZoneRadius: Float = 0.05
 }

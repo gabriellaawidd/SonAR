@@ -59,6 +59,10 @@ enum Wave {
         let absorbent = (material == .soft)
         var maxDuration: TimeInterval = 0
         var returnedCount = 0
+
+        // Jarak hit valid terdekat, dipakai sebagai cadangan kalau ray tengah meleset
+        // padahal permukaan tetap memantulkan cukup gelombang (WAVE RETURNED).
+        var nearestValidDistance: Float?
         
         let centerHit = hits.first ?? nil
         let centerPosition = centerHit?.worldPosition ?? origin // origin = transmitter.position(relativeTo: nil)
@@ -79,7 +83,11 @@ enum Wave {
 
         for (originalHit, forward) in zip(hits, directions) {
             let hit = originalHit.flatMap { $0.distance <= maxRange ? $0 : nil }
-            
+
+            if let hit {
+                nearestValidDistance = min(nearestValidDistance ?? hit.distance, hit.distance)
+            }
+
             let distance = hit?.distance ?? maxRange
             let hitPoint = hit?.worldPosition ?? origin + forward * distance
 //            print("[waveAsset] distance: \(distance) -> hitPoint: \(hitPoint)")
@@ -146,10 +154,16 @@ enum Wave {
         // absorb the echo almost entirely, so their distance instead just needs a raw hit at
         // the center — waiting for a returning echo would nearly always leave it "Unknown".
         let measurable = absorbent ? (centerHit != nil) : returnedCount >= minReturningRays
+
+        // Utamakan jarak ray tengah; kalau ray tengah kebetulan meleset padahal permukaan
+        // tetap memantulkan (returnedCount cukup), pakai hit valid terdekat agar distance
+        // tidak jatuh ke "Unknown" saat badge sudah "WAVE RETURNED".
+        let reportedDistance = centerHit?.distance ?? nearestValidDistance
+
         onReport?(PulseReport(
             returned: returnedCount,
             total: directions.count,
-            centerDistance: measurable ? centerHit?.distance : nil,
+            centerDistance: measurable ? reportedDistance : nil,
             centerAngle: centerAngle
         ))
 

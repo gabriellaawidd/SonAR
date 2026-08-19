@@ -18,6 +18,7 @@ struct SensorIntroView: View {
     @State private var showSensor: Bool = false
     @State private var showButton: Bool = false
     @State private var isWiggling: Bool = false
+    @State private var cameraActive: Bool = true
 
     enum MascotAnimState {
         case normal
@@ -26,7 +27,7 @@ struct SensorIntroView: View {
 
     var body: some View {
         ZStack {
-            CameraPreviewBackdrop()
+            CameraPreviewBackdrop(isActive: cameraActive)
                 .ignoresSafeArea()
              
             LinearGradient(
@@ -91,8 +92,12 @@ struct SensorIntroView: View {
                 Spacer()
 
                 Button {
-                    withAnimation(.easeInOut(duration: 0.4)) {
-                        appState = isGuided ? .guidedWalkthrough : .freeExplore
+                    cameraActive = false
+                    Task {
+                        try? await Task.sleep(nanoseconds: 150_000_000)
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            appState = isGuided ? .guidedWalkthrough : .freeExplore
+                        }
                     }
                 } label: {
                     Text("Let's Start")

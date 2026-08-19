@@ -11,7 +11,7 @@ import Foundation
 @Observable
 final class GuidedWalkthroughViewModel {
 
-    private(set) var step: GuidedStep = .briefing(.findFlat)
+    private(set) var step: GuidedStep = GuidedWalkthroughViewModel.entryStep(for: GuidedProgress().prompt)
     private(set) var progress = GuidedProgress()
     private(set) var feedback: FeedbackPresentation?
 
@@ -76,7 +76,7 @@ final class GuidedWalkthroughViewModel {
     func retryTapped() {
         measurementTask?.cancel()
         model?.dismissFeedbackRobot()
-        step = .placePrompt(progress.prompt)
+        step = Self.entryStep(for: progress.prompt)
         model?.placeAgain()
     }
 
@@ -86,9 +86,13 @@ final class GuidedWalkthroughViewModel {
         syncMaterialOverride()
         isAdvancing = false
         feedback = nil
-        step = .briefing(progress.prompt)
+        step = Self.entryStep(for: progress.prompt)
         model?.dismissFeedbackRobot()
         model?.placeAgain()
+    }
+
+    static func entryStep(for prompt: GuidedPrompt) -> GuidedStep {
+        prompt.needsBriefing ? .briefing(prompt) : .placePrompt(prompt)
     }
 
     private func syncMaterialOverride() {
@@ -110,7 +114,12 @@ final class GuidedWalkthroughViewModel {
 
             switch resolution {
             case .lesson(let lesson):
-                let presentation = FeedbackPresentation(lesson: lesson, report: model.lastPulse)
+                let presentation: FeedbackPresentation
+                if lesson == .absorbed {
+                    presentation = FeedbackPresentation.soft(report: model.lastPulse)
+                } else {
+                    presentation = FeedbackPresentation(lesson: lesson, report: model.lastPulse)
+                }
                 self.feedback = presentation
                 self.step = .feedback(lesson)
 
@@ -168,7 +177,7 @@ final class GuidedWalkthroughViewModel {
                 self.step = .finale
             } else {
                 let prompt = self.progress.prompt
-                self.step = prompt.needsBriefing ? .briefing(prompt) : .placePrompt(prompt)
+                self.step = Self.entryStep(for: prompt)
                 model.placeAgain()
             }
         }
