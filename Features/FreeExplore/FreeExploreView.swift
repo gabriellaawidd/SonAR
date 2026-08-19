@@ -110,14 +110,12 @@ struct FreeExploreView: View {
 
     private var currentFeedback: FeedbackPresentation? {
         guard model.phase == .placed, let pulse = model.lastPulse else { return nil }
-        let lesson: GuidedLesson
+
         if model.surfaceReading?.materialCategory == .soft {
-            lesson = .absorbed
-        } else if pulse.isBounceBack {
-            lesson = .bounceBack
-        } else {
-            lesson = .bounceAway
+            return FeedbackPresentation.soft(report: pulse)
         }
+
+        let lesson: GuidedLesson = pulse.isBounceBack ? .bounceBack : .bounceAway
         return FeedbackPresentation(lesson: lesson, report: pulse)
     }
 

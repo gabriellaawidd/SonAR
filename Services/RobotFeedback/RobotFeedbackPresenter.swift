@@ -127,12 +127,26 @@ final class RobotFeedbackPresenter {
         hoverController?.stop()
         hoverController = nil
 
+        let exitingHintCard = hintCard
+
         if let exit = RobotFeedbackAsset.animation(named: RobotFeedbackAsset.disappearanceTimeline, in: root) {
             root.playAnimation(exit)
+            animateScale(
+                exitingHintCard,
+                to: 0.001,
+                duration: RobotFeedbackAsset.disappearanceDuration,
+                timing: .easeIn
+            )
         } else {
 
             animateScale(
                 robot,
+                to: 0.001,
+                duration: RobotFeedbackAsset.disappearanceDuration,
+                timing: .easeIn
+            )
+            animateScale(
+                exitingHintCard,
                 to: 0.001,
                 duration: RobotFeedbackAsset.disappearanceDuration,
                 timing: .easeIn
@@ -160,19 +174,41 @@ final class RobotFeedbackPresenter {
             cameraTransform.columns.3.z
         )
 
-        var toCamera = cameraPosition - root.position(relativeTo: nil)
-        toCamera.y = 0
-        guard simd_length_squared(toCamera) > 1e-6 else { return }
-
-        let direction = simd_normalize(toCamera)
-        let facing = RobotFeedbackLayout.facesPositiveZ ? direction : -direction
-        let targetYaw = simd_quatf(angle: atan2(facing.x, facing.z), axis: SIMD3<Float>(0, 1, 0))
+        let target = Self.billboardOrientation(
+            of: root.position(relativeTo: nil),
+            facing: cameraPosition,
+            facesPositiveZ: RobotFeedbackLayout.facesPositiveZ
+        )
+        guard let targetOrientation = target else { return }
 
         let factor = PlacementSolver.lerpFactor(
             deltaTime: deltaTime,
             smoothing: RobotFeedbackLayout.billboardSmoothing
         )
-        root.orientation = simd_slerp(root.orientation, targetYaw, factor)
+        root.orientation = simd_slerp(root.orientation, targetOrientation, factor)
+    }
+
+    static func billboardOrientation(
+        of entityPosition: SIMD3<Float>,
+        facing cameraPosition: SIMD3<Float>,
+        facesPositiveZ: Bool
+    ) -> simd_quatf? {
+        var toCamera = cameraPosition - entityPosition
+        guard simd_length_squared(toCamera) > 1e-6 else { return nil }
+        toCamera = simd_normalize(toCamera)
+
+        let forward = facesPositiveZ ? toCamera : -toCamera
+
+        let worldUp = SIMD3<Float>(0, 1, 0)
+        var right = simd_cross(worldUp, forward)
+        if simd_length_squared(right) < 1e-6 {
+            right = SIMD3<Float>(1, 0, 0)
+        }
+        right = simd_normalize(right)
+        let up = simd_normalize(simd_cross(forward, right))
+
+        let basis = simd_float3x3(right, up, forward)
+        return simd_quatf(basis)
     }
 
     private func install(
@@ -325,11 +361,12 @@ final class RobotFeedbackPresenter {
     }
 
     private func animateScale(
-        _ entity: Entity,
+        _ entity: Entity?,
         to scale: Float,
         duration: TimeInterval,
         timing: AnimationTimingFunction
     ) {
+        guard let entity else { return }
         var target = entity.transform
         target.scale = SIMD3<Float>(repeating: scale)
         entity.move(
@@ -476,13 +513,11 @@ final class RobotFeedbackPresenter {
 
         let position = base + offset
 
-        var toCamera = origin - position
-        toCamera.y = 0
-        let facingSource = simd_length_squared(toCamera) > 1e-6
-            ? simd_normalize(toCamera)
-            : -horizontal
-        let facing = RobotFeedbackLayout.facesPositiveZ ? facingSource : -facingSource
-        let yaw = simd_quatf(angle: atan2(facing.x, facing.z), axis: SIMD3<Float>(0, 1, 0))
+        let yaw = Self.billboardOrientation(
+            of: position,
+            facing: origin,
+            facesPositiveZ: RobotFeedbackLayout.facesPositiveZ
+        ) ?? simd_quatf(angle: atan2(-horizontal.x, -horizontal.z), axis: SIMD3<Float>(0, 1, 0))
 
         return (position, yaw)
     }

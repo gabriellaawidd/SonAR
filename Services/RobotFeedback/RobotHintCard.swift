@@ -11,7 +11,6 @@ import UIKit
 enum RobotHintCard {
 
     private static let background = UIColor(red: 0xF7 / 255, green: 0xF4 / 255, blue: 0xEE / 255, alpha: 1)
-    private static let badgeBackground = UIColor.black
     private static let badgeText = UIColor.white
     private static let bodyText = UIColor.black
 
@@ -113,7 +112,7 @@ enum RobotHintCard {
                 width: badgeWidth,
                 height: badgeHeight
             )
-            badgeBackground.setFill()
+            presentation.badgeColor.setFill()
             UIBezierPath(roundedRect: badgeRect, cornerRadius: badgeHeight / 2).fill()
             (presentation.badge as NSString).draw(
                 at: CGPoint(

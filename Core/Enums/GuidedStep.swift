@@ -25,22 +25,35 @@ enum GuidedPrompt: Equatable, Hashable {
     case findFlat
     case findFlatAgain
     case findSteep
+    case findStraight
     case findSoft
+    case findSoftRetry
 
     var bubbleText: String {
         switch self {
         case .findFlat:
-            return "Point at a flat surface and tap to place"
+            return "Point to a flat surface and place the sensor"
         case .findFlatAgain:
             return "Now try pointing at a flat surface and tap to place again!"
         case .findSteep:
-            return "Think like a robot! Move your phone around. Can you spot the waves from a new angle?"
+            return "Now point it at a steep surface and place it!"
+        case .findStraight:
+            return "Point straight at the wall, then place it"
         case .findSoft:
-            return "Try pointing it to a soft objects (e.e. sofa, pillow)"
+            return "Try pointing it to a soft objects, like shoes"
+        case .findSoftRetry:
+            return "Try pointing it directly to a shoe"
         }
     }
 
-    var needsBriefing: Bool { true }
+    var needsBriefing: Bool {
+        switch self {
+        case .findFlat:
+            return false
+        case .findFlatAgain, .findSteep, .findStraight, .findSoft, .findSoftRetry:
+            return true
+        }
+    }
 
     var mascot: String { MascotAsset.neutral }
 
@@ -61,7 +74,7 @@ enum GuidedRetryReason: Equatable {
         case .notSteepEnough:
             return "Move your sensor to a new spot"
         case .notSoft:
-            return "Still feels hard. Aim it at something soft, then tap Place"
+            return "Still feels hard. Aim it at something soft!"
         }
     }
 
@@ -89,7 +102,7 @@ enum GuidedStep: Equatable {
 }
 
 enum GuidedCopy {
-    static let finale = "All done! Now you can freely test any surface you want."
+    static let finale = "All done! Now, test any surface!"
     static let leaveTitle = "Leave the Tour?"
     static let leaveMessage = "You'll have to start the tour over next time."
     static let leaveConfirm = "End Tour"

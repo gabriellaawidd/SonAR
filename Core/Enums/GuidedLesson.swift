@@ -5,7 +5,7 @@
 //  Created by Tiffany Michelle on 12/08/26.
 //
 
-import Foundation
+import SwiftUI
 
 enum GuidedLesson: String, CaseIterable, Codable, Equatable {
     case bounceBack
@@ -16,7 +16,15 @@ enum GuidedLesson: String, CaseIterable, Codable, Equatable {
         switch self {
         case .bounceBack: return "WAVE RETURNED!"
         case .bounceAway: return "WAVE LOST"
-        case .absorbed: return "WEAK ECHO"
+        case .absorbed: return "WEAK SOUNDWAVE"
+        }
+    }
+
+    var badgeColor: Color {
+        switch self {
+        case .bounceBack: return AppPalette.statusGreen
+        case .bounceAway: return AppPalette.statusRed
+        case .absorbed: return AppPalette.statusOrange
         }
     }
 
@@ -25,9 +33,9 @@ enum GuidedLesson: String, CaseIterable, Codable, Equatable {
         case .bounceBack:
             return "The sound wave bounced off the wall and returned to the sensor"
         case .bounceAway:
-            return "Sloped surfaces deflect the wave away. Without a returning echo, distance cannot be measured."
+            return "The sensor can't detect anything because there is no returning wave"
         case .absorbed:
-            return "Soft materials absorb sound. The sensor can only detect them from a close distance!"
+            return "Soft material absorbs soundwave and limits detection range"
         }
     }
 
