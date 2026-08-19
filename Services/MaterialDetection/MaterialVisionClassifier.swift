@@ -53,7 +53,6 @@ final class MaterialVisionClassifier {
             } catch {
                 self.finish(.init(category: .unknown, topLabel: nil, confidence: 0), completion)
             }
-            print("[classify request] : \(classifyRequest.results)")
         }
     }
 

@@ -36,8 +36,8 @@ enum RobotHintCard {
         let height = width * aspect
 
         do {
-            let texture = try TextureResource.generate(
-                from: cgImage,
+            let texture = try TextureResource(
+                image: cgImage,
                 withName: nil,
                 options: .init(semantic: .color)
             )

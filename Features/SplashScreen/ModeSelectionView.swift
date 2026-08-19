@@ -56,26 +56,39 @@ struct ModeSelectionView: View {
                     Image("mascotHome")
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 220)
+                        .frame(height: 260)
                         .offset(y: 28)
                         .zIndex(1)
                         .matchedGeometryEffect(id: "mascotHero", in: mascotNamespace)
 
-                    VStack(spacing: 20) {
-                        HStack(spacing: 2) {
-                            Text("Son")
-                                .foregroundStyle(sonGradient)
-                            Text("AR")
-                                .foregroundStyle(arGradient)
-                        }
-                        .font(.system(size: 42, weight: .bold, design: .rounded))
-                        .padding(.top, 28)
+                    VStack(spacing: 4) {
+                        ZStack(alignment: .center) {
+                            HStack(spacing: 2) {
+                                Text("Son")
+                                Text("AR")
+                            }
+                            .font(.system(size: 72, weight: .black, design: .rounded))
+                            .foregroundStyle(Color("bgMain"))
+                            .shadow(color: .white, radius: 1, x: -1.5, y: -1.5)
+                            .shadow(color: .white, radius: 1, x: 1.5, y: -1.5)
+                            .shadow(color: .white, radius: 1, x: -1.5, y: 1.5)
+                            .shadow(color: .white, radius: 1, x: 1.5, y: 1.5)
 
+                            HStack(spacing: 2) {
+                                Text("Son")
+                                    .foregroundStyle(sonGradient)
+                                Text("AR")
+                                    .foregroundStyle(arGradient)
+                            }
+                            .font(.system(size: 72, weight: .black, design: .rounded))
+                            .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
+                        }
                         Text("Learn how a robot sees with\nultrasonic wave")
                             .font(.headline)
                             .multilineTextAlignment(.center)
                             .foregroundStyle(Color.black.opacity(0.75))
                             .padding(.horizontal, 24)
+                            .padding(.bottom, 16)
 
                         Button {
                             isGuidedIntro = true
@@ -85,14 +98,24 @@ struct ModeSelectionView: View {
                                 Image("quickTour")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 44, height: 44)
-                                Text("Guided tour")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(Color("buttonCyan"))
+                                    .frame(width: 50, height: 60)
+                                
+                                VStack (alignment: .leading) {
+                                    Text("Guided tour")
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(Color("buttonCyan"))
+                                    
+                                    Text("Learn key concepts step-by-step")
+                                        .font(.caption)
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundStyle(Color.black)
+                                }
+                                Spacer(minLength: 0)
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
                             .background(
                                 Capsule()
                                     .stroke(Color("buttonCyan"), lineWidth: 2)
@@ -101,6 +124,7 @@ struct ModeSelectionView: View {
                         }
                         .buttonStyle(.plain)
                         .padding(.horizontal, 28)
+                        .padding(.bottom, 8)
 
                         Button {
                             isGuidedIntro = false
@@ -110,14 +134,24 @@ struct ModeSelectionView: View {
                                 Image("freeExplore")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 44, height: 44)
-                                Text("Free Exploration")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(Color("buttonModeText"))
+                                    .frame(width: 50, height: 60)
+                             
+                                VStack (alignment: .leading){
+                                    Text("Free Exploration")
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(Color("buttonModeText"))
+                                    
+                                    Text("Express your curiosity")
+                                        .font(.caption)
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundStyle(Color.black)
+                                }
+                                Spacer(minLength: 0)
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
                             .background(
                                 Capsule()
                                     .stroke(Color("buttonModeText"), lineWidth: 2)
@@ -128,6 +162,7 @@ struct ModeSelectionView: View {
                         .padding(.horizontal, 28)
                         .padding(.bottom, 28)
                     }
+                    .padding(.vertical, 20)
                     .background(
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
                             .fill(.white)
