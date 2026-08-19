@@ -22,6 +22,11 @@ final class ARSceneController: NSObject, ARSessionDelegate {
     private weak var placedSensor: Entity?
     private let coachingOverlay = ARCoachingOverlayView()
 
+    private var raycastFrameSkip = 0
+    private var lightingFrameSkip = 0
+    private let raycastUpdateInterval = 3
+    private let lightingUpdateInterval = 5
+
     init(model: ARSessionModel) {
         self.model = model
         super.init()
@@ -51,12 +56,10 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             UITapGestureRecognizer(target: self, action: #selector(handleTap))
         )
 
-        // Manually driven by isLowLight below, not ARKit's own tracking-state heuristic.
         coachingOverlay.session = arView.session
         coachingOverlay.goal = .tracking
         coachingOverlay.activatesAutomatically = false
         coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
-        // Used as a passive dark-room hint only; must not swallow the tap-to-place gesture underneath it.
         coachingOverlay.isUserInteractionEnabled = false
         arView.addSubview(coachingOverlay)
         NSLayoutConstraint.activate([
@@ -69,13 +72,16 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         beginCarrying()
     }
 
-    // Matches the low-light threshold used in AmbientIntensity.swift and SensorAsset.applyLowLightGlow.
     private static let lowLightThreshold: Double = 400
     private var lastAppliedAmbientIntensity: Double?
     private var hasShownLowLightOverlay = false
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        arView?.adjustLightingForAmbient(frame: frame)
+        lightingFrameSkip += 1
+        if lightingFrameSkip >= lightingUpdateInterval {
+            lightingFrameSkip = 0
+            arView?.adjustLightingForAmbient(frame: frame)
+        }
 
         if let ambient = frame.lightEstimate?.ambientIntensity {
             let lowLight = ambient < Self.lowLightThreshold
@@ -88,7 +94,6 @@ final class ARSceneController: NSObject, ARSessionDelegate {
             model.isLowLight = lowLight
             if let placedSensor {
                 if let last = lastAppliedAmbientIntensity, abs(last - ambient) < 10.0 {
-                    // Skip material reallocation if lighting hasn't significantly changed
                 } else {
                     lastAppliedAmbientIntensity = ambient
                     SensorAsset.applyLowLightGlow(placedSensor, ambientIntensity: ambient)
@@ -101,7 +106,11 @@ final class ARSceneController: NSObject, ARSessionDelegate {
 
         guard model.phase == .carrying else { return }
 
-        raycastManager.update(frame: frame)
+        raycastFrameSkip += 1
+        if raycastFrameSkip >= raycastUpdateInterval {
+            raycastFrameSkip = 0
+            raycastManager.update(frame: frame)
+        }
         previewManager.update(frame: frame, deltaTime: delta)
     }
 
@@ -117,6 +126,8 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         previewManager.reset()
         raycastManager.clear()
         lastFrameTime = nil
+        raycastFrameSkip = 0
+        lightingFrameSkip = 0
         model.phase = .carrying
         model.isAssetReady = false
         model.lastPulse = nil
@@ -191,7 +202,6 @@ final class ARSceneController: NSObject, ARSessionDelegate {
         anchor.addChild(AnnotationMarker.makeTapZone())
 
         marker.position = SIMD3<Float>(0, AnnotationMarkerLayout.heightAboveSensor, 0)
-        // Selalu menghadap kamera (yaw + pitch) memakai billboard bawaan RealityKit.
         marker.components.set(BillboardComponent())
         anchor.addChild(marker)
         arView.scene.addAnchor(anchor)

@@ -11,26 +11,23 @@ import UIKit
 import simd
 
 enum Wave {
-    // ponytail: geometry doesn't say which dome is T vs R, swap if it's backwards
     static let transmitterName = "_0"
     static let receiverName = "_1"
 
-    private static let maxRange: Float = 2   // Dikecilin dari 4 jadi 2 supaya jeda antar spawnPulse gak terlalu lama (UX things)
+    private static let maxRange: Float = 2
     private static let travelSpeed: Float = 0.7
     private static let minLegDuration: TimeInterval = 0.15
     private static let pulseGap: TimeInterval = 0.05
-    /// Beyond this incidence angle a real echo's specular reflection no longer sweeps back
-    /// near the sensor, so it never returns to the receiver.
+   
     private static let echoReturnAngleLimitDeg: Float = 10
 
-    /// Minimum returning rays for the walkthrough to call a surface flat. Only read by the
-    /// guided flow — the visualisation itself is unaffected.
     static let minReturningRays = 3
 
-    /// Soft surfaces scatter sound inside their pores, so only a couple of rays make it back.
     private static let softMaxEchoes = 2
 
-    /// Summary of one pulse, used by the guided walkthrough to judge a placement.
+    private static let arrowVisualScale: Float = 1.8
+    private static let decalVisualScale: Float = 1.6
+
     struct PulseReport: Equatable {
         let returned: Int
         let total: Int
@@ -45,9 +42,6 @@ enum Wave {
         }
     }
 
-    /// Fires one pulse: a beam from the transmitter to the hit point (or `maxRange` if nothing
-    /// hit), then, only if the surface angle allows an echo, a return beam to the receiver.
-    /// Returns how long the pulse takes to fully finish, so a loop can wait before firing again.
     @discardableResult
     static func fire(from sensor: Entity, anchor: AnchorEntity, hits: [RaycastHit?], directions: [SIMD3<Float>], material: MaterialCategory?, onReport: ((PulseReport) -> Void)? = nil) -> TimeInterval {
         guard let transmitter = sensor.findEntity(named: transmitterName),
@@ -60,12 +54,10 @@ enum Wave {
         var maxDuration: TimeInterval = 0
         var returnedCount = 0
 
-        // Jarak hit valid terdekat, dipakai sebagai cadangan kalau ray tengah meleset
-        // padahal permukaan tetap memantulkan cukup gelombang (WAVE RETURNED).
         var nearestValidDistance: Float?
         
         let centerHit = hits.first ?? nil
-        let centerPosition = centerHit?.worldPosition ?? origin // origin = transmitter.position(relativeTo: nil)
+        let centerPosition = centerHit?.worldPosition ?? origin
         print("[waveAsset] center point: \(centerPosition)")
         
         let centerDirection = directions.first ?? SIMD3<Float>(0, 0, -1)
@@ -90,21 +82,19 @@ enum Wave {
 
             let distance = hit?.distance ?? maxRange
             let hitPoint = hit?.worldPosition ?? origin + forward * distance
-//            print("[waveAsset] distance: \(distance) -> hitPoint: \(hitPoint)")
 
             let outDuration = legDuration(distance)
-            WaveRenderer.spawnPulse(color: .cyan, from: origin, to: hitPoint, anchor: anchor, duration: outDuration)
+            WaveRenderer.spawnPulse(color: .cyan, from: origin, to: hitPoint, anchor: anchor, duration: outDuration, scale: arrowVisualScale)
 
             var totalDuration = outDuration
             if let hit = hit {
                 Task { @MainActor in
                     try? await Task.sleep(for: .seconds(outDuration))
-                    WaveRenderer.spawnHitDecal(at: hit.worldPosition, normal: hit.normal, anchor: anchor)
+                    WaveRenderer.spawnHitDecal(at: hit.worldPosition, normal: hit.normal, anchor: anchor, scale: decalVisualScale)
                 }
                 
                 if hit.incidenceAngleDegrees(incoming: forward) <= echoReturnAngleLimitDeg,
                    !absorbent || returnedCount < softMaxEchoes {
-                    // Return echo
                     returnedCount += 1
                     let receiverPosition = receiver.position(relativeTo: nil)
                     let fullDist = simd_distance(hitPoint, receiverPosition)
@@ -119,7 +109,7 @@ enum Wave {
                     let targetPos = hitPoint + simd_normalize(receiverPosition - hitPoint) * bounceDistance
                         
                     let opacity: Float = material == .soft ? 1.0 : 1.0
-                    let scale: Float = material == .soft ? 0.5 : 1.0
+                    let scale: Float = (material == .soft ? 0.5 : 1.0) * arrowVisualScale
             
                     Task { @MainActor in
                         try? await Task.sleep(for: .seconds(outDuration))
@@ -127,8 +117,6 @@ enum Wave {
                     }
                     totalDuration += backDuration
                 } else if !absorbent {
-                    // Specular reflection bouncing away. Soft surfaces skip this entirely:
-                    // they diffuse the sound rather than deflecting it like a mirror.
                     let reflectedDirection = simd_reflect(simd_normalize(forward), simd_normalize(hit.normal))
                     let remainingDistance = max(maxRange - distance, 0)
                     let bounceDistance = material == .soft ? min(remainingDistance, 0.5) : remainingDistance
@@ -138,7 +126,7 @@ enum Wave {
                     let bounceDuration = legDuration(bounceDistance, speedMultiplier: speedMult)
                     
                     let opacity: Float = material == .soft ? 1.0 : 1.0
-                    let scale: Float = material == .soft ? 0.5 : 1.0
+                    let scale: Float = (material == .soft ? 0.5 : 1.0) * arrowVisualScale
                     
                     Task { @MainActor in
                         try? await Task.sleep(for: .seconds(outDuration))
@@ -150,14 +138,8 @@ enum Wave {
             maxDuration = max(maxDuration, totalDuration)
         }
 
-        // Distance only means something when enough echoes actually came back. Soft surfaces
-        // absorb the echo almost entirely, so their distance instead just needs a raw hit at
-        // the center — waiting for a returning echo would nearly always leave it "Unknown".
         let measurable = absorbent ? (centerHit != nil) : returnedCount >= minReturningRays
 
-        // Utamakan jarak ray tengah; kalau ray tengah kebetulan meleset padahal permukaan
-        // tetap memantulkan (returnedCount cukup), pakai hit valid terdekat agar distance
-        // tidak jatuh ke "Unknown" saat badge sudah "WAVE RETURNED".
         let reportedDistance = centerHit?.distance ?? nearestValidDistance
 
         onReport?(PulseReport(
@@ -170,8 +152,6 @@ enum Wave {
         return maxDuration
     }
 
-    /// Fires repeatedly, re-raycasting `lockID` before each pulse, until cancelled — mirrors a
-    /// real HC-SR04 not firing again until the previous echo window closes.
     static func startLoop(
         sensor: Entity,
         anchor: AnchorEntity,
@@ -181,18 +161,15 @@ enum Wave {
         onPulse: ((PulseReport) -> Void)? = nil
     ) -> Task<Void, Never> {
         Task { @MainActor in
-            // Generate dynamically ONCE: 1 Center + layers of varying counts
             let orientation = sensor.orientation(relativeTo: nil)
-            
-            let layerConfigs: [(angle: Float, count: Int)] = [
-                (3.75, 8),
-                (7.5, 12),
-                (11.25, 16),
-                (15.0, 20)
+
+            let ringConfigs: [(angle: Float, count: Int)] = [
+                (5.0, 8),
+                (10.0, 14)
             ]
-            
-            var angles: [(Float, SIMD3<Float>)] = [(0, [1, 0, 0])] // Center
-            for config in layerConfigs {
+
+            var angles: [(Float, SIMD3<Float>)] = [(0, [1, 0, 0])]
+            for config in ringConfigs {
                 for i in 0..<config.count {
                     let theta = Float(i) * 2.0 * .pi / Float(config.count)
                     let axis = SIMD3<Float>(cos(theta), sin(theta), 0)
@@ -205,7 +182,6 @@ enum Wave {
                 return (orientation * rotation).act(SIMD3<Float>(0, 0, -1))
             }
             
-            // TAKE THE STATIC SNAPSHOT ONCE
             let hits = await refreshHit(lockID, directions)
             let material = getMaterial()
 

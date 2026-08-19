@@ -17,12 +17,6 @@ enum ARSessionConfigurator {
             arView.environment.sceneUnderstanding.options.insert(.occlusion)
         }
 
-        if ARWorldTrackingConfiguration.supportsFrameSemantics(.smoothedSceneDepth) {
-            configuration.frameSemantics.insert(.smoothedSceneDepth)
-        } else if ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth) {
-            configuration.frameSemantics.insert(.sceneDepth)
-        }
-
         arView.session.run(
             configuration,
             options: [.resetTracking, .removeExistingAnchors]

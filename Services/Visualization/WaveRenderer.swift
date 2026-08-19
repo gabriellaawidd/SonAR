@@ -5,7 +5,6 @@ import UIKit
 enum WaveRenderer {
     private static let pulseRadius: Float = 0.003
     
-    // Caches
     private static var cachedTipMesh: MeshResource?
     private static var cachedShaftMesh: MeshResource?
     private static var cachedDecalMesh: MeshResource?
@@ -93,21 +92,20 @@ enum WaveRenderer {
         return decal.clone(recursive: true)
     }
 
-    static func spawnPulse( // munculin bola soundwave
+    static func spawnPulse(
         color: UIColor, from start: SIMD3<Float>, to end: SIMD3<Float>, anchor: AnchorEntity, duration: TimeInterval,
         opacity: Float = 1.0, scale: Float = 1.0
     ) {
-        if simd_distance(start, end) < 0.001 { return } // Prevent zero-distance NaN
+        if simd_distance(start, end) < 0.001 { return }
         
         let arrowContainer = getArrowTemplate(color: color, opacity: opacity)
 
         arrowContainer.setPosition(start, relativeTo: nil)
-        arrowContainer.look(at: end, from: start, relativeTo: nil) // Point -Z towards target
+        arrowContainer.look(at: end, from: start, relativeTo: nil)
         arrowContainer.scale = [scale, scale, scale]
         
         anchor.addChild(arrowContainer)
 
-        // Capture current rotation (facing end) to preserve it during translation
         var targetTransform = arrowContainer.transform
         targetTransform.translation = anchor.convert(position: end, from: nil)
         
@@ -119,25 +117,23 @@ enum WaveRenderer {
         }
     }
 
-    static func spawnHitDecal(at position: SIMD3<Float>, normal: SIMD3<Float>, anchor: AnchorEntity) {
+    static func spawnHitDecal(at position: SIMD3<Float>, normal: SIMD3<Float>, anchor: AnchorEntity, scale: Float = 1.0) {
         let decal = getDecalTemplate()
         
-        // Shift slightly along normal to prevent z-fighting with the real wall
         decal.position = anchor.convert(position: position + normal * 0.002, from: nil)
         
-        // Orient Y-up cylinder to align with the hit normal
         decal.orientation = simd_quatf(from: [0, 1, 0], to: normal)
+     
+        decal.scale = [scale, scale, scale]
         
         anchor.addChild(decal)
         
         Task { @MainActor in
-            // Start shrinking (scale down) at 0.5s
             try? await Task.sleep(for: .seconds(0.5))
             var targetTransform = decal.transform
             targetTransform.scale = [0.01, 0.01, 0.01]
             decal.move(to: targetTransform, relativeTo: decal.parent, duration: 0.2, timingFunction: .easeOut)
-            
-            // Destroy at 0.7s
+     
             try? await Task.sleep(for: .seconds(0.2))
             decal.removeFromParent()
         }

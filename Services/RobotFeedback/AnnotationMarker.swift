@@ -21,8 +21,13 @@ enum AnnotationMarker {
 
     static let entityName = "annotationMarker"
     static let tapZoneName = "annotationTapZone"
+    private static var cachedTemplate: ModelEntity?
 
     static func makeEntity() -> ModelEntity? {
+        if let cachedTemplate {
+            return cachedTemplate.clone(recursive: true)
+        }
+
         guard let image = render(), let cgImage = image.cgImage else { return nil }
 
         do {
@@ -45,7 +50,8 @@ enum AnnotationMarker {
             let marker = ModelEntity(mesh: mesh, materials: [material])
             marker.name = entityName
             marker.generateCollisionShapes(recursive: false)
-            return marker
+            cachedTemplate = marker
+            return marker.clone(recursive: true)
         } catch {
             print("[AnnotationMarker] Gagal membuat tekstur: \(error.localizedDescription)")
             return nil

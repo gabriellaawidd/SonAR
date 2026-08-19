@@ -16,6 +16,14 @@ struct TransparentRealityView: UIViewRepresentable {
         arView.backgroundColor = .clear
         arView.environment.background = .color(.clear)
         
+        arView.renderOptions = [
+            .disableMotionBlur,
+            .disableDepthOfField,
+            .disableGroundingShadows,
+            .disableHDR,
+            .disableCameraGrain
+        ]
+        
         let camera = PerspectiveCamera()
         let cameraAnchor = AnchorEntity(world: .zero)
         camera.position = [0, 0, 0.4]
@@ -44,6 +52,11 @@ struct TransparentRealityView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {
+    }
+
+    static func dismantleUIView(_ uiView: ARView, coordinator: Coordinator) {
+        coordinator.displayLink?.invalidate()
+        coordinator.displayLink = nil
     }
     
     func makeCoordinator() -> Coordinator {

@@ -77,7 +77,7 @@ final class ARRaycastManager {
         guard let index = locks.firstIndex(where: { $0.id == id }) else { return [] }
         let lock = locks[index]
 
-        guard let session = arView?.session else { return [] }
+        guard let session = await arView?.session else { return [] }
         let currentFrameTimestamp = latestFrameTimestamp
         let capturedImage = session.currentFrame?.capturedImage
 
@@ -103,7 +103,6 @@ final class ARRaycastManager {
             }
         }.value
 
-        // Keep the central hit as the primary hit for the lock state
         locks[index] = PlacementLock(
             id: lock.id,
             sensorPosition: lock.sensorPosition,
